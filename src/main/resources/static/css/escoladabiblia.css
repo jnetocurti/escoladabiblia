@@ -1,0 +1,27 @@
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+
+h1.page-header {
+	margin-top: -5px;
+}
+
+.sidebar {
+	padding-left: 0;
+}
+
+.main-container {
+	background: #FFF;
+	padding-top: 15px;
+	margin-top: -20px;
+}
+
+.footer {
+	width: 100%;
+}
+
+.form-inline > .form-group > input {
+	width: 100%;
+}
+
+.form-inline > .form-group {
+	margin-top: 10px;
+}

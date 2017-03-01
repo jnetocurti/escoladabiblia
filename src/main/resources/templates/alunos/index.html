@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="index">
+	<div layout:fragment="content">
+
+		<h3 class="panel-title">Grid de Alunos</h3>
+		<table class="table table-hover grid-alunos" data-ajax="true" th:attr="data-url=@{/alunos/listar}">
+			<thead>
+				<tr>
+					<th data-column-id="id" data-type="numeric" data-identifier="true" data-visible="false"></th>
+					<th data-column-id="nome" data-sortable="false">Nome</th>
+					<th data-column-id="dataNascimento" data-sortable="false">Data de nascimento</th>
+				</tr>
+			</thead>
+		</table>
+	
+		<br></br><br></br>
+
+		<h3 class="panel-title">Cadastro de Alunos</h3>
+		<form class="form-inline aluno-form" th:action="@{/alunos/salvar}" method="post">
+			<div class="form-group col-md-8">
+				<label for="nome">Nome</label>
+				<input type="text" id="nome" th:field="${aluno.nome}" 
+					class="form-control" placeholder="Nome do aluno"></input>
+			</div>
+			<div class="form-group col-md-4">
+				<label for="nascimento">Data de nascimento</label>
+				<input type="text" id="nascimento" th:field="${aluno.dataNascimento}" 
+					class="form-control" placeholder="Data de nascimento"></input>
+			</div>
+			<div class="form-group col-md-12">
+				<button type="button" class="btn btn-default btn-primary save-aluno">Submit</button>
+			</div>
+		</form>
+
+	</div>
+	<div layout:fragment="scripts">
+		<script th:src="@{/js/alunos/aluno.js}"></script>
+	</div>
+</html>
