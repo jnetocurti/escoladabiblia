@@ -1,0 +1,67 @@
+<div th:fragment="presidio-aluno" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+
+	<div class="form-group col-md-6">
+		<label for="nome-presidio">Presídio</label>
+		<div>
+	    	<select class="form-control" id="nome-presidio" th:field="${presidiario.presidio.id}">
+	    		<option value="0">Selecione</option>
+				<option value="1">BANGU II</option>
+			</select>
+    	</div>
+	</div>
+	
+	<div class="form-group col-md-2">
+		<label for="matricula">Matrícula</label>
+		<input type="text" class="form-control" id="matricula" th:field="${presidiario.matricula}"
+			placeholder="Nº matrícula"></input>
+	</div>
+	
+	<div class="form-group col-md-2">
+		<label for="cela">Cela</label>
+		<input type="text" class="form-control" id="cela" th:field="${presidiario.cela}"
+			placeholder="Nº cela"></input>
+	</div>
+	
+	<div class="form-group col-md-2">
+		<label for="raio">Raio</label>
+		<input type="text" class="form-control" id="raio" th:field="${presidiario.raio}"
+			placeholder="Raio / Pavilhão"></input>
+	</div>
+	
+	<div class="form-group col-md-6">
+    	<label for="logradouro-presidio">Rua</label>
+    	<input type="text" class="form-control" id="logradouro-presidio" placeholder="Localidade / Logradouro do presídio" 
+    		readonly="readonly"></input>
+    </div>
+    
+    <div class="form-group col-md-2">
+    	<label for="numero-presidio">Nº</label>
+    	<input type="text" class="form-control" id="numero-presidio" placeholder="Número do presídio" 
+    		readonly="readonly"></input>
+    </div>
+    
+    <div class="form-group col-md-4">
+    	<label for="bairro-presidio">Bairro</label>
+    	<input type="text" class="form-control" id="-presidio" placeholder="Bairro do presídio" 
+    		readonly="readonly"></input>
+    </div>
+    
+    <div class="form-group col-md-6">
+    	<label for="descricao-presidio">Descrição</label>
+    	<input type="text" class="form-control" id="descricao-presidio" placeholder="Descrição endereço do presídio" 
+    		readonly="readonly"></input>
+    </div>
+    
+    <div class="form-group col-md-4">
+    	<label for="cidade-presidio">Cidade</label>
+    	<input type="text" class="form-control" id="cidade-presidio" placeholder="Cidade do presídio" 
+    		readonly="readonly"></input>
+    </div>
+    
+    <div class="form-group col-md-2">
+    	<label for="estado-presidio">Estado</label>
+    	<input type="text" class="form-control" id="estado-presidio" placeholder="UF do presídio" 
+    		readonly="readonly"></input>
+    </div>
+
+</div>

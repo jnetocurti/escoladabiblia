@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.escoladabiblia.model.Aluno;
+import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
@@ -22,7 +23,11 @@ public class AlunoServiceImpl implements AlunoService {
 	}
 
 	@Override
-	public Aluno salvar(Aluno aluno) {
+	public Aluno salvar(Aluno aluno, Presidiario presidiario) {
+
+		presidiario.setAluno(aluno);
+
+		aluno.getCaracterizacoes().add(presidiario);
 
 		return alunoRepository.save(aluno);
 	}

@@ -1,9 +1,6 @@
 package br.com.escoladabiblia.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,18 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "alunos")
-public class Aluno implements Serializable {
+@Table(name = "presidios")
+public class Presidio implements Serializable {
 
 	/**
 	 * 
@@ -36,29 +27,12 @@ public class Aluno implements Serializable {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	@NotBlank
 	@Column(name = "nome", length = 50, nullable = false)
 	private String nome;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_nascimento", nullable = false)
-	private Calendar dataNascimento;
-
-	@Column(name = "possui_biblia")
-	private Boolean possuiBiblia;
-
-	@Column(name = "foi_batizado")
-	private Boolean batizado;
-	
-	@Column(name = "frequentou_igreja")
-	private Boolean frequentouIgreja;
 
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "endereco_id", foreignKey = @ForeignKey(name = "endereco_fk"))
 	private Endereco endereco;
-
-	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
-	private List<Caracterizacao> caracterizacoes = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -76,49 +50,12 @@ public class Aluno implements Serializable {
 		this.nome = nome;
 	}
 
-	public Calendar getDataNascimento() {
-		return dataNascimento;
-	}
-
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	public void setDataNascimento(Calendar dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public Boolean getPossuiBiblia() {
-		return possuiBiblia;
-	}
-
-	public void setPossuiBiblia(Boolean possuiBiblia) {
-		this.possuiBiblia = possuiBiblia;
-	}
-
-	public Boolean getBatizado() {
-		return batizado;
-	}
-
-	public void setBatizado(Boolean batizado) {
-		this.batizado = batizado;
-	}
-
-	public Boolean getFrequentouIgreja() {
-		return frequentouIgreja;
-	}
-
-	public void setFrequentouIgreja(Boolean frequentouIgreja) {
-		this.frequentouIgreja = frequentouIgreja;
-	}
-
 	public Endereco getEndereco() {
 		return endereco;
 	}
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	public List<Caracterizacao> getCaracterizacoes() {
-		return caracterizacoes;
 	}
 
 	@Override
@@ -137,7 +74,7 @@ public class Aluno implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Aluno other = (Aluno) obj;
+		Presidio other = (Presidio) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -148,7 +85,7 @@ public class Aluno implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Aluno [id=" + id + ", nome=" + nome + "]";
+		return "Presidio [nome=" + nome + "]";
 	}
 
 }

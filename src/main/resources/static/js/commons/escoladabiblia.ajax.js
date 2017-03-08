@@ -1,35 +1,62 @@
 Sandbox.modules.ajax = function(box) {
 
-	box.ajaxForm = function(form, before, success, error, complete) {
-
+	box.ajaxForm = function(form, configs) {
+		
+		configs = configs || {};
+		
 		$(form).ajaxForm({
-
-			dataType:  'json',
 			
 			beforeSubmit : function() {
-				if (before) {
-					before();
-				}
+				
+				applyCallback(configs.before, null);
 			},
-
 			success : function(data, statusText, jqXHR, $form) {
-				if (success) {
-					success(data, statusText, jqXHR, $form);
-				}
-				if (complete) {
-					complete(jqXHR, textStatus);
-				}
+				
+				applyCallback(configs.success, jqXHR, data);
+				
+				applyCallback(configs.complete, jqXHR);
 			},
-
 			error : function(jqXHR, textStatus) {
-				if (error) {
-					error(jqXHR, textStatus);
-				}
-				if (complete) {
-					complete(jqXHR, textStatus);
-				}
+
+				proccessErrors(jqXHR);
+				
+				applyCallback(configs.error, jqXHR);
+				
+				applyCallback(configs.complete, jqXHR);
 			}
 		});
+	};
+
+	applyCallback = function(callback, jqXHR, data) {
+
+		if (typeof callback === 'function') {
+
+			if (callback.name === 'before') {
+				callback();
+
+			} else if (callback.name === 'success') {
+				callback(data, jqXHR);
+
+			} else {
+				callback(jqXHR);
+			}
+		}
+	};
+		
+	proccessErrors = function(jqXHR) {
+		
+		switch (jqXHR.status) {
+		
+		case 400:
+			box.showMsgsTooltip(jqXHR.responseJSON.errors);
+			break;
+			
+		case 500:
+			break;
+			
+		default:
+			break;
+		}
 	};
 
 };
