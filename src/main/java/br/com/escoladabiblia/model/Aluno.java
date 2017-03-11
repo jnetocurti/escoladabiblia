@@ -36,7 +36,7 @@ public class Aluno implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
+	@Column(name = "id")
 	private Long id;
 
 	@NotBlank
@@ -44,7 +44,7 @@ public class Aluno implements Serializable {
 	private String nome;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "data_nascimento", nullable = false)
+	@Column(name = "data_nascimento")
 	private Calendar dataNascimento;
 
 	@Column(name = "possui_biblia")
@@ -52,15 +52,16 @@ public class Aluno implements Serializable {
 
 	@Column(name = "foi_batizado")
 	private Boolean batizado;
-	
+
 	@Column(name = "frequentou_igreja")
 	private Boolean frequentouIgreja;
 
+	@JsonInclude(value = Include.NON_NULL)
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "endereco_id", foreignKey = @ForeignKey(name = "endereco_fk"))
 	private Endereco endereco;
 
-	@JsonInclude(value=Include.NON_EMPTY)
+	@JsonInclude(value = Include.NON_EMPTY)
 	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
 	private List<Caracterizacao> caracterizacoes = new ArrayList<>();
 

@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "enderecos")
 public class Endereco implements Serializable {
@@ -25,34 +27,36 @@ public class Endereco implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
+	@Column(name = "id")
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "estado_id", nullable = false, foreignKey = @ForeignKey(name = "estado_fk"))
+	@JoinColumn(name = "estado_id", foreignKey = @ForeignKey(name = "estado_fk"))
 	private Estado estado;
 
-	@NotNull
+	@NotBlank
 	@Size(min = 3, max = 100)
 	@Column(name = "cidade", length = 100, nullable = false)
 	private String cidade;
 
-	@NotNull
+	@NotBlank
 	@Size(min = 3, max = 100)
 	@Column(name = "logradouro", length = 100, nullable = false)
 	private String logradouro;
 
 	@NotNull
-	@Column(name = "numero", length = 8, nullable = false)
+	@Column(name = "numero", length = 8, nullable = false, columnDefinition = "integer default 0")
 	private Integer numero;
 
-	@NotNull
-	@Size(min = 3, max = 100)
-	@Column(name = "bairro", length = 100, nullable = false)
+	@Column(name = "bairro", length = 100)
 	private String bairro;
 
-	@Column(name = "descricao", length = 100)
-	private String descricao;
+	@Column(name = "complemento", length = 100)
+	private String complemento;
+
+	@Size(min = 9, max = 9)
+	@Column(name = "cep", length = 9)
+	private String cep;
 
 	public Long getId() {
 		return id;
@@ -102,12 +106,20 @@ public class Endereco implements Serializable {
 		this.bairro = bairro;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getComplemento() {
+		return complemento;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	@Override

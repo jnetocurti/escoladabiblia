@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "presidios")
 public class Presidio implements Serializable {
@@ -24,10 +26,11 @@ public class Presidio implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", nullable = false)
+	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "nome", length = 50, nullable = false)
+	@NotBlank
+	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
 
 	@OneToOne(cascade = { CascadeType.ALL })
