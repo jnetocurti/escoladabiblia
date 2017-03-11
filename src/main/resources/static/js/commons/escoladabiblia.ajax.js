@@ -1,10 +1,12 @@
 Sandbox.modules.ajax = function(box) {
 
-	box.ajaxForm = function(form, configs) {
+	box.postForm = function(form, configs) {
 		
 		configs = configs || {};
 		
 		$(form).ajaxForm({
+			
+			resetForm : true,
 			
 			beforeSubmit : function() {
 				
@@ -21,6 +23,30 @@ Sandbox.modules.ajax = function(box) {
 				proccessErrors(jqXHR);
 				
 				applyCallback(configs.error, jqXHR);
+				
+				applyCallback(configs.complete, jqXHR);
+			}
+		});
+	};
+
+	box.post = function(url, data, configs) {
+
+		configs = configs || {};
+		
+		$.ajax({
+			type: 'POST',
+		    url: url,
+		    data: data,
+		    contentType: "application/json",
+		    success: function(data, statusText, jqXHR) {
+		    	
+		    	applyCallback(configs.success, jqXHR, data);
+		    },
+		    error: function(jqXHR, textStatus) {
+		    	
+		    	applyCallback(configs.error, jqXHR);
+			},
+			complete : function(jqXHR, textStatus) {
 				
 				applyCallback(configs.complete, jqXHR);
 			}
@@ -52,9 +78,11 @@ Sandbox.modules.ajax = function(box) {
 			break;
 			
 		case 500:
+			box.showMsg(jqXHR.responseJSON);
 			break;
 			
 		default:
+			box.showMsg({type : 'ERROR', message : 'Erro desconhecido no cliente'});
 			break;
 		}
 	};

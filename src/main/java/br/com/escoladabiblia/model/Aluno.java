@@ -22,6 +22,9 @@ import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Entity
 @Table(name = "alunos")
 public class Aluno implements Serializable {
@@ -57,6 +60,7 @@ public class Aluno implements Serializable {
 	@JoinColumn(name = "endereco_id", foreignKey = @ForeignKey(name = "endereco_fk"))
 	private Endereco endereco;
 
+	@JsonInclude(value=Include.NON_EMPTY)
 	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
 	private List<Caracterizacao> caracterizacoes = new ArrayList<>();
 

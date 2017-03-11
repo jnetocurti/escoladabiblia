@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import br.com.escoladabiblia.util.dto.MessageDTO;
+import br.com.escoladabiblia.util.dto.MessageDTO.TipoMensagem;
 import br.com.escoladabiblia.util.dto.ValidationErrosDTO;
 
 @ControllerAdvice
@@ -45,11 +47,13 @@ public class ExceptionHandlerController {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
-	public String handleInternalError(final Exception ex) {
+	public MessageDTO handleInternalError(final Exception ex) {
 
-		LOGGER.error(getLocalizedMessage(ex), ex);
+		final String msg = getLocalizedMessage(ex);
 
-		return null;
+		LOGGER.error(msg, ex);
+
+		return new MessageDTO(TipoMensagem.ERROR, msg);
 	}
 	
 	/**

@@ -4,6 +4,10 @@ Sandbox.modules.event = function(box) {
 		$(element).on('click', callback);
 	};
 	
+	box.eventChange = function(element, callback) {
+		$(element).on('change', callback);
+	};
+	
 	box.submitForm = function(form) {
 		$(form).submit();
 	};
