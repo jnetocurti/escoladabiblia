@@ -38,7 +38,13 @@
 
 		<div th:include="fragments/menu"></div>
 
-		<div class="col-md-10 content" layout:fragment="content"></div>
+		<div class="col-md-10 content" layout:fragment="content">
+			<div th:if="${message}">
+				<div class="alert alert-success" role="alert">
+					<span th:text="${message}"></span>
+				</div>
+			</div>
+		</div>
 
 		<div th:include="fragments/footer"></div>
 	</div>

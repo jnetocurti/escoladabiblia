@@ -59,7 +59,7 @@ public class AlunoController extends BaseController {
 
 		alunoService.salvar(aluno, presidiario);
 
-		return super.returnSuccess("sucesso.aluno.salvo");
+		return super.getSuccessMessage("sucesso.aluno.salvo");
 	}
 
 }

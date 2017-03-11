@@ -15,12 +15,12 @@ public abstract class BaseController {
 	@Autowired
 	private MessageSource messageSource;
 
-	protected MessageDTO returnSuccess(String key) {
+	protected MessageDTO getSuccessMessage(String key) {
 		
-		return this.returnSuccess(key, new Object(){});
+		return this.getSuccessMessage(key, new Object(){});
 	}
 
-	protected MessageDTO returnSuccess(String key, Object... args) {
+	protected MessageDTO getSuccessMessage(String key, Object... args) {
 
 		return new MessageDTO(TipoMensagem.SUCCESS, messageSource.getMessage(key, args, Locale.getDefault()));
 	}
