@@ -30,8 +30,9 @@ public class Endereco implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
+	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "estado_id", foreignKey = @ForeignKey(name = "estado_fk"))
+	@JoinColumn(name = "estado_id", nullable = false, foreignKey = @ForeignKey(name = "estado_fk"))
 	private Estado estado;
 
 	@NotBlank

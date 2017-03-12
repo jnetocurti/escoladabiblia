@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "caracterizacoes")
 @EntityListeners(value = { Caracterizacao.class })
@@ -47,6 +49,7 @@ public abstract class Caracterizacao implements Serializable {
 	@Column(name = "data_registro", nullable = false)
 	private Calendar dataRegistro;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "aluno_id", foreignKey = @ForeignKey(name = "aluno_fk"))
 	private Aluno aluno;

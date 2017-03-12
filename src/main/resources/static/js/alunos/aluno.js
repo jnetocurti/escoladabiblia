@@ -11,7 +11,7 @@ Sandbox('*', function(box) {
 					setLogradouroPresidio(data.endereco.logradouro);
 					setNumeroPresidio(data.endereco.numero);
 					setBairroPresidio(data.endereco.bairro);
-					setDescricaoPresidio(data.endereco.descricao);
+					setDescricaoPresidio(data.endereco.complemento);
 					setCidadePresidio(data.endereco.cidade);
 					setEstadoPresidio(data.endereco.estado.uf);
 				}
