@@ -8,6 +8,19 @@ Sandbox.modules.dom = function(box) {
 		return $(element).addClass('hide');
 	};
 
+	box.get = function(element) {
+		return $(element).val();
+	};
+
+	box.set = function(element, value) {
+		$(element).val(value);
+	};
+	
+	box.switchArea = function(hideDiv, showDiv) {
+		box.hide(hideDiv);
+		box.show(showDiv);
+	};
+
 	box.showMsg = function(msg) {
 		var show = function(alert) {
 			box.show(alert).find('span').text(msg.message);

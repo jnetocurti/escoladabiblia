@@ -14,14 +14,14 @@
 			<h3>Cadastro de Alunos</h3>
 		</div>
 		
-		<div class="area-grid-alunos hide">
+		<div class="area-grid-alunos">
 		
 			<div th:replace="alunos/grid-alunos"></div>
 			
 			<button type="button" class="pull-right btn btn-default btn-primary novo-aluno">Novo</button>
 		</div>
 
-		<div class="area-form-alunos">
+		<div class="area-form-alunos hide">
 		
 			<form class="form-inline aluno-form" th:action="@{/alunos/salvar}" method="post">
 			

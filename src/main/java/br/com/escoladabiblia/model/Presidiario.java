@@ -8,6 +8,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -35,7 +36,7 @@ public class Presidiario extends Caracterizacao {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "presidio_id", foreignKey = @ForeignKey(name = "presidio_fk"))
+	@JoinColumn(name = "presidio_id", nullable = false, foreignKey = @ForeignKey(name = "presidio_fk"))
 	private Presidio presidio;
 
 	public Presidiario() {
@@ -75,6 +76,12 @@ public class Presidiario extends Caracterizacao {
 
 	public void setPresidio(Presidio presidio) {
 		this.presidio = presidio;
+	}
+	
+	@Override
+	@Transient
+	public String getCaracterizacao() {
+		return presidio.getNome();
 	}
 
 	@Override

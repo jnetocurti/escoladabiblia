@@ -56,7 +56,7 @@ public class AlunoController extends BaseController {
 	@PostMapping(path = "salvar")
 	public @ResponseBody MessageDTO salvar(@Valid @ModelAttribute Aluno aluno,
 			@Valid @ModelAttribute Presidiario presidiario) {
-
+		
 		alunoService.salvar(aluno, presidiario);
 
 		return super.getSuccessMessage("sucesso.aluno.salvo");

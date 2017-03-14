@@ -24,7 +24,7 @@ public class AlunoServiceImpl implements AlunoService {
 
 	@Override
 	public Aluno salvar(Aluno aluno, Presidiario presidiario) {
-
+		
 		presidiario.setAluno(aluno);
 
 		aluno.getCaracterizacoes().add(presidiario);

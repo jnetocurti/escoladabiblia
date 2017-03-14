@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -124,6 +125,19 @@ public class Aluno implements Serializable {
 
 	public List<Caracterizacao> getCaracterizacoes() {
 		return caracterizacoes;
+	}
+	
+	@Transient
+	public String getCaracterizacao() {
+
+		if (!caracterizacoes.isEmpty()) {
+
+			return caracterizacoes.get(caracterizacoes.size() - 1).getCaracterizacao();
+
+		} else {
+			// TODO definir caracterização padrão
+			return "";
+		}
 	}
 
 	@Override
