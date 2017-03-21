@@ -11,8 +11,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 @Entity
 @Table(name = "presidiarios")
 public class Presidiario extends Caracterizacao {
@@ -22,17 +20,17 @@ public class Presidiario extends Caracterizacao {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@NotBlank
-	@Column(name = "matricula", length = 30, nullable = false)
+	@Column(name = "matricula", length = 30)
 	private String matricula;
 
-	@NotNull
-	@Column(name = "raio", nullable = false)
+	@Column(name = "raio")
 	private Integer raio;
 
-	@NotNull
-	@Column(name = "cela", nullable = false)
+	@Column(name = "cela")
 	private Integer cela;
+
+	@Column(name = "complemento", length = 50)
+	private String complemento;
 
 	@NotNull
 	@ManyToOne
@@ -70,6 +68,14 @@ public class Presidiario extends Caracterizacao {
 		this.cela = cela;
 	}
 
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
 	public Presidio getPresidio() {
 		return presidio;
 	}
@@ -77,7 +83,7 @@ public class Presidiario extends Caracterizacao {
 	public void setPresidio(Presidio presidio) {
 		this.presidio = presidio;
 	}
-	
+
 	@Override
 	@Transient
 	public String getCaracterizacao() {

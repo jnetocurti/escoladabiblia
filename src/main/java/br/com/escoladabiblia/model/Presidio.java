@@ -34,7 +34,7 @@ public class Presidio implements Serializable {
 	private String nome;
 
 	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "endereco_id", foreignKey = @ForeignKey(name = "endereco_fk"))
+	@JoinColumn(name = "endereco_id", nullable = false, foreignKey = @ForeignKey(name = "endereco_fk"))
 	private Endereco endereco;
 
 	public Long getId() {
