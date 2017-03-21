@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="index">
+
+<body>
+
+	<div layout:fragment="content">
+
+		<form th:method="POST" enctype="multipart/form-data" th:action="@{/importacao/alunos-presidios/importar-dados}"
+			onsubmit="$('button').prop('disabled', true);">
+
+			<div class="form-group">
+				<label for="file">Arquivo para upload:</label> 
+				<input type="file" id="file" name="file"></input>
+			</div>
+			
+			<div class="form-group">
+				<button type="submit" class=" btn btn-default btn-primary">Enviar</button>
+			</div>
+
+		</form>
+
+	</div>
+
+</body>
+</html>

@@ -61,9 +61,8 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 
 						aluno.getCaracterizacoes().add(presidiario);
 						
-						LOGGER.info("Inserindo aluno {} - Matricula: {} - Raio: {} - Cela: {} - Presidio: {}",
-								aluno.getNome(), presidiario.getMatricula(), presidiario.getRaio(),
-								presidiario.getCela(), presidiario.getPresidio().getNome());
+						LOGGER.info("Inserindo aluno {} - Matricula: {} - Raio: {} - Cela: {}", aluno.getNome(),
+								presidiario.getMatricula(), presidiario.getRaio(), presidiario.getCela());
 
 						alunoRepository.save(aluno);
 					}
