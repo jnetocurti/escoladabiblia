@@ -29,9 +29,9 @@ Sandbox('*', function(box) {
 		
 		if (box.get('#presidio')) {
 
-			box.post(context + '/alunos/detalhes-presidio', box.get('#presidio'), {
+			box.post(context + '/alunos-presidios/detalhes-presidio', box.get('#presidio'), {
 				success : function(data) {
-					box.set('#numero-presidio', data.endereco.numero || 's/nº');
+					box.set('#numero-presidio', data.endereco.numero || 's/ nº');
 					box.set('#bairro-presidio', data.endereco.bairro || '-');
 					box.set('#cidade-presidio', data.endereco.cidade);
 					box.set('#estado-presidio', data.endereco.estado.uf);

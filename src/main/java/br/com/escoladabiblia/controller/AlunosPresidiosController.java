@@ -17,13 +17,14 @@ import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.model.Presidio;
 import br.com.escoladabiblia.service.AlunoService;
 import br.com.escoladabiblia.service.PresidioService;
+import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
 import br.com.escoladabiblia.util.dto.MessageDTO;
 import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
 
 @Controller
-@RequestMapping("/alunos")
-public class AlunoController extends BaseController {
+@RequestMapping("/alunos-presidios")
+public class AlunosPresidiosController extends BaseController {
 
 	@Autowired
 	private AlunoService alunoService;
@@ -42,9 +43,9 @@ public class AlunoController extends BaseController {
 	}
 
 	@PostMapping(path = "listar")
-	public @ResponseBody BootgridResponse<Aluno> listar(@ModelAttribute BootgridRequest bootgridRequest) {
+	public @ResponseBody BootgridResponse<AlunoPresidioDTO> listar(@ModelAttribute BootgridRequest bootgridRequest) {
 
-		return alunoService.findByName(bootgridRequest);
+		return alunoService.findAlunosPresidiosByNomeOrMatriculaOrNomePresidio(bootgridRequest);
 	}
 
 	@PostMapping(path = "detalhes-presidio")
@@ -56,7 +57,7 @@ public class AlunoController extends BaseController {
 	@PostMapping(path = "salvar")
 	public @ResponseBody MessageDTO salvar(@Valid @ModelAttribute Aluno aluno,
 			@Valid @ModelAttribute Presidiario presidiario) {
-		
+
 		alunoService.salvar(aluno, presidiario);
 
 		return super.getSuccessMessage("sucesso.aluno.salvo");

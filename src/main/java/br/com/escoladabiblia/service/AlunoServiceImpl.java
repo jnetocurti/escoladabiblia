@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.repository.AlunoRepository;
+import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
 import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
 
@@ -16,15 +17,17 @@ public class AlunoServiceImpl implements AlunoService {
 	private AlunoRepository alunoRepository;
 
 	@Override
-	public BootgridResponse<Aluno> findByName(BootgridRequest bootgridRequest) {
+	public BootgridResponse<AlunoPresidioDTO> findAlunosPresidiosByNomeOrMatriculaOrNomePresidio(
+			BootgridRequest bootgridRequest) {
 
-		return new BootgridResponse<Aluno>(alunoRepository.findByNomeLike("%" + bootgridRequest.getSearchPhrase() + "%",
-				bootgridRequest.getPageRequest()));
+		return new BootgridResponse<AlunoPresidioDTO>(
+				alunoRepository.findAlunosPresidiosByNomeOrMatriculaOrNomePresidio(
+						"%" + bootgridRequest.getSearchPhrase() + "%", bootgridRequest.getPageRequest()));
 	}
 
 	@Override
 	public Aluno salvar(Aluno aluno, Presidiario presidiario) {
-		
+
 		presidiario.setAluno(aluno);
 
 		aluno.getCaracterizacoes().add(presidiario);

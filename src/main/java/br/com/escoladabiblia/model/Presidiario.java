@@ -8,7 +8,6 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -82,12 +81,6 @@ public class Presidiario extends Caracterizacao {
 
 	public void setPresidio(Presidio presidio) {
 		this.presidio = presidio;
-	}
-
-	@Override
-	@Transient
-	public String getCaracterizacao() {
-		return presidio.getNome();
 	}
 
 	@Override

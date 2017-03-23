@@ -19,7 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -94,9 +93,6 @@ public abstract class Caracterizacao implements Serializable {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-	
-	@Transient
-	public abstract String getCaracterizacao();
 
 	@Override
 	public int hashCode() {
