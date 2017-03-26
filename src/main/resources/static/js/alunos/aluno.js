@@ -1,7 +1,5 @@
 Sandbox('*', function(box) {
 	
-	$('.data-nascimento').inputmask("99/99/9999");
-	
 	box.eventClick('.novo-aluno', function() {
 		box.switchArea('.area-grid-alunos', '.area-form-alunos');
 	});
@@ -10,10 +8,28 @@ Sandbox('*', function(box) {
 		box.switchArea('.area-form-alunos', '.area-grid-alunos');
 	});
 	
-	box.bootgrid('.grid-alunos');
+	box.bootgrid('.grid-alunos',
+		{
+			formatters: {
+				"commands": function(column, row) {
+					return box.gridEditButton(column, row) + box.gridDeleteButton(column, row);
+				}
+			},
+			
+			callbacks : function() {
+				
+				box.eventClick('.command-edit', function() {
+					alert($(this).data("row-id"));
+				});
+				
+				box.eventClick('.command-delete', function() {
+					alert($(this).data("row-id"));
+				});
+			}
+		}
+	);
 
 	box.eventClick('.save-aluno', function() {
-
 		box.submitForm('.aluno-form');
 	});
 

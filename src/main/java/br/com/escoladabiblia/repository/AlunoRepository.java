@@ -18,6 +18,7 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 		 + "   JOIN a.caracterizacoes c "
 		 + "   JOIN c.presidio p "
 		 + "  WHERE a.nome LIKE :param "
+		 + "    AND c.ativa = true "
 		 + "     OR c.matricula LIKE :param "
 		 + "     OR p.nome LIKE :param "
 		 + "  ORDER BY p.nome ASC, a.nome ASC ")
