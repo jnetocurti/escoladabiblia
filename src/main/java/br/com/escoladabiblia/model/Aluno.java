@@ -55,6 +55,12 @@ public class Aluno implements Serializable {
 
 	@Column(name = "frequentou_igreja")
 	private Boolean frequentouIgreja;
+	
+	@Column(name = "sexo")
+	private Sexo sexo;
+
+	@Column(name = "observacao")
+	private String observacao;
 
 	@JsonInclude(value = Include.NON_NULL)
 	@OneToOne(cascade = { CascadeType.ALL })
@@ -112,6 +118,22 @@ public class Aluno implements Serializable {
 
 	public void setFrequentouIgreja(Boolean frequentouIgreja) {
 		this.frequentouIgreja = frequentouIgreja;
+	}
+
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	public Endereco getEndereco() {
