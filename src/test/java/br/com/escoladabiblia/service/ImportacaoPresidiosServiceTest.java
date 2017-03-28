@@ -2,6 +2,7 @@ package br.com.escoladabiblia.service;
 
 import java.io.IOException;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,7 +12,7 @@ import br.com.escoladabiblia.repository.EstadoRepository;
 
 public class ImportacaoPresidiosServiceTest extends EscoladabibliaApplicationTests {
 
-	private static final String FILE_PATH = "importaveis/Endereços Penitenciárias.xlsx";
+	private static final String FILE_PATH = "importaveis/penitenciarias.xlsx";
 
 	@Autowired
 	private EstadoRepository estadoRepository;
@@ -19,7 +20,7 @@ public class ImportacaoPresidiosServiceTest extends EscoladabibliaApplicationTes
 	@Autowired
 	private ImportacaoPresidiosService importacaoPresidiosService;
 
-	@org.junit.Before
+	@Before
 	public void init() {
 		inserirEstados();
 	}

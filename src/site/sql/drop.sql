@@ -1,0 +1,12 @@
+alter table alunos drop constraint endereco_fk
+alter table caracterizacoes drop constraint aluno_fk
+alter table enderecos drop constraint estado_fk
+alter table presidiarios drop constraint presidio_fk
+alter table presidiarios drop constraint FKb461e6vmkuh9n54ldbpoo4yoq
+alter table presidios drop constraint endereco_fk
+drop table if exists alunos cascade
+drop table if exists caracterizacoes cascade
+drop table if exists enderecos cascade
+drop table if exists estados cascade
+drop table if exists presidiarios cascade
+drop table if exists presidios cascade
