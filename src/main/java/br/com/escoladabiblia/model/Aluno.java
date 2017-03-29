@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -56,7 +58,8 @@ public class Aluno implements Serializable {
 	@Column(name = "frequentou_igreja")
 	private Boolean frequentouIgreja;
 	
-	@Column(name = "sexo")
+	@Enumerated(EnumType.STRING)
+	@Column(name = "sexo", length = 1)
 	private Sexo sexo;
 
 	@Column(name = "observacao")
@@ -70,6 +73,10 @@ public class Aluno implements Serializable {
 	@JsonInclude(value = Include.NON_EMPTY)
 	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
 	private List<Caracterizacao> caracterizacoes = new ArrayList<>();
+	
+	@JsonInclude(value = Include.NON_EMPTY)
+	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
+	private List<AtividadeEstudo> atividadesEstudo = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -148,6 +155,10 @@ public class Aluno implements Serializable {
 		return caracterizacoes;
 	}
 	
+	public List<AtividadeEstudo> getAtividadesEstudo() {
+		return atividadesEstudo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -7,11 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "presidiarios")
+@PrimaryKeyJoinColumn(foreignKey = @ForeignKey(name = "caracterizacao_fk"))
 public class Presidiario extends Caracterizacao {
 
 	/**
