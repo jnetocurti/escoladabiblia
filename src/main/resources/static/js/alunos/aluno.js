@@ -12,11 +12,17 @@ Sandbox('*', function(box) {
 		{
 			formatters: {
 				"commands": function(column, row) {
-					return box.gridEditButton(column, row) + box.gridDeleteButton(column, row);
+					return box.smallGridButton(column, row, "command-activities", "fa-graduation-cap")
+						 + box.smallGridButton(column, row, "command-edit", "fa-pencil")
+						 + box.smallGridButton(column, row, "command-delete", "fa-trash-o");
 				}
 			},
 			
 			callbacks : function() {
+				
+				box.eventClick('.command-activities', function() {
+					alert($(this).data("row-id"));
+				});
 				
 				box.eventClick('.command-edit', function() {
 					alert($(this).data("row-id"));

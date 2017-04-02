@@ -22,14 +22,8 @@ Sandbox.modules.bootgrid = function(box) {
 		});
 	};
 	
-	box.gridEditButton = function(column, row) {
-		
-		return " <button type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\"></span></button>";
-	};
-	
-	box.gridDeleteButton = function(column, row) {
-		
-		return " <button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-trash-o\"></span></button>";
+	box.smallGridButton = function(column, row, clazz, icon) {
+		return "<button type=\"button\" class=\"btn btn-xs btn-default " + clazz + "\" data-row-id=\"" + row.id + "\"><span class=\"fa " + icon + "\"></span></button> ";
 	};
 
 	initConfigs = function(configs) {
