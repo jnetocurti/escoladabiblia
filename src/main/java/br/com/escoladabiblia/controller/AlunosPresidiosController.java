@@ -39,7 +39,7 @@ public class AlunosPresidiosController extends BaseController {
 		model.addAttribute("presidiario", new Presidiario());
 		model.addAttribute("presidios", presidioService.findAll());
 
-		return "alunos/index";
+		return "alunos/presidios/index";
 	}
 
 	@PostMapping(path = "listar")
@@ -52,6 +52,12 @@ public class AlunosPresidiosController extends BaseController {
 	public @ResponseBody Presidio detalhesPresidio(@RequestBody Long id) {
 
 		return presidioService.findById(id);
+	}
+	
+	@PostMapping(path = "editar")
+	public @ResponseBody Aluno editarAluno(@RequestBody Long id) {
+
+		return alunoService.editar(id);
 	}
 
 	@PostMapping(path = "salvar")

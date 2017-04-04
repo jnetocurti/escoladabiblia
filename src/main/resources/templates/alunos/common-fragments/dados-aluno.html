@@ -1,5 +1,7 @@
 <div th:fragment="dados-aluno" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
 
+	<input type="hidden" id="id" th:field="${aluno.id}" />
+
 	<div class="form-group col-md-8">
 		<label for="nome">Nome</label>
 		<input type="text" id="nome" th:field="${aluno.nome}" 
@@ -14,19 +16,19 @@
 	
 	<div class="checkbox form-group col-md-3">
 		<label> 
-			<input type="checkbox" th:field="${aluno.frequentouIgreja}"></input> Frequentou a igreja?
+			<input type="checkbox" id="frequentouIgreja" th:field="${aluno.frequentouIgreja}"></input> Frequentou a igreja?
 		</label>
 	</div>
 	
 	<div class="checkbox form-group col-md-3">
 		<label>
-			<input type="checkbox" th:field="${aluno.batizado}"></input> Foi batizado?
+			<input type="checkbox" id="batizado" th:field="${aluno.batizado}"></input> Foi batizado?
 		</label>
 	</div>
 	
 	<div class="checkbox form-group col-md-6">
 		<label>
-			<input type="checkbox" th:field="${aluno.possuiBiblia}"></input> Possui bíblia?
+			<input type="checkbox" id="possuiBiblia" th:field="${aluno.possuiBiblia}"></input> Possui bíblia?
 		</label>
 	</div>
 	

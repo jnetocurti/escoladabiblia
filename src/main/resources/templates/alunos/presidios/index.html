@@ -5,39 +5,34 @@
 
 		<ol class="breadcrumb">
 			<li><a th:href="@{/}">Home</a></li>
-			<li class="active">Alunos</li>
+			<li>Alunos</li>
+			<li class="active">Alunos de presídios</li>
 		</ol>
 		
 		<div th:replace="fragments/messages"></div>
 		
-		<div class="col-md-12">
-			<h3>Cadastro de Alunos</h3>
-		</div>
-		
 		<div class="area-grid-alunos">
 		
-			<div th:replace="alunos/grid-alunos"></div>
+			<h3>Alunos cadastrados</h3>
+		
+			<div th:replace="alunos/presidios/grid-alunos"></div>
 			
 			<button type="button" class="pull-right btn btn-default btn-primary novo-aluno">Novo</button>
 		</div>
 
 		<div class="area-form-alunos hide">
 		
+			<h3>Cadastro de alunos</h3>
+		
 			<form class="form-inline aluno-form" th:action="@{/alunos-presidios/salvar}" method="post">
 			
-				<div th:replace="alunos/dados-aluno"></div>
+				<div th:replace="alunos/common-fragments/dados-aluno"></div>
 				
 				<div class="form-group col-md-12">
 					<hr class="separator"></hr>
 				</div>
 				
-				<!-- <div th:replace="alunos/endereco-aluno"></div> -->
-			    
-			    <!-- <div class="form-group col-md-12">
-					<hr class="separator"></hr>
-				</div> -->
-				
-				<div th:replace="alunos/presidio-aluno"></div>
+				<div th:replace="alunos/presidios/presidio-aluno"></div>
 			    
 			    <div class="form-group col-md-12">
 					<hr class="separator"></hr>
@@ -50,9 +45,15 @@
 				
 			</form>
 		</div>
+		
+		<div class="area-atualizacao-atividades hide">
+		
+			<h3>Atividades do aluno</h3>
+		
+		</div>
 
 	</div>
 	<div layout:fragment="scripts">
-		<script th:src="@{/js/alunos/aluno.js}"></script>
+		<script th:src="@{/js/alunos/alunos-presidios.js}"></script>
 	</div>
 </html>

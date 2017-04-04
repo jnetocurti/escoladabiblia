@@ -12,4 +12,6 @@ public interface AlunoService {
 
 	Aluno salvar(Aluno aluno, Presidiario presidiario);
 
+	Aluno editar(Long id);
+
 }

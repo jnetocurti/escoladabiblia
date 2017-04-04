@@ -13,7 +13,7 @@ import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
-	@Query(" SELECT new br.com.escoladabiblia.util.dto.AlunoPresidioDTO(a.id, a.nome, c.matricula, c.raio, c.cela, p.nome) "
+	@Query(" SELECT DISTINCT new br.com.escoladabiblia.util.dto.AlunoPresidioDTO(a.id, a.nome, c.matricula, c.raio, c.cela, p.nome) "
 		 + "   FROM Aluno a "
 		 + "   JOIN a.caracterizacoes c "
 		 + "   JOIN c.presidio p "

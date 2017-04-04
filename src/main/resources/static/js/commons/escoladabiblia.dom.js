@@ -16,6 +16,17 @@ Sandbox.modules.dom = function(box) {
 		$(element).val(value);
 	};
 	
+	box.check = function(element, value) {
+		$(element).prop('checked', value);
+	};
+	
+	box.resetForm = function(form) {
+		box.set(form + ' select', '');
+		box.set(form + ' input[type=text]', '');
+		box.set(form + ' input[type=hidden]', '');
+		box.check(form + ' input[type=checkbox]', false);
+	};
+	
 	box.switchArea = function(hideDiv, showDiv) {
 		box.hide(hideDiv);
 		box.show(showDiv);

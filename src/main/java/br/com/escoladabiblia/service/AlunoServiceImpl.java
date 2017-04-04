@@ -35,4 +35,10 @@ public class AlunoServiceImpl implements AlunoService {
 		return alunoRepository.save(aluno);
 	}
 
+	@Override
+	public Aluno editar(Long id) {
+
+		return alunoRepository.findOne(id);
+	}
+
 }
