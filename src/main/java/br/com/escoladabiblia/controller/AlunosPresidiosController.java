@@ -55,7 +55,7 @@ public class AlunosPresidiosController extends BaseController {
 	}
 	
 	@PostMapping(path = "editar")
-	public @ResponseBody Aluno editarAluno(@RequestBody Long id) {
+	public @ResponseBody Aluno editar(@RequestBody Long id) {
 
 		return alunoService.editar(id);
 	}
