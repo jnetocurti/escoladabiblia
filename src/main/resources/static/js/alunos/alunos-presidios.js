@@ -6,7 +6,7 @@ Sandbox('*', function(box) {
 	});
 	
 	box.eventClick('.cancelar', function() {
-		box.switchArea('.area-form-alunos', '.area-grid-alunos');
+		box.switchArea('.area-form-alunos,.area-atualizacao-atividades', '.area-grid-alunos');
 	});
 	
 	box.bootgrid('.grid-alunos',
@@ -22,7 +22,7 @@ Sandbox('*', function(box) {
 			callbacks : function() {
 				
 				box.eventClick('.command-activities', function() {
-					alert($(this).data("row-id"));
+					gerenciarAtividadesEstudo($(this).data("row-id"));
 				});
 				
 				box.eventClick('.command-edit', function() {
@@ -35,6 +35,11 @@ Sandbox('*', function(box) {
 			}
 		}
 	);
+	
+	gerenciarAtividadesEstudo = function(id) {
+		
+		box.switchArea('.area-grid-alunos', '.area-atualizacao-atividades');
+	};
 	
 	editar = function(id) {
 		
@@ -50,7 +55,7 @@ Sandbox('*', function(box) {
 				box.switchArea('.area-grid-alunos', '.area-form-alunos');
 			}
 		});
-	},
+	};
 	
 	carregarPresidio = function(data) {
 		
@@ -59,7 +64,7 @@ Sandbox('*', function(box) {
 		box.set('#presidio', idPresidio);
 		
 		$( "#presidio" ).trigger( "change" );
-	},
+	};
 
 	box.eventClick('.save-aluno', function() {
 		box.submitForm('.aluno-form');

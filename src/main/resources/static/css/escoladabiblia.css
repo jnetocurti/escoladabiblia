@@ -1,5 +1,9 @@
 @import url(../fonts/font-awesome-4.7.0/css/font-awesome.min.css);
 
+h3 {
+   color:#337ab7 !important;
+}
+
 h1.page-header {
 	margin-top: -5px;
 }
