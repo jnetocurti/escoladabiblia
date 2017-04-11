@@ -20,10 +20,16 @@ Sandbox.modules.dom = function(box) {
 		$(element).prop('checked', value);
 	};
 	
+	box.checkRadio = function(element, value) {
+		$(element).filter('[value=' + value + ']').prop('checked', true);
+	};
+	
 	box.resetForm = function(form) {
 		box.set(form + ' select', '');
+		box.set(form + ' textarea', '');
 		box.set(form + ' input[type=text]', '');
 		box.set(form + ' input[type=hidden]', '');
+		box.check(form + ' input[type=radio]', false);
 		box.check(form + ' input[type=checkbox]', false);
 	};
 	

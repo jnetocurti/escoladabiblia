@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Presidiario;
-import br.com.escoladabiblia.model.Presidio;
 import br.com.escoladabiblia.service.AlunoService;
 import br.com.escoladabiblia.service.PresidioService;
 import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
@@ -48,12 +47,6 @@ public class AlunosPresidiosController extends BaseController {
 		return alunoService.findAlunosPresidiosByNomeOrMatriculaOrNomePresidio(bootgridRequest);
 	}
 
-	@PostMapping(path = "detalhes-presidio")
-	public @ResponseBody Presidio detalhesPresidio(@RequestBody Long id) {
-
-		return presidioService.findById(id);
-	}
-	
 	@PostMapping(path = "editar")
 	public @ResponseBody Aluno editar(@RequestBody Long id) {
 

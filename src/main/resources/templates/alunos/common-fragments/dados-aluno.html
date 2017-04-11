@@ -14,6 +14,25 @@
 			class="form-control data-nascimento" placeholder="Data de nascimento"></input>
 	</div>
 	
+	<div class="form-group col-sm-3">
+        <label>Sexo</label>
+        <div>
+            <label class="radio-inline"> 
+            	<input type="radio" id="sexo" th:field="${aluno.sexo}"
+            		th:value="${T(br.com.escoladabiblia.model.Sexo).M}" /> Masculino 
+            </label>
+            <label class="radio-inline"> 
+            	<input type="radio" id="sexo" th:field="${aluno.sexo}"
+            		th:value="${T(br.com.escoladabiblia.model.Sexo).F}" /> Feminino 
+            </label>
+        </div>
+    </div>
+    
+    <div class="form-group col-md-9">
+		<label for="observacao">Observação</label>
+		<textarea id="observacao" rows="2" th:field="${aluno.observacao}" class="form-control" placeholder="Observações do aluno"></textarea>
+	</div>
+	
 	<div class="checkbox form-group col-md-3">
 		<label> 
 			<input type="checkbox" id="frequentouIgreja" th:field="${aluno.frequentouIgreja}"></input> Frequentou a igreja?

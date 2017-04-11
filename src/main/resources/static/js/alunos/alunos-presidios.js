@@ -9,6 +9,18 @@ Sandbox('*', function(box) {
 		box.switchArea('.area-form-alunos,.area-atualizacao-atividades', '.area-grid-alunos');
 	});
 	
+	box.eventClick('.save-aluno', function() {
+		box.submitForm('.aluno-form');
+	});
+
+	box.postForm('.aluno-form', {
+		success : function(data) {
+			box.showMsg(data);
+			box.switchArea('.area-form-alunos', '.area-grid-alunos');
+			$('.grid-alunos').bootgrid('reload');
+		}
+	});
+	
 	box.bootgrid('.grid-alunos',
 		{
 			formatters: {
@@ -47,59 +59,28 @@ Sandbox('*', function(box) {
 			success : function(data) {
 				box.set('#id', data.id);
 				box.set('#nome', data.nome);
-				box.set('#nascimento', data.dataNascimento);
-				box.check('#frequentouIgreja', data.frequentouIgreja);
 				box.check('#batizado', data.batizado);
+				box.set('#observacao', data.observacao);
+				box.set('#nascimento', data.dataNascimento);
 				box.check('#possuiBiblia', data.possuiBiblia);
-				carregarPresidio(data);
+				box.set('#cela', getCaracterizacao(data).cela);
+				box.set('#raio', getCaracterizacao(data).raio);
+				box.set('#presidio', getPresidio(data).id || '');
+				box.checkRadio('input:radio[name=sexo]', data.sexo);
+				box.check('#frequentouIgreja', data.frequentouIgreja);
+				box.set('#matricula', getCaracterizacao(data).matricula);
+				box.set('#complemento', getCaracterizacao(data).complemento);
 				box.switchArea('.area-grid-alunos', '.area-form-alunos');
 			}
 		});
 	};
 	
-	carregarPresidio = function(data) {
-		
-		var idPresidio = data.caracterizacoes ? data.caracterizacoes[data.caracterizacoes.length - 1].presidio.id : '';
-		
-		box.set('#presidio', idPresidio);
-		
-		$( "#presidio" ).trigger( "change" );
+	getPresidio = function(data) {
+		return getCaracterizacao(data).presidio || {};
 	};
-
-	box.eventClick('.save-aluno', function() {
-		box.submitForm('.aluno-form');
-	});
-
-	box.postForm('.aluno-form', {
-		success : function(data) {
-			box.showMsg(data);
-			box.switchArea('.area-form-alunos', '.area-grid-alunos');
-			$('.grid-alunos').bootgrid('reload');
-		}
-	});
 	
-	box.eventChange('#presidio', function() {
-		
-		if (box.get('#presidio')) {
-
-			box.post(context + 'alunos-presidios/detalhes-presidio', box.get('#presidio'), {
-				success : function(data) {
-					box.set('#numero-presidio', data.endereco.numero || 's/ nº');
-					box.set('#bairro-presidio', data.endereco.bairro || '-');
-					box.set('#cidade-presidio', data.endereco.cidade);
-					box.set('#estado-presidio', data.endereco.estado.uf);
-					box.set('#logradouro-presidio', data.endereco.logradouro);
-					box.set('#complemento-presidio', data.endereco.complemento || '-');
-				}
-			});
-			
-		} else {
-			clearDetalhesPresidio();
-		}
-	});
-
-	clearDetalhesPresidio = function() {
-		box.set('.detalhe-presidio', '');
+	getCaracterizacao = function(data) {
+		return data.caracterizacoes ? data.caracterizacoes[data.caracterizacoes.length - 1] : {};
 	};
 	
 });

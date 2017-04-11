@@ -34,6 +34,10 @@ h1.page-header {
 	width: 100%;
 }
 
+.form-inline>.form-group>textarea {
+	width: 100%;
+}
+
 div.area-buttons button {
 	margin-right: 10px;
 }

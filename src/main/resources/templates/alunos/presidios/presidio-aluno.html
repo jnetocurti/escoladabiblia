@@ -1,67 +1,38 @@
 <div th:fragment="presidio-aluno" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
 
-	<div class="form-group col-md-6">
+	<div class="form-group col-md-8">
 		<label for="presidio">Presídio</label>
 		<div>
-	    	<select class="form-control detalhe-presidio" id="presidio" th:field="${presidiario.presidio.id}">
+	    	<select class="form-control" id="presidio" th:field="${presidiario.presidio.id}">
 	    		<option th:value="${null}" th:text="Selecione"></option>
-	    		<option th:each="presidio : ${presidios}" th:value="${presidio.id}" th:text="${presidio.nome}"></option>
+	    		<option th:each="presidio : ${presidios}" th:value="${presidio.id}" 
+	    			th:text="${presidio.nome} + ' - (' + ${presidio.endereco.cidade} + ' - ' + ${presidio.endereco.estado.uf} + ')'"></option>
 			</select>
     	</div>
 	</div>
 	
-	<div class="form-group col-md-2">
+	<div class="form-group col-md-4">
 		<label for="matricula">Matrícula</label>
 		<input type="text" class="form-control" id="matricula" th:field="${presidiario.matricula}"
 			placeholder="Nº matrícula"></input>
 	</div>
 	
-	<div class="form-group col-md-2">
-		<label for="cela">Cela</label>
-		<input type="text" class="form-control" id="cela" th:field="${presidiario.cela}"
-			placeholder="Nº cela"></input>
-	</div>
-	
-	<div class="form-group col-md-2">
+	<div class="form-group col-md-3">
 		<label for="raio">Raio</label>
 		<input type="text" class="form-control" id="raio" th:field="${presidiario.raio}"
 			placeholder="Raio / Pavilhão"></input>
 	</div>
 	
+	<div class="form-group col-md-3">
+		<label for="cela">Cela</label>
+		<input type="text" class="form-control" id="cela" th:field="${presidiario.cela}"
+			placeholder="Nº cela"></input>
+	</div>
+	
 	<div class="form-group col-md-6">
-    	<label for="logradouro-presidio">Localidade / Logradouro presídio</label>
-    	<input type="text" class="form-control detalhe-presidio" id="logradouro-presidio" disabled="disabled"
-    		placeholder="rua, avenida, rodovia, estrada, etc"></input>
-    </div>
-    
-    <div class="form-group col-md-2">
-    	<label for="numero-presidio">Nº presídio</label>
-    	<input type="text" class="form-control detalhe-presidio" id="numero-presidio" disabled="disabled"
-    		placeholder="número"></input>
-    </div>
-    
-    <div class="form-group col-md-4">
-    	<label for="bairro-presidio">Bairro presídio</label>
-    	<input type="text" class="form-control detalhe-presidio" id="bairro-presidio" disabled="disabled" 
-    		placeholder="bairro"></input>
-    </div>
-    
-    <div class="form-group col-md-6">
-    	<label for="complemento-presidio">Complemento endereço presídio</label>
-    	<input type="text" class="form-control detalhe-presidio" id="complemento-presidio" disabled="disabled"
-    		placeholder="descrição, Km, caixa postal, etc"></input>
-    </div>
-    
-    <div class="form-group col-md-4">
-    	<label for="cidade-presidio">Cidade presídio</label>
-    	<input type="text" class="form-control detalhe-presidio" id="cidade-presidio" disabled="disabled" 
-    		placeholder="cidade"></input>
-    </div>
-    
-    <div class="form-group col-md-2">
-    	<label for="estado-presidio">Estado presídio</label>
-    	<input type="text" class="form-control detalhe-presidio" id="estado-presidio" disabled="disabled" 
-    		placeholder="uf"></input>
-    </div>
-
+		<label for="complemento">Complemento</label>
+		<input type="text" class="form-control" id="complemento" th:field="${presidiario.complemento}"
+			placeholder="Complementação ex.: alojamento, amamentação, etc"></input>
+	</div>
+	
 </div>
