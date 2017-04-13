@@ -2,11 +2,13 @@ Sandbox.modules.ajax = function(box) {
 
 	box.postForm = function(form, configs) {
 		
-		configs = configs || {};
+		configs = _.isObject(configs) ? configs : {};
+		
+		_.defaults( configs, { resetForm : true } );
 		
 		$(form).ajaxForm({
 			
-			resetForm : true,
+			resetForm : configs.resetForm,
 			
 			beforeSubmit : function() {
 				
@@ -31,7 +33,7 @@ Sandbox.modules.ajax = function(box) {
 
 	box.post = function(url, data, configs) {
 
-		configs = configs || {};
+		configs = _.isObject(configs) ? configs : {};
 		
 		$.ajax({
 			type: 'POST',

@@ -71,7 +71,7 @@ Sandbox.modules.dom = function(box) {
 	
 	box.showMsgsTooltip = function(array) {
 		$(array).each(function(index, element) {
-			var field = $('input[name=' + element.field + ']');
+			var field = $('[name=' + element.field + ']');
 			box.tooltip(field, element.message);
 		});
 	};
