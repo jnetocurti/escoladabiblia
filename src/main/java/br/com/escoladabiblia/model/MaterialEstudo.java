@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "materiais_estudo")
+@Table(name = "materiais_estudo", uniqueConstraints = @UniqueConstraint(name = "numero_ordem_uk", columnNames = "numero_ordem"))
 public class MaterialEstudo implements Serializable {
 
 	/**
@@ -28,6 +29,9 @@ public class MaterialEstudo implements Serializable {
 	@NotBlank
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
+	
+	@Column(name = "numero_ordem")
+	private Integer numeroOrdem;
 
 	@Column(name = "envia_certificado", nullable = false)
 	private boolean enviaCertificado;
@@ -49,6 +53,14 @@ public class MaterialEstudo implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public Integer getNumeroOrdem() {
+		return numeroOrdem;
+	}
+
+	public void setNumeroOrdem(Integer numeroOrdem) {
+		this.numeroOrdem = numeroOrdem;
 	}
 
 	public boolean isEnviaCertificado() {

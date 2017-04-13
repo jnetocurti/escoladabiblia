@@ -16,12 +16,24 @@ Sandbox.modules.dom = function(box) {
 		$(element).val(value);
 	};
 	
+	box.text = function(element, value) {
+		$(element).text(value);
+	};
+	
 	box.check = function(element, value) {
 		$(element).prop('checked', value);
 	};
 	
 	box.checkRadio = function(element, value) {
 		$(element).filter('[value=' + value + ']').prop('checked', true);
+	};
+	
+	box.clearSelect = function(element) {
+		$(element).html('').append($("<option />").val('').text('Selecione'));
+	};
+	
+	box.addOption = function(element, value, text) {
+		$(element).append($("<option />").val(value).text(text));
 	};
 	
 	box.resetForm = function(form) {

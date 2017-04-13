@@ -1,29 +1,23 @@
 <div th:fragment="atividades-estudos" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
 
-	<form class="form-inline" th:action="@{/}" method="post">
+	<div class="form-inline">
 
 		<div class="form-group col-md-12">
 			<dl class="dl-horizontal">
 				<dt>Aluno</dt>
-				<dd>Emanoel dos Reis Machado</dd>
-				<dt>Matricula</dt>
-				<dd>012.345</dd>
+				<dd id="nome-aluno"></dd>
 			</dl>
 		</div>
 
 		<div class="form-group col-md-3">
-			<label for="nascimento">Data de envio</label> 
-			<input class="form-control" readonly="readonly" value="10/10/2017" />
+			<label for="data-proximo-envio">Data próximo envio</label> 
+			<input id="data-proximo-envio" class="form-control" readonly="readonly" />
 		</div>
 
 		<div class="form-group col-md-6">
 			<label>Material de estudo</label>
 			<div class="input-group col-md-12">
-				<select class="form-control">
-					<option>Introdução</option>
-					<option>O que a biblia diz</option>
-					<option>Deus tem falado</option>
-				</select>
+				<select id="materiais-disponiveis" class="form-control"></select>
 				<div class="input-group-btn">
 					<button class="btn btn-default" type="button">
 						<span class="glyphicon glyphicon-plus"></span>
@@ -31,60 +25,32 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<div class="form-group col-md-12">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Data envio</th>
-						<th>Material</th>
-						<th>Data retorno</th>
-						<th>Nota</th>
-						<th>Certificado</th>
-						<th>Bíblia enviada</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>10/10/2017</td>
-						<td>Introdução</td>
-						<td>15/10/2017</td>
-						<td>-</td>
-						<td>NÃO</td>
-						<td></td>
-						<td><button type="button" class="btn btn-xs btn-default">
-								<span class="fa fa-pencil"></span>
-							</button></td>
-					</tr>
-					<tr>
-						<td>10/10/2017</td>
-						<td>Deus tem falado</td>
-						<td>15/10/2017</td>
-						<td>10</td>
-						<td>SIM</td>
-						<td></td>
-						<td><button type="button" class="btn btn-xs btn-default">
-								<span class="fa fa-pencil"></span>
-							</button></td>
-					</tr>
-					<tr>
-						<td>10/10/2017</td>
-						<td>O que a bíblia diz</td>
-						<td>15/10/2017</td>
-						<td>9.5</td>
-						<td>SIM</td>
-						<td>SIM</td>
-						<td><button type="button" class="btn btn-xs btn-default">
-								<span class="fa fa-pencil"></span>
-							</button></td>
-					</tr>
-				</tbody>
-			</table>
-
+			<hr class="separator"></hr>
 		</div>
 
-	</form>
+		<div class="form-group col-md-12">
+			<table id="atividades-estudo" class="table table-condensed table-hover table-striped" >
+				<thead>
+					<tr>
+						<th data-column-id="id" data-type="numeric" data-identifier="true" data-visible="false"></th>
+						<th data-column-id="dataEnvioEstudo" data-sortable="false">Data envio</th>
+						<th data-column-id="material" data-formatter="material" data-sortable="false">Material</th>
+						<th data-column-id="dataRetornoEstudo" data-sortable="false">Data retorno</th>
+						<th data-column-id="nota" data-sortable="false">Nota</th>
+						<th data-column-id="envioCertificado" data-sortable="false">Certificado</th>
+						<th data-column-id="envioBiblia" data-sortable="false">Bíblia enviada</th>
+						<th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="40"></th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		
+		<div class="form-group col-md-12">
+			<hr class="separator"></hr>
+		</div>
 
+	</div>
 
 </div>

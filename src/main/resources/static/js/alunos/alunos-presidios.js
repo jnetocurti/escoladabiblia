@@ -21,7 +21,7 @@ Sandbox('*', function(box) {
 		}
 	});
 	
-	box.bootgrid('.grid-alunos',
+	box.bootgridPagination('.grid-alunos',
 		{
 			formatters: {
 				"commands": function(column, row) {
@@ -50,13 +50,46 @@ Sandbox('*', function(box) {
 	
 	gerenciarAtividadesEstudo = function(id) {
 		
-		box.switchArea('.area-grid-alunos', '.area-atualizacao-atividades');
+		box.post(context + 'atividades-estudo/editar-atividades', id.toString(), {
+			success : function(data) {
+				
+				var $materiais = $('#materiais-disponiveis');
+				
+				box.text('#nome-aluno', data.aluno.nome);
+				box.set('#data-proximo-envio', data.dataProximoEnvio);
+				
+				box.clearSelect($materiais);
+				
+				$(data.materiais).each(function() {
+					box.addOption($materiais, this.id, this.nome);
+				});
+
+				box.bootgridAppended('#atividades-estudo', data.aluno.atividadesEstudo, 
+					{
+						formatters : {
+							"material" : function(column, row) {
+								return row.material.nome;
+							},
+							"commands" : function(column, row) {
+								return box.smallGridButton(column, row, "command-edit", "fa-pencil");
+							}
+						},
+						callbacks : function() {
+							
+						}
+					}
+				);
+				
+				box.switchArea('.area-grid-alunos', '.area-atualizacao-atividades');
+			}
+		});
 	};
 	
 	editar = function(id) {
 		
 		box.post(context + 'alunos-presidios/editar', id.toString(), {
 			success : function(data) {
+				
 				box.set('#id', data.id);
 				box.set('#nome', data.nome);
 				box.check('#batizado', data.batizado);
@@ -70,6 +103,7 @@ Sandbox('*', function(box) {
 				box.check('#frequentouIgreja', data.frequentouIgreja);
 				box.set('#matricula', getCaracterizacao(data).matricula);
 				box.set('#complemento', getCaracterizacao(data).complemento);
+				
 				box.switchArea('.area-grid-alunos', '.area-form-alunos');
 			}
 		});

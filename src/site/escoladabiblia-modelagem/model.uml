@@ -246,6 +246,9 @@
     <ownedAttribute xmi:id="_r8A1QBQJEeeJMetIJl5ejg" name="nome" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
+    <ownedAttribute xmi:id="_zRqwgB8HEeerSfBs_xE8Rg" name="numeroOrdem" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
     <ownedAttribute xmi:id="_vGPVkBQJEeeJMetIJl5ejg" name="enviaCertificado" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
     </ownedAttribute>
