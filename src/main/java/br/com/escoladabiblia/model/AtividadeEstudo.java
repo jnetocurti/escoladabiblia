@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,10 +32,6 @@ public class AtividadeEstudo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_envio_estudo", nullable = false)
-	private Calendar dataEnvioEstudo;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_retorno_estudo")
@@ -54,6 +51,11 @@ public class AtividadeEstudo implements Serializable {
 	@JoinColumn(name = "aluno_id", nullable = false, foreignKey = @ForeignKey(name = "aluno_fk"))
 	private Aluno aluno;
 
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name = "postagem_id", nullable = false, foreignKey = @ForeignKey(name = "postagem_fk"))
+	private Postagem postagem;
+
 	@ManyToOne
 	@JoinColumn(name = "material_id", nullable = false, foreignKey = @ForeignKey(name = "material_fk"))
 	private MaterialEstudo material;
@@ -65,13 +67,10 @@ public class AtividadeEstudo implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	@Transient
 	public Calendar getDataEnvioEstudo() {
-		return dataEnvioEstudo;
-	}
-
-	public void setDataEnvioEstudo(Calendar dataEnvioEstudo) {
-		this.dataEnvioEstudo = dataEnvioEstudo;
+		return postagem.getDataPrevistaEnvio();
 	}
 
 	public Calendar getDataRetornoEstudo() {
@@ -114,6 +113,14 @@ public class AtividadeEstudo implements Serializable {
 		this.aluno = aluno;
 	}
 
+	public Postagem getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(Postagem postagem) {
+		this.postagem = postagem;
+	}
+
 	public MaterialEstudo getMaterial() {
 		return material;
 	}
@@ -149,8 +156,8 @@ public class AtividadeEstudo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AtividadeEstudo [dataEnvioEstudo=" + dataEnvioEstudo + ", aluno=" + aluno + ", material=" + material
-				+ "]";
+		return "AtividadeEstudo [dataEnvioEstudo=" + postagem.getDataPrevistaEnvio() + ", aluno=" + aluno
+				+ ", material=" + material + "]";
 	}
 
 }

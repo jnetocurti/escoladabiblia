@@ -53,9 +53,10 @@ Sandbox('*', function(box) {
 		box.post(context + 'atividades-estudo/editar-atividades', id.toString(), {
 			success : function(data) {
 				
-				box.set('#idAluno', data.aluno.id);
+				box.set('#id-aluno', data.aluno.id);
 				box.text('#nome-aluno', data.aluno.nome);
-				box.set('#data-proximo-envio', data.dataProximoEnvio);
+				box.set('#id-postagem', data.postagem.id);
+				box.set('#data-proximo-envio', data.postagem.dataPrevistaEnvio);
 				
 				loadComboMateriais(data);
 				

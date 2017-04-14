@@ -1,11 +1,8 @@
 package br.com.escoladabiblia.util.dto;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class AtividadeEstudoDTO implements Serializable {
 
@@ -18,7 +15,7 @@ public class AtividadeEstudoDTO implements Serializable {
 	private Long idAluno;
 
 	@NotNull
-	private Calendar dataProximoEnvio;
+	private Long idPostagem;
 
 	@NotNull
 	private Long idMaterial;
@@ -31,13 +28,12 @@ public class AtividadeEstudoDTO implements Serializable {
 		this.idAluno = idAluno;
 	}
 
-	public Calendar getDataProximoEnvio() {
-		return dataProximoEnvio;
+	public Long getIdPostagem() {
+		return idPostagem;
 	}
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	public void setDataProximoEnvio(Calendar dataProximoEnvio) {
-		this.dataProximoEnvio = dataProximoEnvio;
+	public void setIdPostagem(Long idPostagem) {
+		this.idPostagem = idPostagem;
 	}
 
 	public Long getIdMaterial() {

@@ -216,9 +216,6 @@
     <ownedAttribute xmi:id="_9iWrwBQHEeeJMetIJl5ejg" name="id" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#ELong"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_FsvTQBQIEeeJMetIJl5ejg" name="dataEnvioEstudo" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Date"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="_RUdkUBQIEeeJMetIJl5ejg" name="dataRetornoEstudo" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Date"/>
     </ownedAttribute>
@@ -235,6 +232,7 @@
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_HhOTMBQJEeeJMetIJl5ejg" name="aluno" visibility="public" type="_CYTD4BNAEeeT3fti3uGRbA"/>
+    <ownedAttribute xmi:id="_GCCTkCCaEeeOyoCkx9RtVQ" name="postagem" visibility="public" type="_UIGXUBQNEeeJMetIJl5ejg"/>
     <ownedAttribute xmi:id="_HsyNgBQKEeeJMetIJl5ejg" name="materialEstudo" visibility="public" type="_mWeJEBQJEeeJMetIJl5ejg"/>
     <ownedOperation xmi:id="_7B8vEBQIEeeJMetIJl5ejg" name="getters"/>
     <ownedOperation xmi:id="_8hPXkBQIEeeJMetIJl5ejg" name="setters"/>
@@ -252,6 +250,7 @@
     <ownedAttribute xmi:id="_vGPVkBQJEeeJMetIJl5ejg" name="enviaCertificado" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
     </ownedAttribute>
+    <ownedAttribute xmi:id="_oBXDUCCbEeeOyoCkx9RtVQ" name="tipoEnvelope" visibility="public" type="_7Fdb0CCaEeeOyoCkx9RtVQ"/>
     <ownedAttribute xmi:id="_3De48BQJEeeJMetIJl5ejg" name="qtdEstoque" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Integer"/>
     </ownedAttribute>
@@ -262,11 +261,11 @@
     <ownedAttribute xmi:id="_VbUSsBQNEeeJMetIJl5ejg" name="id" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_ZLmtcBQNEeeJMetIJl5ejg" name="dataPostagem" visibility="public">
+    <ownedAttribute xmi:id="_ZLmtcBQNEeeJMetIJl5ejg" name="dataPrevistaEnvio" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Date"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_ej1WYBQNEeeJMetIJl5ejg" name="postado" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+    <ownedAttribute xmi:id="_ej1WYBQNEeeJMetIJl5ejg" name="dataEfetivaEnvio" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Date"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_z15k0BQYEeeJMetIJl5ejg" name="AtividadesEstudo" visibility="public" type="_5r3iYBQHEeeJMetIJl5ejg">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_46pREBQYEeeJMetIJl5ejg"/>
@@ -303,6 +302,37 @@
     <ownedEnd xmi:id="_EtkskBQZEeeJMetIJl5ejg" name="atividadeEstudos" type="_5r3iYBQHEeeJMetIJl5ejg" aggregation="composite" association="_EthCMBQZEeeJMetIJl5ejg">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Etl6sBQZEeeJMetIJl5ejg" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EtnI0BQZEeeJMetIJl5ejg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_7Fdb0CCaEeeOyoCkx9RtVQ" name="TipoEnvelope"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Iv5LgCCbEeeOyoCkx9RtVQ" memberEnd="_Iv5ykCCbEeeOyoCkx9RtVQ _Iv814iCbEeeOyoCkx9RtVQ" navigableOwnedEnd="_Iv814iCbEeeOyoCkx9RtVQ">
+    <ownedEnd xmi:id="_Iv5ykCCbEeeOyoCkx9RtVQ" name="alunos" type="_CYTD4BNAEeeT3fti3uGRbA" association="_Iv5LgCCbEeeOyoCkx9RtVQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Iv814CCbEeeOyoCkx9RtVQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Iv814SCbEeeOyoCkx9RtVQ" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_Iv814iCbEeeOyoCkx9RtVQ" name="sexos" type="_-QbZIBNLEeeT3fti3uGRbA" association="_Iv5LgCCbEeeOyoCkx9RtVQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Iv-EACCbEeeOyoCkx9RtVQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Iv-rECCbEeeOyoCkx9RtVQ" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_OQOnkCCbEeeOyoCkx9RtVQ" memberEnd="_OQOnkSCbEeeOyoCkx9RtVQ _OQPOoiCbEeeOyoCkx9RtVQ" navigableOwnedEnd="_OQPOoiCbEeeOyoCkx9RtVQ">
+    <ownedEnd xmi:id="_OQOnkSCbEeeOyoCkx9RtVQ" name="caracterizacaos" type="_YsIK8BNDEeeT3fti3uGRbA" association="_OQOnkCCbEeeOyoCkx9RtVQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OQPOoCCbEeeOyoCkx9RtVQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OQPOoSCbEeeOyoCkx9RtVQ" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_OQPOoiCbEeeOyoCkx9RtVQ" name="tipoCaracterizacaos" type="_YIuz4BNMEeeT3fti3uGRbA" association="_OQOnkCCbEeeOyoCkx9RtVQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OQPOoyCbEeeOyoCkx9RtVQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OQPOpCCbEeeOyoCkx9RtVQ" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_fZjgACCbEeeOyoCkx9RtVQ" memberEnd="_fZjgASCbEeeOyoCkx9RtVQ _fZkHESCbEeeOyoCkx9RtVQ" navigableOwnedEnd="_fZkHESCbEeeOyoCkx9RtVQ">
+    <ownedEnd xmi:id="_fZjgASCbEeeOyoCkx9RtVQ" name="materialEstudos" type="_mWeJEBQJEeeJMetIJl5ejg" association="_fZjgACCbEeeOyoCkx9RtVQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fZjgAiCbEeeOyoCkx9RtVQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fZkHECCbEeeOyoCkx9RtVQ" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_fZkHESCbEeeOyoCkx9RtVQ" name="tipoEnvelopes" type="_7Fdb0CCaEeeOyoCkx9RtVQ" association="_fZjgACCbEeeOyoCkx9RtVQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fZkHEiCbEeeOyoCkx9RtVQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fZkHEyCbEeeOyoCkx9RtVQ" value="*"/>
     </ownedEnd>
   </packagedElement>
 </uml:Model>

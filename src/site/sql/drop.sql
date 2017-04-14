@@ -1,8 +1,7 @@
 alter table alunos drop constraint endereco_fk
 alter table atividades_estudo drop constraint aluno_fk
 alter table atividades_estudo drop constraint material_fk
-alter table atividades_postagem drop constraint atividade_fk
-alter table atividades_postagem drop constraint postagem_fk
+alter table atividades_estudo drop constraint postagem_fk
 alter table caracterizacoes drop constraint aluno_fk
 alter table enderecos drop constraint estado_fk
 alter table presidiarios drop constraint presidio_fk
@@ -10,7 +9,6 @@ alter table presidiarios drop constraint caracterizacao_fk
 alter table presidios drop constraint endereco_fk
 drop table if exists alunos cascade
 drop table if exists atividades_estudo cascade
-drop table if exists atividades_postagem cascade
 drop table if exists caracterizacoes cascade
 drop table if exists enderecos cascade
 drop table if exists estados cascade

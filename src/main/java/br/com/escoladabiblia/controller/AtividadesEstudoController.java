@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.com.escoladabiblia.service.AtividadesEstudoService;
 import br.com.escoladabiblia.util.dto.AtividadeEstudoDTO;
 import br.com.escoladabiblia.util.dto.EdicaoAtividadesEstudoDTO;
+import br.com.escoladabiblia.util.exception.BusinessException;
 
 @Controller
 @RequestMapping("/atividades-estudo")
@@ -22,15 +23,16 @@ public class AtividadesEstudoController extends BaseController {
 	private AtividadesEstudoService atividadesEstudoService;
 
 	@PostMapping(path = "editar-atividades")
-	public @ResponseBody EdicaoAtividadesEstudoDTO editarAtividades(@RequestBody Long id) {
+	public @ResponseBody EdicaoAtividadesEstudoDTO editarAtividades(@RequestBody Long id) throws BusinessException {
 
 		return atividadesEstudoService.obterAtividadesEstudoAlunoParaEdicao(id);
 	}
 
 	@PostMapping(path = "adicionar-atividade")
-	public @ResponseBody EdicaoAtividadesEstudoDTO adicionarAtividade(@Valid @ModelAttribute AtividadeEstudoDTO atividadeEstudo) {
+	public @ResponseBody EdicaoAtividadesEstudoDTO adicionarAtividade(
+			@Valid @ModelAttribute AtividadeEstudoDTO atividadeEstudo) throws BusinessException {
 
-		atividadesEstudoService.adicionarAtividade(atividadeEstudo.getIdAluno(), atividadeEstudo.getDataProximoEnvio(),
+		atividadesEstudoService.adicionarAtividade(atividadeEstudo.getIdAluno(), atividadeEstudo.getIdPostagem(),
 				atividadeEstudo.getIdMaterial());
 
 		return atividadesEstudoService.obterAtividadesEstudoAlunoParaEdicao(atividadeEstudo.getIdAluno());

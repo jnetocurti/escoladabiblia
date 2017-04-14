@@ -5,19 +5,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -36,18 +37,18 @@ public class Postagem implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
+	@Future
+	@NotNull
 	@Temporal(TemporalType.DATE)
-	@Column(name = "data_postagem", nullable = false)
-	private Calendar dataPostagem;
+	@Column(name = "data_prevista_envio", updatable = false, nullable = false)
+	private Calendar dataPrevistaEnvio;
 
-	@Column(name = "postado", nullable = false)
-	private boolean postado;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_efetiva_envio")
+	private Calendar dataEfetivaEnvio;
 
-	@OneToMany
 	@JsonInclude(value = Include.NON_EMPTY)
-	@JoinTable(name = "atividades_postagem", joinColumns = @JoinColumn(name = "postagem_id"), foreignKey = @ForeignKey(name = "postagem_fk"), 
-	inverseJoinColumns = @JoinColumn(name = "atividade_id"), inverseForeignKey = @ForeignKey(name = "atividade_fk"), 
-	uniqueConstraints = @UniqueConstraint(name = "atividades_postagem_uk", columnNames = "atividade_id"))
+	@OneToMany(mappedBy = "postagem", cascade = { CascadeType.ALL })
 	private List<AtividadeEstudo> atividadesEstudo = new ArrayList<>();
 
 	public Long getId() {
@@ -58,20 +59,22 @@ public class Postagem implements Serializable {
 		this.id = id;
 	}
 
-	public Calendar getDataPostagem() {
-		return dataPostagem;
+	public Calendar getDataPrevistaEnvio() {
+		return dataPrevistaEnvio;
 	}
 
-	public void setDataPostagem(Calendar dataPostagem) {
-		this.dataPostagem = dataPostagem;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public void setDataPrevistaEnvio(Calendar dataPrevistaEnvio) {
+		this.dataPrevistaEnvio = dataPrevistaEnvio;
 	}
 
-	public boolean isPostado() {
-		return postado;
+	public Calendar getDataEfetivaEnvio() {
+		return dataEfetivaEnvio;
 	}
 
-	public void setPostado(boolean postado) {
-		this.postado = postado;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public void setDataEfetivaEnvio(Calendar dataEfetivaEnvio) {
+		this.dataEfetivaEnvio = dataEfetivaEnvio;
 	}
 
 	public List<AtividadeEstudo> getAtividadesEstudo() {
@@ -109,7 +112,7 @@ public class Postagem implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Postagem [dataPostagem=" + dataPostagem + ", postado=" + postado + "]";
+		return "Postagem [dataPrevistaEnvio=" + dataPrevistaEnvio + ", dataEfetivaEnvio=" + dataEfetivaEnvio + "]";
 	}
 
 }

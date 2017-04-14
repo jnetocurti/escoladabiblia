@@ -1,6 +1,7 @@
 package br.com.escoladabiblia.util.handler;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -9,15 +10,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.FieldError;
 
 import br.com.escoladabiblia.util.dto.ValidationErrosDTO;
+import br.com.escoladabiblia.util.exception.BusinessException;
 
 /**
- * A classe utilitária {@code ExceptionHandlerHelper} é responsavel
- * por processar listas de erros de validação de dados enviados nas requests.
+ * A classe utilitária {@code ExceptionHandlerHelper} é responsavel por
+ * processar listas de erros de validação de dados enviados nas requests e
+ * exceções de negócio.
  * 
  * @author José Cataldo Curti Neto
  * 
  * @see br.com.escoladabiblia.util.dto.ValidationErrosDTO
  * @see br.com.escoladabiblia.util.dto.FieldErrorDTO
+ * @see br.com.escoladabiblia.util.exception.BusinessException
  */
 @Component
 public class ExceptionHandlerHelper {
@@ -43,6 +47,17 @@ public class ExceptionHandlerHelper {
 		}
 
 		return validationErros;
+	}
+	
+	/**
+	 * Retorna a mensagem correspondente a exceção de negócio
+	 * 
+	 * @param ex
+	 * @return
+	 */
+	public String getMessageFromProperties(BusinessException ex) {
+		
+		return messageSource.getMessage (ex.getKey(), null, Locale.getDefault());
 	}
 
 	/**

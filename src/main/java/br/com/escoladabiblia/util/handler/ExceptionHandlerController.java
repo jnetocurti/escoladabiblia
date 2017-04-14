@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import br.com.escoladabiblia.util.dto.MessageDTO;
 import br.com.escoladabiblia.util.dto.MessageDTO.TipoMensagem;
 import br.com.escoladabiblia.util.dto.ValidationErrosDTO;
+import br.com.escoladabiblia.util.exception.BusinessException;
 
 @ControllerAdvice
 public class ExceptionHandlerController {
@@ -25,6 +26,14 @@ public class ExceptionHandlerController {
 	private ExceptionHandlerHelper helper;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlerController.class);
+	
+	@ResponseBody
+	@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+	@ExceptionHandler(BusinessException.class)
+	public MessageDTO handleBusinessException(final BusinessException ex) {
+
+		return new MessageDTO(TipoMensagem.ERROR, helper.getMessageFromProperties(ex));
+	}
 	
 	/**
 	 * Intercepta erros causados na validação dos dados enviados nas requests

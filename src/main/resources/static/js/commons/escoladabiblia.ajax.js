@@ -46,6 +46,8 @@ Sandbox.modules.ajax = function(box) {
 		    },
 		    error: function(jqXHR, textStatus) {
 		    	
+		    	proccessErrors(jqXHR);
+		    	
 		    	applyCallback(configs.error, jqXHR);
 			},
 			complete : function(jqXHR, textStatus) {
@@ -79,6 +81,7 @@ Sandbox.modules.ajax = function(box) {
 			box.showMsgsTooltip(jqXHR.responseJSON.errors);
 			break;
 			
+		case 422:
 		case 500:
 			box.showMsg(jqXHR.responseJSON);
 			break;

@@ -1,13 +1,12 @@
 package br.com.escoladabiblia.service;
 
-import java.util.Calendar;
-
 import br.com.escoladabiblia.util.dto.EdicaoAtividadesEstudoDTO;
+import br.com.escoladabiblia.util.exception.BusinessException;
 
 public interface AtividadesEstudoService {
 
-	EdicaoAtividadesEstudoDTO obterAtividadesEstudoAlunoParaEdicao(Long id);
+	EdicaoAtividadesEstudoDTO obterAtividadesEstudoAlunoParaEdicao(Long id) throws BusinessException;
 
-	void adicionarAtividade(Long idAluno, Calendar dataProximoEnvio, Long idMaterial);
+	void adicionarAtividade(Long idAluno, Long idPostagem, Long idMaterial);
 
 }
