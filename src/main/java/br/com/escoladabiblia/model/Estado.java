@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.annotation.Generated;
 
 @Entity
 @Table(name = "estados")
@@ -34,6 +35,16 @@ public class Estado implements Serializable {
 	@Size(min = 3, max = 50)
 	@Column(name = "descricao", length = 50, nullable = false)
 	private String descricao;
+
+	public Estado() {
+	}
+
+	@Generated("SparkTools")
+	private Estado(Builder builder) {
+		this.id = builder.id;
+		this.uf = builder.uf;
+		this.descricao = builder.descricao;
+	}
 
 	public Long getId() {
 		return id;
@@ -87,6 +98,48 @@ public class Estado implements Serializable {
 	@Override
 	public String toString() {
 		return "Estado [uf=" + uf + "]";
+	}
+
+	/**
+	 * Creates builder to build {@link Estado}.
+	 * 
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link Estado}.
+	 */
+	@Generated("SparkTools")
+	public static final class Builder {
+		private Long id;
+		private String uf;
+		private String descricao;
+
+		private Builder() {
+		}
+
+		public Builder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder withUf(String uf) {
+			this.uf = uf;
+			return this;
+		}
+
+		public Builder withDescricao(String descricao) {
+			this.descricao = descricao;
+			return this;
+		}
+
+		public Estado build() {
+			return new Estado(this);
+		}
 	}
 
 }

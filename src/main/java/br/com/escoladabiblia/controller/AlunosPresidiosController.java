@@ -34,8 +34,8 @@ public class AlunosPresidiosController extends BaseController {
 	@GetMapping({ "", "/" })
 	public String index(Model model) {
 
-		model.addAttribute("aluno", new Aluno());
-		model.addAttribute("presidiario", new Presidiario());
+		model.addAttribute("aluno", Aluno.builder().build());
+		model.addAttribute("presidiario", Presidiario.builder().build());
 		model.addAttribute("presidios", presidioService.findAll());
 
 		return "alunos/presidios/index";

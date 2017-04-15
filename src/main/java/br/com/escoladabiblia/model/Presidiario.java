@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.annotation.Generated;
 
 @Entity
 @Table(name = "presidiarios")
@@ -40,9 +41,17 @@ public class Presidiario extends Caracterizacao {
 
 	public Presidiario() {
 		super.setAtiva(true);
-		this.setPresidio(new Presidio());
 		super.setDataRegistro(Calendar.getInstance());
 		super.setTipo(TipoCaracterizacao.PRESIDIARIO);
+	}
+
+	@Generated("SparkTools")
+	private Presidiario(Builder builder) {
+		this.matricula = builder.matricula;
+		this.raio = builder.raio;
+		this.cela = builder.cela;
+		this.complemento = builder.complemento;
+		this.presidio = builder.presidio;
 	}
 
 	public String getMatricula() {
@@ -89,6 +98,59 @@ public class Presidiario extends Caracterizacao {
 	public String toString() {
 		return "Presidiario [numeroMatricula=" + matricula + ", raio=" + raio + ", cela=" + cela + ", presidio="
 				+ presidio + "]";
+	}
+
+	/**
+	 * Creates builder to build {@link Presidiario}.
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link Presidiario}.
+	 */
+	@Generated("SparkTools")
+	public static final class Builder {
+		private String matricula;
+		private Integer raio;
+		private Integer cela;
+		private String complemento;
+		private Presidio presidio;
+
+		private Builder() {
+		}
+
+		public Builder withMatricula(String matricula) {
+			this.matricula = matricula;
+			return this;
+		}
+
+		public Builder withRaio(Integer raio) {
+			this.raio = raio;
+			return this;
+		}
+
+		public Builder withCela(Integer cela) {
+			this.cela = cela;
+			return this;
+		}
+
+		public Builder withComplemento(String complemento) {
+			this.complemento = complemento;
+			return this;
+		}
+
+		public Builder withPresidio(Presidio presidio) {
+			this.presidio = presidio;
+			return this;
+		}
+
+		public Presidiario build() {
+			return new Presidiario(this);
+		}
 	}
 
 }

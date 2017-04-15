@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -57,7 +59,7 @@ public class Aluno implements Serializable {
 
 	@Column(name = "frequentou_igreja")
 	private Boolean frequentouIgreja;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sexo", length = 1)
 	private Sexo sexo;
@@ -73,10 +75,28 @@ public class Aluno implements Serializable {
 	@JsonInclude(value = Include.NON_EMPTY)
 	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
 	private List<Caracterizacao> caracterizacoes = new ArrayList<>();
-	
+
 	@JsonInclude(value = Include.NON_EMPTY)
 	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
 	private List<AtividadeEstudo> atividadesEstudo = new ArrayList<>();
+
+	public Aluno() {
+	}
+
+	@Generated("SparkTools")
+	private Aluno(Builder builder) {
+		this.id = builder.id;
+		this.nome = builder.nome;
+		this.dataNascimento = builder.dataNascimento;
+		this.possuiBiblia = builder.possuiBiblia;
+		this.batizado = builder.batizado;
+		this.frequentouIgreja = builder.frequentouIgreja;
+		this.sexo = builder.sexo;
+		this.observacao = builder.observacao;
+		this.endereco = builder.endereco;
+		this.caracterizacoes = builder.caracterizacoes;
+		this.atividadesEstudo = builder.atividadesEstudo;
+	}
 
 	public Long getId() {
 		return id;
@@ -154,9 +174,33 @@ public class Aluno implements Serializable {
 	public List<Caracterizacao> getCaracterizacoes() {
 		return caracterizacoes;
 	}
-	
+
 	public List<AtividadeEstudo> getAtividadesEstudo() {
 		return atividadesEstudo;
+	}
+
+	@Transient
+	public Caracterizacao getCaracterizacao() {
+		return this.caracterizacoes.stream().filter(c -> c.isAtiva()).findFirst().get();
+	}
+
+	@Transient
+	public TipoCaracterizacao getTipoCaracterizacao() {
+		return this.getCaracterizacao() != null ? this.getCaracterizacao().getTipo() : null;
+	}
+
+	@Transient
+	public Endereco getEnderecoEfetivo() {
+
+		switch (this.getTipoCaracterizacao()) {
+
+		case PRESIDIARIO:
+
+			return ((Presidiario) this.getCaracterizacao()).getPresidio().getEndereco();
+
+		default:
+			return this.endereco;
+		}
 	}
 
 	@Override
@@ -187,6 +231,86 @@ public class Aluno implements Serializable {
 	@Override
 	public String toString() {
 		return "Aluno [id=" + id + ", nome=" + nome + "]";
+	}
+
+	/**
+	 * Creates builder to build {@link Aluno}.
+	 * 
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link Aluno}.
+	 */
+	@Generated("SparkTools")
+	public static final class Builder {
+		private Long id;
+		private String nome;
+		private Calendar dataNascimento;
+		private Boolean possuiBiblia;
+		private Boolean batizado;
+		private Boolean frequentouIgreja;
+		private Sexo sexo;
+		private String observacao;
+		private Endereco endereco;
+		private List<Caracterizacao> caracterizacoes = new ArrayList<>();
+		private List<AtividadeEstudo> atividadesEstudo = new ArrayList<>();
+
+		private Builder() {
+		}
+
+		public Builder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder withNome(String nome) {
+			this.nome = nome;
+			return this;
+		}
+
+		public Builder withDataNascimento(Calendar dataNascimento) {
+			this.dataNascimento = dataNascimento;
+			return this;
+		}
+
+		public Builder withPossuiBiblia(Boolean possuiBiblia) {
+			this.possuiBiblia = possuiBiblia;
+			return this;
+		}
+
+		public Builder withBatizado(Boolean batizado) {
+			this.batizado = batizado;
+			return this;
+		}
+
+		public Builder withFrequentouIgreja(Boolean frequentouIgreja) {
+			this.frequentouIgreja = frequentouIgreja;
+			return this;
+		}
+
+		public Builder withSexo(Sexo sexo) {
+			this.sexo = sexo;
+			return this;
+		}
+
+		public Builder withObservacao(String observacao) {
+			this.observacao = observacao;
+			return this;
+		}
+
+		public Builder withEndereco(Endereco endereco) {
+			this.endereco = endereco;
+			return this;
+		}
+
+		public Aluno build() {
+			return new Aluno(this);
+		}
 	}
 
 }

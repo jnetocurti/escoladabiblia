@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import javax.annotation.Generated;
 
 @Entity
 @Table(name = "enderecos")
@@ -58,6 +59,21 @@ public class Endereco implements Serializable {
 	@Size(min = 9, max = 9)
 	@Column(name = "cep", length = 9)
 	private String cep;
+
+	public Endereco() {
+	}
+
+	@Generated("SparkTools")
+	private Endereco(Builder builder) {
+		this.id = builder.id;
+		this.estado = builder.estado;
+		this.cidade = builder.cidade;
+		this.logradouro = builder.logradouro;
+		this.numero = builder.numero;
+		this.bairro = builder.bairro;
+		this.complemento = builder.complemento;
+		this.cep = builder.cep;
+	}
 
 	public Long getId() {
 		return id;
@@ -152,6 +168,78 @@ public class Endereco implements Serializable {
 	public String toString() {
 		return "Endereco [estado=" + estado + ", cidade=" + cidade + ", logradouro=" + logradouro + ", numero=" + numero
 				+ ", bairro=" + bairro + "]";
+	}
+
+	/**
+	 * Creates builder to build {@link Endereco}.
+	 * 
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link Endereco}.
+	 */
+	@Generated("SparkTools")
+	public static final class Builder {
+		private Long id;
+		private Estado estado;
+		private String cidade;
+		private String logradouro;
+		private Integer numero;
+		private String bairro;
+		private String complemento;
+		private String cep;
+
+		private Builder() {
+		}
+
+		public Builder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder withEstado(Estado estado) {
+			this.estado = estado;
+			return this;
+		}
+
+		public Builder withCidade(String cidade) {
+			this.cidade = cidade;
+			return this;
+		}
+
+		public Builder withLogradouro(String logradouro) {
+			this.logradouro = logradouro;
+			return this;
+		}
+
+		public Builder withNumero(Integer numero) {
+			this.numero = numero;
+			return this;
+		}
+
+		public Builder withBairro(String bairro) {
+			this.bairro = bairro;
+			return this;
+		}
+
+		public Builder withComplemento(String complemento) {
+			this.complemento = complemento;
+			return this;
+		}
+
+		public Builder withCep(String cep) {
+			this.cep = cep;
+			return this;
+		}
+
+		public Endereco build() {
+			return new Endereco(this);
+		}
 	}
 
 }

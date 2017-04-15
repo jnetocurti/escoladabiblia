@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import javax.annotation.Generated;
 
 @Entity
 @Table(name = "presidios")
@@ -33,9 +35,20 @@ public class Presidio implements Serializable {
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
 
+	@NotNull
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "endereco_id", nullable = false, foreignKey = @ForeignKey(name = "endereco_fk"))
 	private Endereco endereco;
+
+	public Presidio() {
+	}
+
+	@Generated("SparkTools")
+	private Presidio(Builder builder) {
+		this.id = builder.id;
+		this.nome = builder.nome;
+		this.endereco = builder.endereco;
+	}
 
 	public Long getId() {
 		return id;
@@ -89,6 +102,47 @@ public class Presidio implements Serializable {
 	@Override
 	public String toString() {
 		return "Presidio [nome=" + nome + "]";
+	}
+
+	/**
+	 * Creates builder to build {@link Presidio}.
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link Presidio}.
+	 */
+	@Generated("SparkTools")
+	public static final class Builder {
+		private Long id;
+		private String nome;
+		private Endereco endereco;
+
+		private Builder() {
+		}
+
+		public Builder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder withNome(String nome) {
+			this.nome = nome;
+			return this;
+		}
+
+		public Builder withEndereco(Endereco endereco) {
+			this.endereco = endereco;
+			return this;
+		}
+
+		public Presidio build() {
+			return new Presidio(this);
+		}
 	}
 
 }
