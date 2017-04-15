@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
@@ -83,6 +85,12 @@ public class Postagem implements Serializable {
 
 	public void setAtividadesEstudo(List<AtividadeEstudo> atividadesEstudo) {
 		this.atividadesEstudo = atividadesEstudo;
+	}
+	
+	@Transient
+	public Integer getQuantidadeAlunos() {
+
+		return this.atividadesEstudo.stream().map(a -> a.getAluno()).collect(Collectors.toSet()).size();
 	}
 
 	@Override

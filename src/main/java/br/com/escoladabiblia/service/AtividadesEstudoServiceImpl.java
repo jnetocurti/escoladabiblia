@@ -72,7 +72,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 		// workaround :(
 
 		// Consulta NOT IN não retorna todos resultados quando a lista de ids enviada estiver vazia.
-		// O zero foi acrescentado para que todos registros fossem retornados nesse caso.
+		// O zero foi acrescentado para garantir que todos registros fossem retornados nesse caso.
 		idsMateriais.add(0L);
 
 		return idsMateriais;

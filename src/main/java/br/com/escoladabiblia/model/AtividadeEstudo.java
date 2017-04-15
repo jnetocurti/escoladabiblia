@@ -68,11 +68,6 @@ public class AtividadeEstudo implements Serializable {
 		this.id = id;
 	}
 	
-	@Transient
-	public Calendar getDataEnvioEstudo() {
-		return postagem.getDataPrevistaEnvio();
-	}
-
 	public Calendar getDataRetornoEstudo() {
 		return dataRetornoEstudo;
 	}
@@ -127,6 +122,11 @@ public class AtividadeEstudo implements Serializable {
 
 	public void setMaterial(MaterialEstudo material) {
 		this.material = material;
+	}
+	
+	@Transient
+	public Calendar getDataEnvioEstudo() {
+		return postagem.getDataPrevistaEnvio();
 	}
 
 	@Override

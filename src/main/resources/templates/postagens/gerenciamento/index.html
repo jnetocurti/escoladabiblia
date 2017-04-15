@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="index">
+	
+	<div layout:fragment="content">
+
+		<ol class="breadcrumb">
+			<li><a th:href="@{/}">Home</a></li>
+			<li class="breadcrumb-item">Postagens</li>
+			<li class="breadcrumb-item active">Gerenciamento</li>
+		</ol>
+		
+		<div th:replace="fragments/messages"></div>
+		
+		<div class="area-form-gerenciar-postagem">
+		
+			<h3>Gerenciamento de postagens</h3>
+		
+			<form id="gerenciamento-form" class="form-inline" th:action="@{/postagens/gerenciamento/listar}" method="post">
+			
+				<div class="form-group col-md-3">
+					<label for="data-de">De</label>
+					<input type="text" class="form-control" id="data-de" th:field="${periodo.dataDe}"
+						data-inputmask="'alias': 'data'" placeholder="Início período"></input>
+				</div>
+				
+				<div class="form-group col-md-3">
+					<label for="data-ate">Até</label>
+					<div class="input-group col-md-12">
+						<input type="text" class="form-control" id="data-ate" th:field="${periodo.dataAte}"
+							data-inputmask="'alias': 'data'" placeholder="Fim período"></input>
+						<div class="input-group-btn">
+							<button id="pesquisar-postagens" class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group col-md-12">
+					<table id="postagens" class="table table-condensed table-hover table-striped" >
+						<thead>
+							<tr>
+								<th data-column-id="id" data-type="numeric" data-identifier="true" data-visible="false"></th>
+								<th data-column-id="dataPrevistaEnvio" data-sortable="false">Data envio</th>
+								<th data-column-id="quantidadeAlunos" data-sortable="false">Qtd Alunos</th>
+								<th data-column-id="processado" data-formatter="processado" data-sortable="false">Processado</th>
+								<th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="70"></th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				
+			</form>
+			
+		</div>
+		
+		<div id="modal-processamento-postagem" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Processamento de Postagens</h4>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="id-postagem"></input>
+						<p>Selecione abaixo para encerrar esta postagem. Caso selecione finalizar, nenhuma outra atividade poderá ser
+							acrescentada a este lote e somente a reimpressão dos envelopes será possível.</p>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="encerrar-postagem"></input> Deseja finalizar esta postagem?
+							</label>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="processar-postagem">Enviar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div layout:fragment="scripts">
+		<script th:src="@{/js/postagens/postagem-gerenciamento.js}"></script>
+	</div>
+	
+</html>
