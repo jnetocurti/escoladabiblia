@@ -38,10 +38,7 @@ public class ImportacaoPresidiosServiceTest extends EscoladabibliaApplicationTes
 	}
 
 	private Estado createEstado(String uf, String descricao) {
-		Estado estado = new Estado();
-		estado.setUf(uf);
-		estado.setDescricao(descricao);
-		return estado;
+		return Estado.builder().withUf(uf).withDescricao(descricao).build();
 	}
 
 }

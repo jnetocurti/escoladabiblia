@@ -2,6 +2,7 @@ package br.com.escoladabiblia.model;
 
 import java.util.Calendar;
 
+import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -10,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.annotation.Generated;
 
 @Entity
 @Table(name = "presidiarios")
@@ -40,13 +40,18 @@ public class Presidiario extends Caracterizacao {
 	private Presidio presidio;
 
 	public Presidiario() {
-		super.setAtiva(true);
-		super.setDataRegistro(Calendar.getInstance());
-		super.setTipo(TipoCaracterizacao.PRESIDIARIO);
+		this.ativa = true;
+		this.dataRegistro = Calendar.getInstance();
+		this.tipo = TipoCaracterizacao.PRESIDIARIO;
 	}
 
 	@Generated("SparkTools")
 	private Presidiario(Builder builder) {
+		this.id = builder.id;
+		this.tipo = builder.tipo;
+		this.ativa = builder.ativa;
+		this.dataRegistro = builder.dataRegistro;
+		this.aluno = builder.aluno;
 		this.matricula = builder.matricula;
 		this.raio = builder.raio;
 		this.cela = builder.cela;
@@ -114,13 +119,40 @@ public class Presidiario extends Caracterizacao {
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
+		private Long id;
+		private boolean ativa;
+		private Calendar dataRegistro;
+		private Aluno aluno;
 		private String matricula;
 		private Integer raio;
 		private Integer cela;
 		private String complemento;
 		private Presidio presidio;
+		
+		private final TipoCaracterizacao tipo;
 
 		private Builder() {
+			this.tipo = TipoCaracterizacao.PRESIDIARIO;
+		}
+
+		public Builder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder withAtiva(boolean ativa) {
+			this.ativa = ativa;
+			return this;
+		}
+
+		public Builder withDataRegistro(Calendar dataRegistro) {
+			this.dataRegistro = dataRegistro;
+			return this;
+		}
+
+		public Builder withAluno(Aluno aluno) {
+			this.aluno = aluno;
+			return this;
 		}
 
 		public Builder withMatricula(String matricula) {

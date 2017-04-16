@@ -36,11 +36,8 @@ public class ImportacaoPresidiosServiceImpl implements ImportacaoPresidiosServic
 
 				if (!row.getCell(0).toString().equals("NOME") && !row.getCell(0).toString().equals("")) {
 
-					Presidio presidio = new Presidio();
-
-					presidio.setNome(row.getCell(0).toString());
-
-					presidio.setEndereco(createEndereco(row));
+					Presidio presidio = Presidio.builder().withNome(row.getCell(0).toString())
+							.withEndereco(createEndereco(row)).build();
 
 					presidioRepository.save(presidio);
 				}
@@ -53,23 +50,15 @@ public class ImportacaoPresidiosServiceImpl implements ImportacaoPresidiosServic
 
 	private Endereco createEndereco(Row row) {
 
-		Endereco endereco = new Endereco();
-
-		endereco.setLogradouro(obterLogradouro(row.getCell(1)));
-
-		endereco.setNumero(obterNumero(row.getCell(1)));
-
-		endereco.setBairro(row.getCell(2).toString().trim());
-
-		endereco.setComplemento(row.getCell(3).toString().trim());
-
-		endereco.setCidade(obterCidade(row.getCell(4)));
-
-		endereco.setEstado(estadoRepository.findByUf(obterUf(row.getCell(4))));
-
-		endereco.setCep(row.getCell(5).toString().trim());
-
-		return endereco;
+		return Endereco.builder()
+				.withLogradouro(obterLogradouro(row.getCell(1)))
+				.withNumero(obterNumero(row.getCell(1)))
+				.withBairro(row.getCell(2).toString().trim())
+				.withComplemento(row.getCell(3).toString().trim())
+				.withCidade(obterCidade(row.getCell(4)))
+				.withEstado(estadoRepository.findByUf(obterUf(row.getCell(4))))
+				.withCep(row.getCell(5).toString().trim())
+				.build();
 	}
 
 	private String obterLogradouro(Cell cell) {

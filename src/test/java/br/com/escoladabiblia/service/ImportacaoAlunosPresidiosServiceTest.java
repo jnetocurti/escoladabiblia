@@ -84,25 +84,20 @@ public class ImportacaoAlunosPresidiosServiceTest extends EscoladabibliaApplicat
 	}
 
 	private Presidio createPresidio(String nome) {
-		Presidio presidio = new Presidio();
-		presidio.setNome(nome);
-		presidio.setEndereco(createEndereco());
-		return presidio;
+		
+		return Presidio.builder().withNome(nome).withEndereco(createEndereco()).build();
 	}
 
 	private Endereco createEndereco() {
-		Endereco endereco = new Endereco();
-		endereco.setLogradouro("logradouro");
-		endereco.setCidade("cidade");
-		endereco.setEstado(estado);
-		endereco.setNumero(0);
-		return endereco;
+		
+		return Endereco.builder().withLogradouro("logradouro").withCidade("cidade")
+				.withEstado(estado).withNumero(0).build();
 	}
 
 	private void inserirEstados() {
-		estado = new Estado();
-		estado.setUf("SP");
-		estado.setDescricao("São Paulo");
+		
+		estado = Estado.builder().withUf("SP").withDescricao("São Paulo").build();
+		
 		estadoRepository.save(estado);
 	}
 

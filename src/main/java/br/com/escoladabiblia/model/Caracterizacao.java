@@ -36,23 +36,23 @@ public abstract class Caracterizacao implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Long id;
+	protected Long id;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_caracterizacao", length = 50, nullable = false)
-	private TipoCaracterizacao tipo;
+	protected TipoCaracterizacao tipo;
 
 	@Column(name = "ativa", nullable = false)
-	private boolean ativa;
+	protected boolean ativa;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_registro", nullable = false)
-	private Calendar dataRegistro;
+	protected Calendar dataRegistro;
 
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "aluno_id", foreignKey = @ForeignKey(name = "aluno_fk"))
-	private Aluno aluno;
+	protected Aluno aluno;
 
 	public Long getId() {
 		return id;

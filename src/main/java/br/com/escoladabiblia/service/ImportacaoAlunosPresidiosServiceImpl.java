@@ -53,14 +53,12 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 
 					if (isRegistroAluno(row)) {
 
-						Aluno aluno = new Aluno();
-						
+						Aluno aluno = Aluno.builder().withNome(obterNomeAluno(row)).build();
+
 						Presidiario presidiario = createCaracterizacao(aluno, row);
 
-						aluno.setNome(obterNomeAluno(row));
-
 						aluno.getCaracterizacoes().add(presidiario);
-						
+
 						LOGGER.info("Inserindo aluno {} - Matricula: {} - Raio: {} - Cela: {}", aluno.getNome(),
 								presidiario.getMatricula(), presidiario.getRaio(), presidiario.getCela());
 
@@ -80,22 +78,14 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 	}
 
 	private Presidiario createCaracterizacao(Aluno aluno, Row row) {
-
-		Presidiario presidiario = new Presidiario();
-
-		presidiario.setAluno(aluno);
-
-		presidiario.setMatricula(getCellValue(row, 1));
-
-		presidiario.setRaio(obterRaio(row));
-
-		presidiario.setCela(obterCela(row));
-
-		presidiario.setComplemento(getCellValue(row, 3));
-
-		presidiario.setPresidio(obterPresidio(row));
-
-		return presidiario;
+		
+		return Presidiario.builder()
+				.withAluno(aluno)
+				.withMatricula(getCellValue(row, 1))
+				.withRaio(obterRaio(row))
+				.withCela(obterCela(row))
+				.withComplemento(getCellValue(row, 3))
+				.withPresidio(obterPresidio(row)).build();
 	}
 
 	private boolean isRegistroAluno(Row row) {

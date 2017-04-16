@@ -4,7 +4,7 @@ create table caracterizacoes (id  bigserial not null, ativa boolean not null, da
 create table enderecos (id  bigserial not null, bairro varchar(100), cep varchar(9), cidade varchar(100) not null, complemento varchar(100), logradouro varchar(100) not null, numero integer default 0 not null, estado_id int8 not null, primary key (id))
 create table estados (id  bigserial not null, descricao varchar(50) not null, uf varchar(2) not null, primary key (id))
 create table materiais_estudo (id  bigserial not null, envia_certificado boolean not null, nome varchar(100) not null, numero_ordem int4, qtd_estoque int4, primary key (id))
-create table postagens (id  bigserial not null, data_efetiva_envio date not null, data_prevista_envio date not null, primary key (id))
+create table postagens (id  bigserial not null, data_efetiva_envio date, data_prevista_envio date not null, primary key (id))
 create table presidiarios (cela int4, complemento varchar(50), matricula varchar(30), raio int4, id int8 not null, presidio_id int8 not null, primary key (id))
 create table presidios (id  bigserial not null, nome varchar(100) not null, endereco_id int8 not null, primary key (id))
 alter table materiais_estudo add constraint numero_ordem_uk unique (numero_ordem)

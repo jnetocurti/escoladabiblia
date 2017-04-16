@@ -39,7 +39,7 @@ public class DestinatarioTest {
 		assertEquals("Estrada da Corrupção", destinatario.getComplemento());
 		assertEquals("São Junit do Norte - SP", destinatario.getCidadeEstado());
 		assertEquals("Mt: 111.111.111 - Raio: 1 - Cela: 10", destinatario.getIdentificacao());
-		assertEquals("Prenitenciária Orientada ao descaso público", destinatario.getInstituicao());
+		assertEquals("Penitenciária Orientada ao descaso público", destinatario.getInstituicao());
 	}
 	
 	@Test
@@ -167,7 +167,7 @@ public class DestinatarioTest {
 
 	private Presidio buildPresidio() {
 
-		return Presidio.builder().withNome("Prenitenciária Orientada ao descaso público").withEndereco(buildEndereco())
+		return Presidio.builder().withNome("Penitenciária Orientada ao descaso público").withEndereco(buildEndereco())
 				.build();
 	}
 
