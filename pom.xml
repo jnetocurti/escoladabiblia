@@ -67,9 +67,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.sf.jasperreports</groupId>
-			<artifactId>jasperreports-fonts</artifactId>
-			<version>6.0.0</version>
+			<groupId>fontes.book-antiqua</groupId>
+			<artifactId>book-antiqua</artifactId>
+			<version>1.0</version>
 		</dependency>
 
 	</dependencies>
@@ -79,6 +79,25 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>fontes.book-antiqua</groupId>
+							<artifactId>book-antiqua</artifactId>
+							<version>1.0</version>
+							<packaging>jar</packaging>
+							<file>${basedir}/src/site/lib/book-antiqua.jar</file>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
