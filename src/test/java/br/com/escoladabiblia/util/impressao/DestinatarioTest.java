@@ -26,20 +26,19 @@ public class DestinatarioTest {
 		presidiario.getPresidio().getEndereco().setNumero(100);
 		presidiario.getPresidio().getEndereco().setCep("11111-111");
 		presidiario.getPresidio().getEndereco().setBairro("Vila da Imutabilidade");
-		presidiario.getPresidio().getEndereco().setComplemento("Estrada da Corrupção");
+		presidiario.getPresidio().getEndereco().setComplemento("Estrada dos Objetos");
 
 		aluno.getCaracterizacoes().add(presidiario);
 
-		DestinatarioPresidio destinatario = new DestinatarioPresidio(aluno);
+		PresidiarioDestinatario destinatario = new PresidiarioDestinatario(aluno);
 		
 		assertEquals("José Cataldo Curti Neto", destinatario.getNome());
-		assertEquals("11111-111", destinatario.getCep());
+		assertEquals("11111-111", destinatario.getCEP());
 		assertEquals("Bairro: Vila da Imutabilidade", destinatario.getBairro());
-		assertEquals("Rua dos Testes Unitarios, 100", destinatario.getLocalidade());
-		assertEquals("Estrada da Corrupção", destinatario.getComplemento());
-		assertEquals("São Junit do Norte - SP", destinatario.getCidadeEstado());
+		assertEquals("Rua dos Testes Unitarios, 100", destinatario.getLogradouro());
+		assertEquals("Estrada dos Objetos", destinatario.getComplemento());
+		assertEquals("São Junit do Norte - SP", destinatario.getLocalidadeAndUF());
 		assertEquals("Mt: 111.111.111 - Raio: 1 - Cela: 10", destinatario.getIdentificacao());
-		assertEquals("Penitenciária Orientada ao descaso público", destinatario.getInstituicao());
 	}
 	
 	@Test
@@ -52,7 +51,7 @@ public class DestinatarioTest {
 		presidiario.setCela(10);
 		aluno.getCaracterizacoes().add(presidiario);
 
-		DestinatarioPresidio destinatario = new DestinatarioPresidio(aluno);
+		PresidiarioDestinatario destinatario = new PresidiarioDestinatario(aluno);
 		
 		assertEquals("Raio: 1 - Cela: 10", destinatario.getIdentificacao());
 	}
@@ -67,7 +66,7 @@ public class DestinatarioTest {
 		presidiario.setCela(10);
 		aluno.getCaracterizacoes().add(presidiario);
 
-		DestinatarioPresidio destinatario = new DestinatarioPresidio(aluno);
+		PresidiarioDestinatario destinatario = new PresidiarioDestinatario(aluno);
 		
 		assertEquals("Mt: 111.111.111 - Cela: 10", destinatario.getIdentificacao());
 	}
@@ -82,7 +81,7 @@ public class DestinatarioTest {
 		presidiario.setRaio(1);
 		aluno.getCaracterizacoes().add(presidiario);
 
-		DestinatarioPresidio destinatario = new DestinatarioPresidio(aluno);
+		PresidiarioDestinatario destinatario = new PresidiarioDestinatario(aluno);
 		
 		assertEquals("Mt: 111.111.111 - Raio: 1", destinatario.getIdentificacao());
 	}
@@ -95,7 +94,7 @@ public class DestinatarioTest {
 		Presidiario presidiario = buildPresidiario();
 		aluno.getCaracterizacoes().add(presidiario);
 
-		DestinatarioPresidio destinatario = new DestinatarioPresidio(aluno);
+		PresidiarioDestinatario destinatario = new PresidiarioDestinatario(aluno);
 		
 		assertEquals(null, destinatario.getIdentificacao());
 	}
@@ -109,9 +108,9 @@ public class DestinatarioTest {
 		presidiario.setPresidio(buildPresidio());
 		aluno.getCaracterizacoes().add(presidiario);
 
-		DestinatarioPresidio destinatario = new DestinatarioPresidio(aluno);
+		PresidiarioDestinatario destinatario = new PresidiarioDestinatario(aluno);
 		
-		assertEquals("Rua dos Testes Unitarios", destinatario.getLocalidade());
+		assertEquals("Rua dos Testes Unitarios", destinatario.getLogradouro());
 	}
 	
 	@Test
@@ -123,9 +122,9 @@ public class DestinatarioTest {
 		presidiario.setPresidio(buildPresidio());
 		aluno.getCaracterizacoes().add(presidiario);
 
-		DestinatarioPresidio destinatario = new DestinatarioPresidio(aluno);
+		PresidiarioDestinatario destinatario = new PresidiarioDestinatario(aluno);
 		
-		assertEquals(null, destinatario.getCep());
+		assertEquals(null, destinatario.getCEP());
 	}
 	
 	@Test
@@ -137,7 +136,7 @@ public class DestinatarioTest {
 		presidiario.setPresidio(buildPresidio());
 		aluno.getCaracterizacoes().add(presidiario);
 
-		DestinatarioPresidio destinatario = new DestinatarioPresidio(aluno);
+		PresidiarioDestinatario destinatario = new PresidiarioDestinatario(aluno);
 		
 		assertEquals(null, destinatario.getBairro());
 	}
@@ -151,7 +150,7 @@ public class DestinatarioTest {
 		presidiario.setPresidio(buildPresidio());
 		aluno.getCaracterizacoes().add(presidiario);
 
-		DestinatarioPresidio destinatario = new DestinatarioPresidio(aluno);
+		PresidiarioDestinatario destinatario = new PresidiarioDestinatario(aluno);
 		
 		assertEquals(null, destinatario.getComplemento());
 	}
@@ -167,8 +166,7 @@ public class DestinatarioTest {
 
 	private Presidio buildPresidio() {
 
-		return Presidio.builder().withNome("Penitenciária Orientada ao descaso público").withEndereco(buildEndereco())
-				.build();
+		return Presidio.builder().withEndereco(buildEndereco()).build();
 	}
 
 	private Endereco buildEndereco() {

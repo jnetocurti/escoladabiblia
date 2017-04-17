@@ -120,8 +120,6 @@ public class Presidiario extends Caracterizacao {
 	@Generated("SparkTools")
 	public static final class Builder {
 		private Long id;
-		private boolean ativa;
-		private Calendar dataRegistro;
 		private Aluno aluno;
 		private String matricula;
 		private Integer raio;
@@ -129,24 +127,18 @@ public class Presidiario extends Caracterizacao {
 		private String complemento;
 		private Presidio presidio;
 		
+		private final boolean ativa;
+		private final Calendar dataRegistro;
 		private final TipoCaracterizacao tipo;
 
 		private Builder() {
+			this.ativa = true;
+			this.dataRegistro = Calendar.getInstance();
 			this.tipo = TipoCaracterizacao.PRESIDIARIO;
 		}
 
 		public Builder withId(Long id) {
 			this.id = id;
-			return this;
-		}
-
-		public Builder withAtiva(boolean ativa) {
-			this.ativa = ativa;
-			return this;
-		}
-
-		public Builder withDataRegistro(Calendar dataRegistro) {
-			this.dataRegistro = dataRegistro;
 			return this;
 		}
 

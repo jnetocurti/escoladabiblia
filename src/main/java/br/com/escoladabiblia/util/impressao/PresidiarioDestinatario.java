@@ -6,39 +6,28 @@ import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.model.TipoCaracterizacao;
 
-public class DestinatarioPresidio extends Destinatario {
+public class PresidiarioDestinatario extends AbstractDestinatario {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public DestinatarioPresidio(Aluno aluno) {
+	public PresidiarioDestinatario(Aluno aluno) {
 		super(aluno);
-	}
-
-	public String getInstituicao() {
-
-		if (TipoCaracterizacao.PRESIDIARIO.equals(aluno.getTipoCaracterizacao())) {
-
-			Presidiario presidiario = (Presidiario) aluno.getCaracterizacao();
-
-			return stringFromBuilder(new StringBuilder(presidiario.getPresidio().getNome()));
+		if (aluno.getTipoCaracterizacao() == null || !aluno.getTipoCaracterizacao().equals(TipoCaracterizacao.PRESIDIARIO)) {
+			throw new IllegalArgumentException("Tipo de caracterização do aluno deve ser PRESIDIARIO");
 		}
-
-		return null;
 	}
 
+	@Override
 	public String getIdentificacao() {
 
 		StringBuilder builder = new StringBuilder();
 
-		if (TipoCaracterizacao.PRESIDIARIO.equals(aluno.getTipoCaracterizacao())) {
+		createIdentificacao(builder);
 
-			createIdentificacao(builder);
-		}
-
-		return stringFromBuilder(builder);
+		return resultFromBuilder(builder);
 	}
 
 	private void createIdentificacao(StringBuilder builder) {
@@ -57,7 +46,7 @@ public class DestinatarioPresidio extends Destinatario {
 		if (!StringUtils.isEmpty(presidiario.getMatricula())) {
 
 			builder.append("Mt: " + presidiario.getMatricula());
-			
+
 			if (!StringUtils.isEmpty(presidiario.getRaio()) || !StringUtils.isEmpty(presidiario.getCela())) {
 
 				builder.append(" - ");
@@ -70,7 +59,7 @@ public class DestinatarioPresidio extends Destinatario {
 		if (!StringUtils.isEmpty(presidiario.getRaio())) {
 
 			builder.append("Raio: " + presidiario.getRaio());
-			
+
 			if (!StringUtils.isEmpty(presidiario.getCela())) {
 
 				builder.append(" - ");

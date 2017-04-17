@@ -181,11 +181,17 @@ public class Aluno implements Serializable {
 
 	@Transient
 	public Caracterizacao getCaracterizacao() {
+
+		if (this.caracterizacoes.isEmpty()) {
+			return null;
+		}
+
 		return this.caracterizacoes.stream().filter(c -> c.isAtiva()).findFirst().get();
 	}
 
 	@Transient
 	public TipoCaracterizacao getTipoCaracterizacao() {
+		
 		return this.getCaracterizacao() != null ? this.getCaracterizacao().getTipo() : null;
 	}
 
