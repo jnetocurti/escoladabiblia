@@ -24,6 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import javax.annotation.Generated;
 
 @Entity
 @Table(name = "postagens")
@@ -52,6 +53,16 @@ public class Postagem implements Serializable {
 	@JsonInclude(value = Include.NON_EMPTY)
 	@OneToMany(mappedBy = "postagem", cascade = { CascadeType.ALL })
 	private List<AtividadeEstudo> atividadesEstudo = new ArrayList<>();
+
+	public Postagem() {
+	}
+
+	@Generated("SparkTools")
+	private Postagem(Builder builder) {
+		this.id = builder.id;
+		this.dataPrevistaEnvio = builder.dataPrevistaEnvio;
+		this.dataEfetivaEnvio = builder.dataEfetivaEnvio;
+	}
 
 	public Long getId() {
 		return id;
@@ -86,7 +97,7 @@ public class Postagem implements Serializable {
 	public void setAtividadesEstudo(List<AtividadeEstudo> atividadesEstudo) {
 		this.atividadesEstudo = atividadesEstudo;
 	}
-	
+
 	@Transient
 	public Integer getQuantidadeAlunos() {
 
@@ -121,6 +132,48 @@ public class Postagem implements Serializable {
 	@Override
 	public String toString() {
 		return "Postagem [dataPrevistaEnvio=" + dataPrevistaEnvio + ", dataEfetivaEnvio=" + dataEfetivaEnvio + "]";
+	}
+
+	/**
+	 * Creates builder to build {@link Postagem}.
+	 * 
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link Postagem}.
+	 */
+	@Generated("SparkTools")
+	public static final class Builder {
+		private Long id;
+		private Calendar dataPrevistaEnvio;
+		private Calendar dataEfetivaEnvio;
+
+		private Builder() {
+		}
+
+		public Builder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder withDataPrevistaEnvio(Calendar dataPrevistaEnvio) {
+			this.dataPrevistaEnvio = dataPrevistaEnvio;
+			return this;
+		}
+
+		public Builder withDataEfetivaEnvio(Calendar dataEfetivaEnvio) {
+			this.dataEfetivaEnvio = dataEfetivaEnvio;
+			return this;
+		}
+
+		public Postagem build() {
+			return new Postagem(this);
+		}
 	}
 
 }

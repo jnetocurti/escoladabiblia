@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.annotation.Generated;
 
 @Entity
 @Table(name = "atividades_estudo")
@@ -60,6 +61,21 @@ public class AtividadeEstudo implements Serializable {
 	@JoinColumn(name = "material_id", nullable = false, foreignKey = @ForeignKey(name = "material_fk"))
 	private MaterialEstudo material;
 
+	public AtividadeEstudo() {
+	}
+
+	@Generated("SparkTools")
+	private AtividadeEstudo(Builder builder) {
+		this.id = builder.id;
+		this.dataRetornoEstudo = builder.dataRetornoEstudo;
+		this.nota = builder.nota;
+		this.envioCertificado = builder.envioCertificado;
+		this.envioBiblia = builder.envioBiblia;
+		this.aluno = builder.aluno;
+		this.postagem = builder.postagem;
+		this.material = builder.material;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -67,7 +83,7 @@ public class AtividadeEstudo implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Calendar getDataRetornoEstudo() {
 		return dataRetornoEstudo;
 	}
@@ -123,7 +139,7 @@ public class AtividadeEstudo implements Serializable {
 	public void setMaterial(MaterialEstudo material) {
 		this.material = material;
 	}
-	
+
 	@Transient
 	public Calendar getDataEnvioEstudo() {
 		return postagem.getDataPrevistaEnvio();
@@ -158,6 +174,78 @@ public class AtividadeEstudo implements Serializable {
 	public String toString() {
 		return "AtividadeEstudo [dataEnvioEstudo=" + postagem.getDataPrevistaEnvio() + ", aluno=" + aluno
 				+ ", material=" + material + "]";
+	}
+
+	/**
+	 * Creates builder to build {@link AtividadeEstudo}.
+	 * 
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link AtividadeEstudo}.
+	 */
+	@Generated("SparkTools")
+	public static final class Builder {
+		private Long id;
+		private Calendar dataRetornoEstudo;
+		private Float nota;
+		private boolean envioCertificado;
+		private boolean envioBiblia;
+		private Aluno aluno;
+		private Postagem postagem;
+		private MaterialEstudo material;
+
+		private Builder() {
+		}
+
+		public Builder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder withDataRetornoEstudo(Calendar dataRetornoEstudo) {
+			this.dataRetornoEstudo = dataRetornoEstudo;
+			return this;
+		}
+
+		public Builder withNota(Float nota) {
+			this.nota = nota;
+			return this;
+		}
+
+		public Builder withEnvioCertificado(boolean envioCertificado) {
+			this.envioCertificado = envioCertificado;
+			return this;
+		}
+
+		public Builder withEnvioBiblia(boolean envioBiblia) {
+			this.envioBiblia = envioBiblia;
+			return this;
+		}
+
+		public Builder withAluno(Aluno aluno) {
+			this.aluno = aluno;
+			return this;
+		}
+
+		public Builder withPostagem(Postagem postagem) {
+			this.postagem = postagem;
+			return this;
+		}
+
+		public Builder withMaterial(MaterialEstudo material) {
+			this.material = material;
+			return this;
+		}
+
+		public AtividadeEstudo build() {
+			return new AtividadeEstudo(this);
+		}
 	}
 
 }

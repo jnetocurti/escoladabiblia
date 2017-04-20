@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.NotBlank;
+import javax.annotation.Generated;
 
 @Entity
 @Table(name = "materiais_estudo", uniqueConstraints = @UniqueConstraint(name = "numero_ordem_uk", columnNames = "numero_ordem"))
@@ -29,7 +30,7 @@ public class MaterialEstudo implements Serializable {
 	@NotBlank
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
-	
+
 	@Column(name = "numero_ordem")
 	private Integer numeroOrdem;
 
@@ -38,6 +39,18 @@ public class MaterialEstudo implements Serializable {
 
 	@Column(name = "qtd_estoque")
 	private Integer qtdEstoque;
+
+	public MaterialEstudo() {
+	}
+
+	@Generated("SparkTools")
+	private MaterialEstudo(Builder builder) {
+		this.id = builder.id;
+		this.nome = builder.nome;
+		this.numeroOrdem = builder.numeroOrdem;
+		this.enviaCertificado = builder.enviaCertificado;
+		this.qtdEstoque = builder.qtdEstoque;
+	}
 
 	public Long getId() {
 		return id;
@@ -54,7 +67,7 @@ public class MaterialEstudo implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public Integer getNumeroOrdem() {
 		return numeroOrdem;
 	}
@@ -107,6 +120,60 @@ public class MaterialEstudo implements Serializable {
 	@Override
 	public String toString() {
 		return "MaterialEstudo [nome=" + nome + "]";
+	}
+
+	/**
+	 * Creates builder to build {@link MaterialEstudo}.
+	 * 
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
+
+	/**
+	 * Builder to build {@link MaterialEstudo}.
+	 */
+	@Generated("SparkTools")
+	public static final class Builder {
+		private Long id;
+		private String nome;
+		private Integer numeroOrdem;
+		private boolean enviaCertificado;
+		private Integer qtdEstoque;
+
+		private Builder() {
+		}
+
+		public Builder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public Builder withNome(String nome) {
+			this.nome = nome;
+			return this;
+		}
+
+		public Builder withNumeroOrdem(Integer numeroOrdem) {
+			this.numeroOrdem = numeroOrdem;
+			return this;
+		}
+
+		public Builder withEnviaCertificado(boolean enviaCertificado) {
+			this.enviaCertificado = enviaCertificado;
+			return this;
+		}
+
+		public Builder withQtdEstoque(Integer qtdEstoque) {
+			this.qtdEstoque = qtdEstoque;
+			return this;
+		}
+
+		public MaterialEstudo build() {
+			return new MaterialEstudo(this);
+		}
 	}
 
 }

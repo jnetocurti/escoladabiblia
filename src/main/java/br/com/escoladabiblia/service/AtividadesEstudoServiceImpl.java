@@ -37,7 +37,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 		final Postagem postagem = postagemRepository.findLastOpenPostagem();
 
 		if (postagem == null) {
-			
+
 			throw new BusinessException("erro.atividade.estudo.sem.postagem.aberta");
 		}
 
@@ -45,7 +45,8 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 
 		final EdicaoAtividadesEstudoDTO edicao = new EdicaoAtividadesEstudoDTO(aluno, postagem);
 
-		edicao.getMateriais().addAll(materialEstudoRepository.findByIdIsNotIn(getIdsMateriaisEstudados(aluno)));
+		edicao.getMateriais()
+				.addAll(materialEstudoRepository.obterMateriaisNaoEstudados(getIdsMateriaisEstudados(aluno)));
 
 		return edicao;
 	}
@@ -55,8 +56,8 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 
 		final AtividadeEstudo atividadeEstudo = new AtividadeEstudo();
 
-		atividadeEstudo.setAluno(alunoRepository.findOne(idAluno));
-		
+		atividadeEstudo.setAluno(Aluno.builder().withId(idAluno).build());
+
 		atividadeEstudo.setPostagem(postagemRepository.findOne(idPostagem));
 
 		atividadeEstudo.setMaterial(materialEstudoRepository.findOne(idMaterial));
@@ -65,17 +66,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	}
 
 	private List<Long> getIdsMateriaisEstudados(final Aluno aluno) {
-
-		List<Long> idsMateriais = aluno.getAtividadesEstudo().stream().map(a -> a.getMaterial().getId())
-				.collect(Collectors.toList());
-
-		// workaround :(
-
-		// Consulta NOT IN não retorna todos resultados quando a lista de ids enviada estiver vazia.
-		// O zero foi acrescentado para garantir que todos registros fossem retornados nesse caso.
-		idsMateriais.add(0L);
-
-		return idsMateriais;
+		return aluno.getAtividadesEstudo().stream().map(a -> a.getMaterial().getId()).collect(Collectors.toList());
 	}
 
 }

@@ -1,5 +1,6 @@
 package br.com.escoladabiblia.util.impressao;
 
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import br.com.escoladabiblia.model.Aluno;
@@ -11,13 +12,11 @@ public abstract class AbstractDestinatario implements Destinatario {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	protected final Aluno aluno;
 
 	public AbstractDestinatario(Aluno aluno) {
-		if (aluno == null) {
-			throw new IllegalArgumentException("Aluno não pode ser null");
-		}
+		Assert.notNull(aluno, "Aluno não pode ser null");
 		this.aluno = aluno;
 	}
 

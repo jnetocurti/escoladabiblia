@@ -1,5 +1,6 @@
 package br.com.escoladabiblia.util.impressao;
 
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import br.com.escoladabiblia.model.Aluno;
@@ -15,11 +16,11 @@ public class PresidiarioDestinatario extends AbstractDestinatario {
 
 	public PresidiarioDestinatario(Aluno aluno) {
 		super(aluno);
-		if (aluno.getTipoCaracterizacao() == null || !aluno.getTipoCaracterizacao().equals(TipoCaracterizacao.PRESIDIARIO)) {
-			throw new IllegalArgumentException("Tipo de caracterização do aluno deve ser PRESIDIARIO");
-		}
+		Assert.notNull(aluno.getTipoCaracterizacao(), "Tipo de caracterização do aluno não deve ser null");
+		Assert.isTrue(aluno.getTipoCaracterizacao().equals(TipoCaracterizacao.PRESIDIARIO),
+				"Tipo de caracterização do aluno deve ser PRESIDIARIO");
 	}
-
+	
 	@Override
 	public String getIdentificacao() {
 
