@@ -304,7 +304,10 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EtnI0BQZEeeJMetIJl5ejg" value="*"/>
     </ownedEnd>
   </packagedElement>
-  <packagedElement xmi:type="uml:Enumeration" xmi:id="_7Fdb0CCaEeeOyoCkx9RtVQ" name="TipoEnvelope"/>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_7Fdb0CCaEeeOyoCkx9RtVQ" name="TipoEnvelope">
+    <ownedLiteral xmi:id="_pSOf8CYaEeeYe-qEIf_0GA" name="OFICIO_114_X_229"/>
+    <ownedLiteral xmi:id="_2NwiQCYaEeeYe-qEIf_0GA" name="ENVELOPE_162_X_229"/>
+  </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_Iv5LgCCbEeeOyoCkx9RtVQ" memberEnd="_Iv5ykCCbEeeOyoCkx9RtVQ _Iv814iCbEeeOyoCkx9RtVQ" navigableOwnedEnd="_Iv814iCbEeeOyoCkx9RtVQ">
     <ownedEnd xmi:id="_Iv5ykCCbEeeOyoCkx9RtVQ" name="alunos" type="_CYTD4BNAEeeT3fti3uGRbA" association="_Iv5LgCCbEeeOyoCkx9RtVQ">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Iv814CCbEeeOyoCkx9RtVQ"/>

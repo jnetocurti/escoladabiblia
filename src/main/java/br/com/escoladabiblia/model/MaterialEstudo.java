@@ -4,11 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import javax.annotation.Generated;
@@ -31,13 +34,19 @@ public class MaterialEstudo implements Serializable {
 	@Column(name = "nome", length = 100, nullable = false)
 	private String nome;
 
-	@Column(name = "numero_ordem")
+	@NotNull
+	@Column(name = "numero_ordem", nullable = false)
 	private Integer numeroOrdem;
 
 	@Column(name = "envia_certificado", nullable = false)
 	private boolean enviaCertificado;
 
-	@Column(name = "qtd_estoque")
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_envelope", length = 30, nullable = false)
+	private TipoEnvelope tipoEnvelope;
+
+	@Column(name = "qtd_estoque", nullable = false, columnDefinition = "integer default 0")
 	private Integer qtdEstoque;
 
 	public MaterialEstudo() {
@@ -49,6 +58,7 @@ public class MaterialEstudo implements Serializable {
 		this.nome = builder.nome;
 		this.numeroOrdem = builder.numeroOrdem;
 		this.enviaCertificado = builder.enviaCertificado;
+		this.tipoEnvelope = builder.tipoEnvelope;
 		this.qtdEstoque = builder.qtdEstoque;
 	}
 
@@ -82,6 +92,14 @@ public class MaterialEstudo implements Serializable {
 
 	public void setEnviaCertificado(boolean enviaCertificado) {
 		this.enviaCertificado = enviaCertificado;
+	}
+
+	public TipoEnvelope getTipoEnvelope() {
+		return tipoEnvelope;
+	}
+
+	public void setTipoEnvelope(TipoEnvelope tipoEnvelope) {
+		this.tipoEnvelope = tipoEnvelope;
 	}
 
 	public Integer getQtdEstoque() {
@@ -141,6 +159,7 @@ public class MaterialEstudo implements Serializable {
 		private String nome;
 		private Integer numeroOrdem;
 		private boolean enviaCertificado;
+		private TipoEnvelope tipoEnvelope;
 		private Integer qtdEstoque;
 
 		private Builder() {
@@ -163,6 +182,11 @@ public class MaterialEstudo implements Serializable {
 
 		public Builder withEnviaCertificado(boolean enviaCertificado) {
 			this.enviaCertificado = enviaCertificado;
+			return this;
+		}
+
+		public Builder withTipoEnvelope(TipoEnvelope tipoEnvelope) {
+			this.tipoEnvelope = tipoEnvelope;
 			return this;
 		}
 
