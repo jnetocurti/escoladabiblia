@@ -13,7 +13,7 @@ import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.repository.AtividadeEstudoRepository;
 import br.com.escoladabiblia.repository.MaterialEstudoRepository;
 import br.com.escoladabiblia.repository.PostagemRepository;
-import br.com.escoladabiblia.util.dto.EdicaoAtividadesEstudoDTO;
+import br.com.escoladabiblia.util.dto.AtividadesEstudoEdicaoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
 
 @Service
@@ -32,7 +32,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	private AtividadeEstudoRepository atividadeEstudoRepository;
 
 	@Override
-	public EdicaoAtividadesEstudoDTO obterAtividadesEstudoAlunoParaEdicao(Long id) throws BusinessException {
+	public AtividadesEstudoEdicaoDTO obterAtividadesEstudoAlunoParaEdicao(Long id) throws BusinessException {
 
 		final Postagem postagem = postagemRepository.findLastOpenPostagem();
 
@@ -43,7 +43,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 
 		final Aluno aluno = alunoRepository.findOne(id);
 
-		final EdicaoAtividadesEstudoDTO edicao = new EdicaoAtividadesEstudoDTO(aluno, postagem);
+		final AtividadesEstudoEdicaoDTO edicao = new AtividadesEstudoEdicaoDTO(aluno, postagem);
 
 		edicao.getMateriais()
 				.addAll(materialEstudoRepository.obterMateriaisNaoEstudados(getIdsMateriaisEstudados(aluno)));

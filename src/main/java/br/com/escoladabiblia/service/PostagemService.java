@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.escoladabiblia.model.Postagem;
 import br.com.escoladabiblia.util.dto.PeriodoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
+import net.sf.jasperreports.engine.JRException;
 
 public interface PostagemService {
 
@@ -14,6 +15,6 @@ public interface PostagemService {
 
 	List<Postagem> listarPorPeriodo(PeriodoDTO periodo);
 
-	byte[] processarPostagem(Long id, boolean encerrar);
+	byte[] processarPostagem(Long id, boolean encerrar) throws JRException;
 
 }

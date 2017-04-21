@@ -29,7 +29,7 @@ public abstract class BaseController {
 		return new MessageDTO(TipoMensagem.SUCCESS, messageSource.getMessage(key, args, Locale.getDefault()));
 	}
 	
-	protected ResponseEntity<byte[]> getPDFResponse(final byte[] envelopes, String filename) {
+	protected ResponseEntity<byte[]> getPDFResponse(final byte[] bytes, String filename) {
 
 		HttpHeaders headers = new HttpHeaders();
 
@@ -39,7 +39,7 @@ public abstract class BaseController {
 
 		headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
 
-		return new ResponseEntity<byte[]>(envelopes, headers, HttpStatus.OK);
+		return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
 	}
 
 }

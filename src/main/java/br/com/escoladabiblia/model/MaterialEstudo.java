@@ -2,10 +2,10 @@ package br.com.escoladabiblia.model;
 
 import java.io.Serializable;
 
+import javax.annotation.Generated;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +14,6 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import javax.annotation.Generated;
 
 @Entity
 @Table(name = "materiais_estudo", uniqueConstraints = @UniqueConstraint(name = "numero_ordem_uk", columnNames = "numero_ordem"))
@@ -42,8 +41,8 @@ public class MaterialEstudo implements Serializable {
 	private boolean enviaCertificado;
 
 	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_envelope", length = 30, nullable = false)
+	@Convert(converter = TipoEnvelopeConverter.class)
+	@Column(name = "tipo_envelope", nullable = false)
 	private TipoEnvelope tipoEnvelope;
 
 	@Column(name = "qtd_estoque", nullable = false, columnDefinition = "integer default 0")

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class AbstractRepositoryImpl<T, ID extends Serializable> {
@@ -18,4 +19,9 @@ public class AbstractRepositoryImpl<T, ID extends Serializable> {
 	TypedQuery<T> createTypedQuery(String query, Class<T> clazz) {
 		return this.entityManager.createQuery(query, clazz);
 	}
+
+	Query createQuery(String query) {
+		return this.entityManager.createQuery(query);
+	}
+
 }

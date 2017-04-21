@@ -21,6 +21,7 @@ import br.com.escoladabiblia.service.PostagemService;
 import br.com.escoladabiblia.util.dto.MessageDTO;
 import br.com.escoladabiblia.util.dto.PeriodoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
+import net.sf.jasperreports.engine.JRException;
 
 @Controller
 @RequestMapping("/postagens")
@@ -67,7 +68,7 @@ public class PostagensController extends BaseController {
 
 	@GetMapping(path = "gerenciamento/processar/{id}/{encerrar}")
 	public ResponseEntity<byte[]> processar(@PathVariable Long id, @PathVariable boolean encerrar)
-			throws BusinessException {
+			throws BusinessException, JRException {
 
 		final byte[] envelopes = postagemService.processarPostagem(id, encerrar);
 
