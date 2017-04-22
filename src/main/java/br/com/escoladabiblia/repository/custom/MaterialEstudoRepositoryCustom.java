@@ -8,7 +8,7 @@ public interface MaterialEstudoRepositoryCustom {
 
 	/**
 	 * @param ids
-	 *            - Ids dos materiais ja estudados
+	 *            - Ids dos materiais já estudados
 	 * @return Lista de materiais ainda não estudados pelo aluno
 	 */
 	List<MaterialEstudo> obterMateriaisNaoEstudados(List<Long> ids);

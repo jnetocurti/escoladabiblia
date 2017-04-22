@@ -8,10 +8,12 @@ public interface AtividadeEstudoRepositoryCustom {
 
 	/**
 	 * @param idPostagem
-	 *            - O {@code id} da postagem relacionada à atividade de estudo
+	 *            - Id da postagem qual a atividade de estudo está relacionada
 	 * 
-	 * @return Lista de {@code AtividadeEstudoImpressaoDTO} agrupadas por alunos
-	 *         e com o maior tipo de envelope do material de estudo
+	 * @return Lista de {@code AtividadeEstudoImpressaoDTO} agrupadas por aluno
+	 *
+	 * @see {@link br.com.escoladabiblia.util.dto.AtividadeEstudoImpressaoDTO}
+	 * @see {@link br.com.escoladabiblia.model.TipoEnvelope }
 	 */
 	List<AtividadeEstudoImpressaoDTO> obterAtividadesEstudoAlunosParaImpressao(Long idPostagem);
 }

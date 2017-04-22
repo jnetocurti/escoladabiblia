@@ -38,7 +38,7 @@ public abstract class AbstractDestinatario implements Destinatario {
 
 		Endereco endereco = getEndereco();
 		
-		if (endereco.getComplemento() == null) {
+		if (StringUtils.isEmpty(endereco.getComplemento())) {
 			return null;
 		}
 
@@ -50,7 +50,7 @@ public abstract class AbstractDestinatario implements Destinatario {
 
 		Endereco endereco = getEndereco();
 
-		if (endereco.getBairro() == null) {
+		if (StringUtils.isEmpty(endereco.getBairro())) {
 			return null;
 		}
 
@@ -70,7 +70,7 @@ public abstract class AbstractDestinatario implements Destinatario {
 
 		Endereco endereco = getEndereco();
 		
-		if (endereco.getCep() == null) {
+		if (StringUtils.isEmpty(endereco.getCep())) {
 			return null;
 		}
 

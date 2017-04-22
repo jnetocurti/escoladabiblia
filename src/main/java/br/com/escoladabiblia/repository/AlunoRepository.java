@@ -13,15 +13,15 @@ import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
-	@Query(" SELECT DISTINCT new br.com.escoladabiblia.util.dto.AlunoPresidioDTO(a.id, a.nome, c.matricula, c.raio, c.cela, p.nome) "
-		 + "   FROM Aluno a "
-		 + "   JOIN a.caracterizacoes c "
-		 + "   JOIN c.presidio p "
-		 + "  WHERE a.nome LIKE :param "
-		 + "    AND c.ativa = true "
-		 + "     OR c.matricula LIKE :param "
-		 + "     OR p.nome LIKE :param "
-		 + "  ORDER BY p.nome ASC, a.nome ASC ")
-	Page<AlunoPresidioDTO> findAlunosPresidiosByNomeOrMatriculaOrNomePresidio(@Param("param") String param, Pageable pageable);
+	@Query(" select distinct new br.com.escoladabiblia.util.dto.AlunoPresidioDTO(a.id, a.nome, c.matricula, c.raio, c.cela, p.nome) "
+		 + "   from Aluno a "
+		 + "   join a.caracterizacoes c "
+		 + "   join c.presidio p "
+		 + "  where a.nome like :filter "
+		 + "    and c.ativa = true "
+		 + "     or c.matricula like :filter "
+		 + "     or p.nome like :filter "
+		 + "  order by p.nome asc, a.nome asc ")
+	Page<AlunoPresidioDTO> findAlunosPresidiosByNomeOrMatriculaOrNomePresidio(@Param("filter") String filter, Pageable pageable);
 
 }

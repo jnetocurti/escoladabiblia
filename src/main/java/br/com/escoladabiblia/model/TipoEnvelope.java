@@ -3,13 +3,12 @@ package br.com.escoladabiblia.model;
 /**
  * Representa os tipos de envelopes para impressão suportados pelo sistema
  * <p>
- * O atributo único {@code size} define a grandeza em pontos pata o tipo de
- * envelope
+ * O atributo {@code size} define o tamanho em "pontos" para o envelope sendo
+ * também seu identificador. Ex: <b>OFICIO_114_X_229</b> é um envelope menor que
+ * <b>ENVELOPE_162_X_229</b>
  * <p>
  * O atributo {@code jasperFile} define o jasper template correspondente ao tipo
  * de envelope
- * <p>
- * Ex: <b>OFICIO_114_X_229</b> é um envelope menor que <b>ENVELOPE_162_X_229</b>
  * 
  * @author José Cataldo Curti Neto
  * 
@@ -17,8 +16,7 @@ package br.com.escoladabiblia.model;
  */
 public enum TipoEnvelope {
 
-	OFICIO_114_X_229(1, "jasper/envelope-oficio-frente.jasper"), 
-	ENVELOPE_162_X_229(2, "jasper/envelope-medio-frente.jasper");
+	OFICIO_114_X_229(1, "jasper/envelope-oficio-frente.jasper"), ENVELOPE_162_X_229(2, "jasper/envelope-medio-frente.jasper");
 
 	public final Integer size;
 

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.escoladabiblia.EscoladabibliaApplicationTests;
 import br.com.escoladabiblia.model.Endereco;
-import br.com.escoladabiblia.model.Estado;
 import br.com.escoladabiblia.model.Presidio;
 import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.repository.EstadoRepository;
@@ -34,11 +33,8 @@ public class ImportacaoAlunosPresidiosServiceTest extends EscoladabibliaApplicat
 	@Autowired
 	private ImportacaoAlunosPresidiosService importacaoAlunosPresidiosService;
 
-	private Estado estado;
-
 	@Before
 	public void init() {
-		inserirEstados();
 		inserirPenitenciarias();
 	}
 
@@ -84,21 +80,14 @@ public class ImportacaoAlunosPresidiosServiceTest extends EscoladabibliaApplicat
 	}
 
 	private Presidio createPresidio(String nome) {
-		
+
 		return Presidio.builder().withNome(nome).withEndereco(createEndereco()).build();
 	}
 
 	private Endereco createEndereco() {
-		
-		return Endereco.builder().withLogradouro("logradouro").withCidade("cidade")
-				.withEstado(estado).withNumero(0).build();
-	}
 
-	private void inserirEstados() {
-		
-		estado = Estado.builder().withUf("SP").withDescricao("São Paulo").build();
-		
-		estadoRepository.save(estado);
+		return Endereco.builder().withLogradouro("logradouro").withCidade("cidade")
+				.withEstado(estadoRepository.findByUf("SP")).withNumero(0).build();
 	}
 
 }

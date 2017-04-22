@@ -86,6 +86,12 @@ Sandbox('*', function(box) {
 					"material" : function(column, row) {
 						return row.material.nome;
 					},
+					"envioCertificado" : function(column, row) {
+						return row.envioCertificado ? 'Sim' : 'Não';
+					},
+					"envioBiblia" : function(column, row) {
+						return row.envioBiblia ? 'Sim' : 'Não';
+					},
 					"commands" : function(column, row) {
 						return box.smallGridButton(column, row, "command-edit", "fa-pencil");
 					}
@@ -104,6 +110,8 @@ Sandbox('*', function(box) {
 	box.postForm('#atividades-estudos-form', {
 		resetForm : false,
 		success : function(data) {
+			
+			box.showMsg({type: 'SUCCESS', message: 'Atividade cadastrada com sucesso!'});
 			
 			loadComboMateriais(data);
 			

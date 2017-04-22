@@ -13,10 +13,10 @@ import br.com.escoladabiblia.model.Postagem;
 @Repository
 public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 
-	@Query("SELECT p FROM Postagem p WHERE p.dataPrevistaEnvio IS NOT NULL AND p.dataEfetivaEnvio IS NULL")
-	Postagem findLastOpenPostagem();
+	@Query("select p from Postagem p where p.dataPrevistaEnvio is not null and p.dataEfetivaEnvio is null")
+	Postagem findLastOpen();
 
-	@Query("SELECT p FROM Postagem p WHERE p.dataPrevistaEnvio BETWEEN :dataDe AND :dataAte")
+	@Query("select p from Postagem p where p.dataPrevistaEnvio between :dataDe and :dataAte")
 	List<Postagem> findByPeriod(@Param("dataDe") Calendar dataDe, @Param("dataAte") Calendar dataAte);
 
 }

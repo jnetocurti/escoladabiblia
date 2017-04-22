@@ -3,10 +3,7 @@
 	<form id="atividades-estudos-form" class="form-inline" th:action="@{/atividades-estudo/adicionar-atividade}" method="post">
 
 		<div class="form-group col-md-12">
-			<dl class="dl-horizontal">
-				<dt>Aluno</dt>
-				<dd id="nome-aluno"></dd>
-			</dl>
+			<p><strong>Aluno: </strong><span id="nome-aluno"></span></p>
 		</div>
 		
 		<input id="id-aluno" type="hidden" name="idAluno" />
@@ -38,8 +35,8 @@
 						<th data-column-id="material" data-formatter="material" data-sortable="false" data-width="400">Material</th>
 						<th data-column-id="dataRetornoEstudo" data-sortable="false">Data retorno</th>
 						<th data-column-id="nota" data-sortable="false">Nota</th>
-						<th data-column-id="envioCertificado" data-sortable="false">Certificado</th>
-						<th data-column-id="envioBiblia" data-sortable="false">Bíblia enviada</th>
+						<th data-column-id="envioCertificado" data-formatter="envioCertificado" data-sortable="false">Certificado</th>
+						<th data-column-id="envioBiblia" data-formatter="envioBiblia" data-sortable="false">Bíblia enviada</th>
 						<th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="40"></th>
 					</tr>
 				</thead>

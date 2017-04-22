@@ -43,7 +43,7 @@ public class PostagemServiceImpl implements PostagemService {
 	@Override
 	public Postagem obterPostagemEmAberto() {
 
-		return postagemRepository.findLastOpenPostagem();
+		return postagemRepository.findLastOpen();
 	}
 
 	@Override

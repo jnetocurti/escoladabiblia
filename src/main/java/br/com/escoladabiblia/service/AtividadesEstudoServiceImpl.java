@@ -34,7 +34,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	@Override
 	public AtividadesEstudoEdicaoDTO obterAtividadesEstudoAlunoParaEdicao(Long id) throws BusinessException {
 
-		final Postagem postagem = postagemRepository.findLastOpenPostagem();
+		final Postagem postagem = postagemRepository.findLastOpen();
 
 		if (postagem == null) {
 
