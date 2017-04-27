@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -70,7 +71,7 @@ public class Aluno implements Serializable {
 	@JsonInclude(value = Include.NON_NULL)
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "endereco_id", foreignKey = @ForeignKey(name = "endereco_fk"))
-	private Endereco endereco;
+	private @Valid Endereco endereco;
 
 	@JsonInclude(value = Include.NON_EMPTY)
 	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
@@ -198,15 +199,20 @@ public class Aluno implements Serializable {
 	@Transient
 	public Endereco getEnderecoEfetivo() {
 
-		switch (this.getTipoCaracterizacao()) {
+		if (this.getTipoCaracterizacao() != null) {
 
-		case PRESIDIARIO:
+			switch (this.getTipoCaracterizacao()) {
 
-			return ((Presidiario) this.getCaracterizacao()).getPresidio().getEndereco();
+			case PRESIDIARIO:
 
-		default:
-			return this.endereco;
+				return ((Presidiario) this.getCaracterizacao()).getPresidio().getEndereco();
+
+			default:
+				return this.endereco;
+			}
 		}
+
+		return this.endereco;
 	}
 
 	@Override

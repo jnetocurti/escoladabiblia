@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.repository.AlunoRepository;
+import br.com.escoladabiblia.util.dto.AlunoComumDTO;
 import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
 import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
@@ -26,12 +27,25 @@ public class AlunoServiceImpl implements AlunoService {
 	}
 
 	@Override
-	public Aluno salvar(Aluno aluno, Presidiario presidiario) {
+	public Aluno salvarAlunoPresidio(Aluno aluno, Presidiario presidiario) {
 
 		presidiario.setAluno(aluno);
 
 		aluno.getCaracterizacoes().add(presidiario);
 
+		return alunoRepository.save(aluno);
+	}
+	
+	@Override
+	public BootgridResponse<AlunoComumDTO> findAlunosComunsByNome(BootgridRequest bootgridRequest) {
+
+		return new BootgridResponse<AlunoComumDTO>(alunoRepository.findAlunosComunsByName(
+				"%" + bootgridRequest.getSearchPhrase() + "%", bootgridRequest.getPageRequest()));
+	}
+
+	@Override
+	public Aluno salvarAlunoComum(Aluno aluno) {
+		
 		return alunoRepository.save(aluno);
 	}
 

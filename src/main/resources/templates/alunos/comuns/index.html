@@ -5,49 +5,58 @@
 
 		<ol class="breadcrumb">
 			<li><a th:href="@{/}">Home</a></li>
-			<li>Alunos</li>
-			<li class="active">Alunos comuns</li>
+			<li class="breadcrumb-item">Alunos</li>
+			<li class="breadcrumb-item active">Alunos comuns</li>
 		</ol>
 		
 		<div th:replace="fragments/messages"></div>
 		
-		<div class="col-md-12">
-			<h3>Cadastro de Alunos</h3>
-		</div>
-		
 		<div class="area-grid-alunos">
 		
-			<div th:replace="alunos/grid-alunos"></div>
+			<h3>Alunos cadastrados</h3>
+		
+			<div th:replace="alunos/comuns/grid-alunos"></div>
 			
 			<button type="button" class="pull-right btn btn-default btn-primary novo-aluno">Novo</button>
 		</div>
 
 		<div class="area-form-alunos hide">
 		
-			<form class="form-inline aluno-form" th:action="@{/alunos-presidios/salvar}" method="post">
+			<h3>Cadastro de alunos</h3>
+		
+			<form id="aluno-form" class="form-inline" th:action="@{/alunos-comuns/salvar}" method="post">
 			
-				<div th:replace="alunos/dados-aluno"></div>
+				<div th:replace="alunos/common-fragments/dados-aluno"></div>
 				
-				<div class="form-group col-md-12">
-					<hr class="separator"></hr>
-				</div>
-				
-				<div th:replace="alunos/endereco-aluno"></div>
+				<div th:replace="alunos/comuns/endereco-aluno"></div>
 			    
 			    <div class="form-group col-md-12">
 					<hr class="separator"></hr>
 				</div>
 				
 				<div class="form-group col-md-12 area-buttons">
-					<button type="button" class="pull-right btn btn-default btn-primary save-aluno">Salvar</button>
+					<button id="save-aluno" type="button" class="pull-right btn btn-default btn-primary">Salvar</button>
 					<button type="button" class="pull-right btn btn-default btn-primary cancelar">Cancelar</button>
 				</div>
 				
 			</form>
 		</div>
+		
+		<div class="area-atualizacao-atividades hide">
+		
+			<h3>Atividades do aluno</h3>
+			
+			<div th:replace="alunos/common-fragments/atividades-estudos"></div>
+			
+			<div class="form-group col-md-12 area-buttons">
+				<button type="button" class="pull-right btn btn-default btn-primary cancelar">Cancelar</button>
+			</div>
+		
+		</div>
 
 	</div>
 	<div layout:fragment="scripts">
-		<script th:src="@{/js/alunos/aluno.js}"></script>
+		<script th:src="@{/js/alunos/alunos.js}"></script>
+		<script th:src="@{/js/alunos/alunos-comuns.js}"></script>
 	</div>
 </html>

@@ -1,0 +1,51 @@
+<div th:fragment="endereco-aluno" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+
+	<input type="hidden" id="id-endereco" th:field="${aluno.endereco.id}"></input>
+
+	<div class="form-group col-md-2">
+    	<label for="cep">CEP</label>
+    	<input type="text" class="form-control" id="cep" th:field="${aluno.endereco.cep}"
+    		data-inputmask="'alias': 'cep'" placeholder="CEP"></input>
+    </div>
+
+	<div class="form-group col-md-8">
+    	<label for="logradouro">Localidade / Logradouro</label>
+    	<input type="text" class="form-control" id="logradouro" th:field="${aluno.endereco.logradouro}" 
+    		placeholder="Rua, avenida, praça, travessa, etc"></input>
+    </div>
+    
+    <div class="form-group col-md-2">
+    	<label for="numero">Nº</label>
+    	<input type="text" class="form-control" id="numero" th:field="${aluno.endereco.numero}" 
+    		placeholder="Número"></input>
+    </div>
+    
+    <div class="form-group col-md-6">
+    	<label for="bairro">Bairro</label>
+    	<input type="text" class="form-control" id="bairro" th:field="${aluno.endereco.bairro}" 
+    		placeholder="Bairro"></input>
+    </div>
+    
+    <div class="form-group col-md-6">
+    	<label for="complemento">Complemento / Descrição</label>
+    	<input type="text" class="form-control" id="complemento" th:field="${aluno.endereco.complemento}"
+    		 placeholder="Casa, apartamento, etc"></input>
+    </div>
+    
+    <div class="form-group col-md-4">
+    	<label for="cidade">Cidade</label>
+    	<input type="text" class="form-control" id="cidade" th:field="${aluno.endereco.cidade}" 
+    		placeholder="Cidade / Localidade"></input>
+    </div>
+    
+    <div class="form-group col-md-2">
+    	<label for="estado">Estado</label>
+    	<div>
+	    	<select class="form-control" id="estado"  th:field="${aluno.endereco.estado.id}">
+				<option th:value="${null}" th:text="Selecione"></option>
+	    		<option th:each="estado : ${estados}" th:value="${estado.id}" th:text="${estado.uf}"></option>
+			</select>
+    	</div>
+    </div>
+
+</div>

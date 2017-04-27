@@ -1,12 +1,8 @@
-<table class="table table-hover grid-alunos" data-ajax="true" th:attr="data-url=@{/alunos-presidios/listar}" xmlns:th="http://www.thymeleaf.org">
+<table class="table table-hover grid-alunos" data-ajax="true" th:attr="data-url=@{/alunos-comuns/listar}" xmlns:th="http://www.thymeleaf.org">
 	<thead>
 		<tr>
 			<th data-column-id="id" data-type="numeric" data-identifier="true" data-visible="false"></th>
 			<th data-column-id="nome" data-sortable="false">Nome</th>
-			<th data-column-id="matricula" data-sortable="false" data-width="130">Matricula</th>
-			<th data-column-id="raio" data-sortable="false" data-width="80">Raio</th>
-			<th data-column-id="cela" data-sortable="false" data-width="80">Cela</th>
-			<th data-column-id="presidio" data-sortable="false">Penitenciária / Presídio</th>
 			<th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="100"></th>
 		</tr>
 	</thead>
