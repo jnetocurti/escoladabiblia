@@ -8,6 +8,10 @@ Sandbox.modules.event = function(box) {
 		$(element).on('change', callback);
 	};
 	
+	box.eventBlur = function(element, callback) {
+		$(element).on('blur', callback);
+	};
+	
 	box.submitForm = function(form) {
 		$(form).submit();
 	};
