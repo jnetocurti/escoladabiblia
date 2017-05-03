@@ -1,8 +1,5 @@
 package br.com.escoladabiblia.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +42,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 
 		final AtividadesEstudoEdicaoDTO edicao = new AtividadesEstudoEdicaoDTO(aluno, postagem);
 
-		edicao.getMateriais()
-				.addAll(materialEstudoRepository.obterMateriaisNaoEstudados(getIdsMateriaisEstudados(aluno)));
+		edicao.getMateriais().addAll(materialEstudoRepository.findAll());
 
 		return edicao;
 	}
@@ -63,10 +59,6 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 		atividadeEstudo.setMaterial(materialEstudoRepository.findOne(idMaterial));
 
 		atividadeEstudoRepository.save(atividadeEstudo);
-	}
-
-	private List<Long> getIdsMateriaisEstudados(final Aluno aluno) {
-		return aluno.getAtividadesEstudo().stream().map(a -> a.getMaterial().getId()).collect(Collectors.toList());
 	}
 
 }
