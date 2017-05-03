@@ -87,17 +87,22 @@ Sandbox('*', function(box) {
 						return row.material.nome;
 					},
 					"envioCertificado" : function(column, row) {
-						return row.envioCertificado ? 'Sim' : 'Não';
+						return row.envioCertificado ? 'Sim' : row.material.enviaCertificado ? 'Sim' : 'Não';
 					},
 					"envioBiblia" : function(column, row) {
 						return row.envioBiblia ? 'Sim' : 'Não';
 					},
 					"commands" : function(column, row) {
-						return box.smallGridButton(column, row, "command-edit", "fa-pencil");
+						return box.smallGridButton(column, row, "command-edit-atividades", "fa-pencil");
 					}
 				},
 				callbacks : function() {
 					
+					box.eventClick('.command-edit-atividades', function() {
+						
+						$('#modal-edicao-atividade').modal('show');
+//						editar($(this).data("row-id"));
+					});
 				}
 			}
 		);
