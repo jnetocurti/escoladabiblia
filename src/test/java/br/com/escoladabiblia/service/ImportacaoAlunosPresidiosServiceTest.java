@@ -14,12 +14,13 @@ import br.com.escoladabiblia.model.Presidio;
 import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.repository.EstadoRepository;
 import br.com.escoladabiblia.repository.PresidioRepository;
+import br.com.escoladabiblia.util.exception.BusinessException;
 
 public class ImportacaoAlunosPresidiosServiceTest extends EscoladabibliaApplicationTests {
 
-	private static final String FILE_PATH_HOMENS = "importaveis/alunos-presidios.xlsx";
-
-	private static final String FILE_PATH_MULHERES = "importaveis/alunas-presidios.xlsx";
+	private static final String FILE_PATH_MULHERES = "importaveis/1- Alunas presídios (mulheres) - novo.xlsx";
+	
+	private static final String FILE_PATH_HOMENS = "importaveis/2- Alunos presídios (homens) - novo.xlsx";
 
 	@Autowired
 	private EstadoRepository estadoRepository;
@@ -39,13 +40,15 @@ public class ImportacaoAlunosPresidiosServiceTest extends EscoladabibliaApplicat
 	}
 
 	@Test
-	public void importPresidiosFromXLSXFileTest() throws IOException {
+	public void importPresidiosFromXLSXFileTest() throws IOException, BusinessException {
 
 		importacaoAlunosPresidiosService.importAlunosPresidiosFromXLSXFile(
-				Thread.currentThread().getContextClassLoader().getResourceAsStream(FILE_PATH_HOMENS));
+				Thread.currentThread().getContextClassLoader().getResourceAsStream(FILE_PATH_MULHERES),
+				"1- Alunas presídios (mulheres) - novo.xlsx");
 
 		importacaoAlunosPresidiosService.importAlunosPresidiosFromXLSXFile(
-				Thread.currentThread().getContextClassLoader().getResourceAsStream(FILE_PATH_MULHERES));
+				Thread.currentThread().getContextClassLoader().getResourceAsStream(FILE_PATH_HOMENS),
+				"2- Alunos presídios (homens) - novo.xlsx");
 
 		assertEquals(701, alunoRepository.count());
 	}

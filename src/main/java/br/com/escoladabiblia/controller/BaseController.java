@@ -29,6 +29,16 @@ public abstract class BaseController {
 		return new MessageDTO(TipoMensagem.SUCCESS, messageSource.getMessage(key, args, Locale.getDefault()));
 	}
 	
+	protected MessageDTO getErrorMessage(String key) {
+		
+		return this.getErrorMessage(key, new Object(){});
+	}
+
+	protected MessageDTO getErrorMessage(String key, Object... args) {
+
+		return new MessageDTO(TipoMensagem.ERROR, messageSource.getMessage(key, args, Locale.getDefault()));
+	}
+	
 	protected ResponseEntity<byte[]> getPDFResponse(final byte[] bytes, String filename) {
 
 		HttpHeaders headers = new HttpHeaders();

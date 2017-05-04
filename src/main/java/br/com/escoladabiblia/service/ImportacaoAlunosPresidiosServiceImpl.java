@@ -18,13 +18,19 @@ import org.springframework.stereotype.Service;
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.model.Presidio;
+import br.com.escoladabiblia.model.Sexo;
 import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.repository.PresidioRepository;
+import br.com.escoladabiblia.util.exception.BusinessException;
 
 @Service
 public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPresidiosService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ImportacaoAlunosPresidiosService.class);
+	
+	private static final String FILE_NAME_ALUNAS_PRESIDIOS= "1- Alunas presídios (mulheres) - novo.xlsx";
+	
+	private static final String FILE_NAME_ALUNOS_PRESIDIOS= "2- Alunos presídios (homens) - novo.xlsx";
 
 	private static final Pattern NOME_ALUNO_PATTERN = Pattern.compile("([A-ZÀ-Û .]+)");
 
@@ -41,8 +47,11 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 	private AlunoRepository alunoRepository;
 
 	@Override
-	public void importAlunosPresidiosFromXLSXFile(InputStream stream) throws IOException {
-
+	public void importAlunosPresidiosFromXLSXFile(InputStream stream, String fileName)
+			throws IOException, BusinessException {
+		
+		final Sexo sexo = obterGeneroPeloNomeDoArquivo(fileName);
+		
 		try (Workbook workbook = new XSSFWorkbook(stream)) {
 
 			for (Sheet sheet : workbook) {
@@ -53,7 +62,7 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 
 					if (isRegistroAluno(row)) {
 
-						Aluno aluno = Aluno.builder().withNome(obterNomeAluno(row)).build();
+						Aluno aluno = Aluno.builder().withNome(obterNomeAluno(row)).withSexo(sexo).build();
 
 						Presidiario presidiario = createCaracterizacao(aluno, row);
 
@@ -74,6 +83,22 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 		} catch (Exception e) {
 			LOGGER.error("Erro inesperado importar alunos do arquivo", e);
 			throw e;
+		}
+	}
+
+	private Sexo obterGeneroPeloNomeDoArquivo(String fileName) throws BusinessException {
+
+		if (fileName.equals(FILE_NAME_ALUNAS_PRESIDIOS)) {
+
+			return Sexo.F;
+
+		} else if (fileName.equals(FILE_NAME_ALUNOS_PRESIDIOS)) {
+
+			return Sexo.M;
+
+		} else {
+
+			throw new BusinessException("erro.aluno.presidio.nome.arquivo");
 		}
 	}
 

@@ -41,6 +41,11 @@
 						<span th:text="${message}"></span>
 					</div>
 				</div>
+				<div th:if="${error}">
+					<div class="alert alert-danger" role="alert">
+						<span th:text="${error}"></span>
+					</div>
+				</div>
 			</div>
 	
 			<div th:include="fragments/footer"></div>

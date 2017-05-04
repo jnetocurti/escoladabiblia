@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.escoladabiblia.service.ImportacaoAlunosPresidiosService;
+import br.com.escoladabiblia.util.exception.BusinessException;
 
 @Controller
 @RequestMapping("/importacao/alunos-presidios")
@@ -30,10 +31,17 @@ public class ImportarAlunosPresidiosController extends BaseController {
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes)
 			throws IOException {
 
-		redirectAttributes.addFlashAttribute("message",
-				super.getSuccessMessage("sucesso.presidio.importado").getMessage());
+		try {
 
-		importacaoAlunosPresidios.importAlunosPresidiosFromXLSXFile(file.getInputStream());
+			importacaoAlunosPresidios.importAlunosPresidiosFromXLSXFile(file.getInputStream(), file.getOriginalFilename());
+
+			redirectAttributes.addFlashAttribute("message",
+					super.getSuccessMessage("sucesso.aluno.presidio.importado").getMessage());
+
+		} catch (BusinessException e) {
+
+			redirectAttributes.addFlashAttribute("error", super.getErrorMessage(e.getKey()).getMessage());
+		}
 
 		return "redirect:/";
 	}
