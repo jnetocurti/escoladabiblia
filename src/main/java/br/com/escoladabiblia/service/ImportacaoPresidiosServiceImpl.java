@@ -11,11 +11,21 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.escoladabiblia.model.ControleImportacao;
 import br.com.escoladabiblia.model.Endereco;
 import br.com.escoladabiblia.model.Presidio;
+import br.com.escoladabiblia.model.TipoImportacao;
+import br.com.escoladabiblia.repository.ControleImportacaoRepository;
 import br.com.escoladabiblia.repository.EstadoRepository;
 import br.com.escoladabiblia.repository.PresidioRepository;
+import br.com.escoladabiblia.util.exception.BusinessException;
 
+/**
+ * @deprecated escoladabiblia 1.0 - O processo de importação dos dados legados
+ *             atualmente salvos em planílhas do Excel não mais existirá nas
+ *             próximas versões do sistema, tendo apenas o propósito específico
+ *             de facilitar o cadastro/setup destas informações.
+ */
 @Service
 public class ImportacaoPresidiosServiceImpl implements ImportacaoPresidiosService {
 
@@ -24,9 +34,17 @@ public class ImportacaoPresidiosServiceImpl implements ImportacaoPresidiosServic
 
 	@Autowired
 	private PresidioRepository presidioRepository;
+	
+	@Autowired
+	private ControleImportacaoRepository controleImportacaoRepository;
 
 	@Override
-	public void importPresidiosFromXLSXFile(InputStream stream) throws IOException {
+	public void importPresidiosFromXLSXFile(InputStream stream) throws IOException, BusinessException {
+		
+		if (controleImportacaoRepository.existsByTipoImportacao(TipoImportacao.DADOS_PRESIDIOS)) {
+
+			throw new BusinessException("erro.presidio.importacao.importado");
+		}
 
 		try (Workbook workbook = new XSSFWorkbook(stream)) {
 
@@ -42,6 +60,9 @@ public class ImportacaoPresidiosServiceImpl implements ImportacaoPresidiosServic
 					presidioRepository.save(presidio);
 				}
 			}
+			
+			controleImportacaoRepository
+					.save(ControleImportacao.builder().withTipoImportacao(TipoImportacao.DADOS_PRESIDIOS).build());
 
 		} catch (IOException e) {
 			throw e;

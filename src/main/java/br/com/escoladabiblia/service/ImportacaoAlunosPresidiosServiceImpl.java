@@ -26,6 +26,12 @@ import br.com.escoladabiblia.repository.ControleImportacaoRepository;
 import br.com.escoladabiblia.repository.PresidioRepository;
 import br.com.escoladabiblia.util.exception.BusinessException;
 
+/**
+ * @deprecated escoladabiblia 1.0 - O processo de importação dos dados legados
+ *             atualmente salvos em planílhas do Excel não mais existirá nas
+ *             próximas versões do sistema, tendo apenas o propósito específico
+ *             de facilitar o cadastro/setup destas informações.
+ */
 @Service
 public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPresidiosService {
 
@@ -171,7 +177,6 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 		return presidioRepository.findByNome(getCellValue(row, 4));
 	}
 
-	@SuppressWarnings("deprecation")
 	private String getCellValue(Row row, int index) {
 
 		if (row.getCell(index).getCellTypeEnum().equals(CellType.NUMERIC)) {

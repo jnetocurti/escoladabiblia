@@ -16,6 +16,12 @@ import br.com.escoladabiblia.repository.EstadoRepository;
 import br.com.escoladabiblia.repository.PresidioRepository;
 import br.com.escoladabiblia.util.exception.BusinessException;
 
+/**
+ * @deprecated escoladabiblia 1.0 - O processo de importação dos dados legados
+ *             atualmente salvos em planílhas do Excel não mais existirá nas
+ *             próximas versões do sistema, tendo apenas o propósito específico
+ *             de facilitar o cadastro/setup destas informações.
+ */
 public class ImportacaoAlunosPresidiosServiceTest extends EscoladabibliaApplicationTests {
 
 	private static final String FILE_PATH_MULHERES = "importaveis/1- Alunas presídios (mulheres) - novo.xlsx";

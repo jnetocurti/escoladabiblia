@@ -12,7 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.escoladabiblia.service.ImportacaoPresidiosService;
+import br.com.escoladabiblia.util.exception.BusinessException;
 
+/**
+ * @deprecated escoladabiblia 1.0 - O processo de importação dos dados legados
+ *             atualmente salvos em planílhas do Excel não mais existirá nas
+ *             próximas versões do sistema, tendo apenas o propósito específico
+ *             de facilitar o cadastro/setup destas informações.
+ */
 @Controller
 @RequestMapping("/importacao/presidios")
 public class ImportarPresidiosController extends BaseController {
@@ -30,10 +37,17 @@ public class ImportarPresidiosController extends BaseController {
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes)
 			throws IOException {
 
-		redirectAttributes.addFlashAttribute("message",
-				super.getSuccessMessage("sucesso.presidio.importado").getMessage());
+		try {
 
-		importacaoService.importPresidiosFromXLSXFile(file.getInputStream());
+			importacaoService.importPresidiosFromXLSXFile(file.getInputStream());
+
+			redirectAttributes.addFlashAttribute("message",
+					super.getSuccessMessage("sucesso.presidio.importacao.importado").getMessage());
+
+		} catch (BusinessException e) {
+
+			redirectAttributes.addFlashAttribute("error", super.getErrorMessage(e.getKey()).getMessage());
+		}
 
 		return "redirect:/";
 	}

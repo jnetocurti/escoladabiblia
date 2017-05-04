@@ -14,6 +14,12 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.annotation.Generated;
 
+/**
+ * @deprecated escoladabiblia 1.0 - O processo de importação dos dados legados
+ *             atualmente salvos em planílhas do Excel não mais existirá nas
+ *             próximas versões do sistema, tendo apenas o propósito específico
+ *             de facilitar o cadastro/setup destas informações.
+ */
 @Entity
 @Table(name = "controle_importacoes", uniqueConstraints = @UniqueConstraint(name = "tipo_importacao_uk", columnNames = { "tipo_importacao" }))
 public class ControleImportacao implements Serializable {
