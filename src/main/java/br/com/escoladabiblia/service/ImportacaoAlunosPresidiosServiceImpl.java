@@ -16,10 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.escoladabiblia.model.Aluno;
+import br.com.escoladabiblia.model.ControleImportacao;
 import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.model.Presidio;
 import br.com.escoladabiblia.model.Sexo;
+import br.com.escoladabiblia.model.TipoImportacao;
 import br.com.escoladabiblia.repository.AlunoRepository;
+import br.com.escoladabiblia.repository.ControleImportacaoRepository;
 import br.com.escoladabiblia.repository.PresidioRepository;
 import br.com.escoladabiblia.util.exception.BusinessException;
 
@@ -27,10 +30,10 @@ import br.com.escoladabiblia.util.exception.BusinessException;
 public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPresidiosService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ImportacaoAlunosPresidiosService.class);
-	
-	private static final String FILE_NAME_ALUNAS_PRESIDIOS= "1- Alunas presídios (mulheres) - novo.xlsx";
-	
-	private static final String FILE_NAME_ALUNOS_PRESIDIOS= "2- Alunos presídios (homens) - novo.xlsx";
+
+	private static final String FILE_NAME_ALUNAS_PRESIDIOS = "1- Alunas presídios (mulheres) - novo.xlsx";
+
+	private static final String FILE_NAME_ALUNOS_PRESIDIOS = "2- Alunos presídios (homens) - novo.xlsx";
 
 	private static final Pattern NOME_ALUNO_PATTERN = Pattern.compile("([A-ZÀ-Û .]+)");
 
@@ -46,12 +49,19 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 	@Autowired
 	private AlunoRepository alunoRepository;
 
+	@Autowired
+	private ControleImportacaoRepository controleImportacaoRepository;
+
 	@Override
 	public void importAlunosPresidiosFromXLSXFile(InputStream stream, String fileName)
 			throws IOException, BusinessException {
-		
+
 		final Sexo sexo = obterGeneroPeloNomeDoArquivo(fileName);
-		
+
+		final TipoImportacao tipoImportacao = obterTipoImportacao(sexo);
+
+		validarImportacao(tipoImportacao);
+
 		try (Workbook workbook = new XSSFWorkbook(stream)) {
 
 			for (Sheet sheet : workbook) {
@@ -76,6 +86,8 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 				}
 			}
 
+			controleImportacaoRepository.save(ControleImportacao.builder().withTipoImportacao(tipoImportacao).build());
+
 		} catch (IOException e) {
 			LOGGER.error("Erro inesperado ao processar o arquivo", e);
 			throw e;
@@ -98,7 +110,20 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 
 		} else {
 
-			throw new BusinessException("erro.aluno.presidio.nome.arquivo");
+			throw new BusinessException("erro.aluno.presidio.importacao.nome.arquivo");
+		}
+	}
+
+	private TipoImportacao obterTipoImportacao(Sexo sexo) {
+
+		return sexo.equals(Sexo.F) ? TipoImportacao.ALUNAS_PRESIDIOS : TipoImportacao.ALUNOS_PRESIDIOS;
+	}
+
+	private void validarImportacao(TipoImportacao tipoImportacao) throws BusinessException {
+
+		if (controleImportacaoRepository.existsByTipoImportacao(tipoImportacao)) {
+
+			throw new BusinessException("erro.aluno.presidio.importacao.tipo.importado");
 		}
 	}
 
@@ -130,7 +155,7 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 	private Integer obterRaio(Row row) {
 
 		matcher = RAIO_ALUNO_PATTERN.matcher(getCellValue(row, 2));
-		
+
 		return matcher.matches() ? Integer.valueOf(matcher.group(1)) : null;
 	}
 

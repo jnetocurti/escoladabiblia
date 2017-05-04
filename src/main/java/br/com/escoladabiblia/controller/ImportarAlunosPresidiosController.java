@@ -36,7 +36,7 @@ public class ImportarAlunosPresidiosController extends BaseController {
 			importacaoAlunosPresidios.importAlunosPresidiosFromXLSXFile(file.getInputStream(), file.getOriginalFilename());
 
 			redirectAttributes.addFlashAttribute("message",
-					super.getSuccessMessage("sucesso.aluno.presidio.importado").getMessage());
+					super.getSuccessMessage("sucesso.aluno.presidio.importacao.importado").getMessage());
 
 		} catch (BusinessException e) {
 

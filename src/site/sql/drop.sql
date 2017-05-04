@@ -10,6 +10,7 @@ alter table presidios drop constraint endereco_fk
 drop table if exists alunos cascade
 drop table if exists atividades_estudo cascade
 drop table if exists caracterizacoes cascade
+drop table if exists controle_importacoes cascade
 drop table if exists enderecos cascade
 drop table if exists estados cascade
 drop table if exists materiais_estudo cascade
