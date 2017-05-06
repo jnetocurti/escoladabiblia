@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import javax.annotation.Generated;
 
 @Entity
 @Table(name = "postagens")
@@ -54,6 +54,14 @@ public class Postagem implements Serializable {
 	@OneToMany(mappedBy = "postagem", cascade = { CascadeType.ALL })
 	private List<AtividadeEstudo> atividadesEstudo = new ArrayList<>();
 
+	@JsonInclude(value = Include.NON_EMPTY)
+	@OneToMany(mappedBy = "postagem", cascade = { CascadeType.ALL })
+	private List<BibliaEnviada> bibliasEnviadas = new ArrayList<>();
+
+	@JsonInclude(value = Include.NON_EMPTY)
+	@OneToMany(mappedBy = "postagem", cascade = { CascadeType.ALL })
+	private List<CertificadoEnviado> certificadosEnviados = new ArrayList<>();
+
 	public Postagem() {
 	}
 
@@ -61,7 +69,6 @@ public class Postagem implements Serializable {
 	private Postagem(Builder builder) {
 		this.id = builder.id;
 		this.dataPrevistaEnvio = builder.dataPrevistaEnvio;
-		this.dataEfetivaEnvio = builder.dataEfetivaEnvio;
 	}
 
 	public Long getId() {
@@ -94,8 +101,12 @@ public class Postagem implements Serializable {
 		return atividadesEstudo;
 	}
 
-	public void setAtividadesEstudo(List<AtividadeEstudo> atividadesEstudo) {
-		this.atividadesEstudo = atividadesEstudo;
+	public List<BibliaEnviada> getBibliasEnviadas() {
+		return bibliasEnviadas;
+	}
+
+	public List<CertificadoEnviado> getCertificadosEnviados() {
+		return certificadosEnviados;
 	}
 
 	@Transient
@@ -151,7 +162,6 @@ public class Postagem implements Serializable {
 	public static final class Builder {
 		private Long id;
 		private Calendar dataPrevistaEnvio;
-		private Calendar dataEfetivaEnvio;
 
 		private Builder() {
 		}
@@ -163,11 +173,6 @@ public class Postagem implements Serializable {
 
 		public Builder withDataPrevistaEnvio(Calendar dataPrevistaEnvio) {
 			this.dataPrevistaEnvio = dataPrevistaEnvio;
-			return this;
-		}
-
-		public Builder withDataEfetivaEnvio(Calendar dataEfetivaEnvio) {
-			this.dataEfetivaEnvio = dataEfetivaEnvio;
 			return this;
 		}
 

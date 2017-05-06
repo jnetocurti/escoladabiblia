@@ -41,12 +41,6 @@ public class AtividadeEstudo implements Serializable {
 	@Column(name = "nota")
 	private Float nota;
 
-	@Column(name = "envio_certificado")
-	private boolean envioCertificado;
-
-	@Column(name = "envio_biblia")
-	private boolean envioBiblia;
-
 	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "aluno_id", nullable = false, foreignKey = @ForeignKey(name = "aluno_fk"))
@@ -61,16 +55,18 @@ public class AtividadeEstudo implements Serializable {
 	@JoinColumn(name = "material_id", nullable = false, foreignKey = @ForeignKey(name = "material_fk"))
 	private MaterialEstudo material;
 
+	@OneToOne(mappedBy = "atividadeEstudo")
+	private CertificadoEnviado certificado;
+
+	@OneToOne(mappedBy = "atividadeEstudo")
+	private BibliaEnviada biblia;
+
 	public AtividadeEstudo() {
 	}
 
 	@Generated("SparkTools")
 	private AtividadeEstudo(Builder builder) {
 		this.id = builder.id;
-		this.dataRetornoEstudo = builder.dataRetornoEstudo;
-		this.nota = builder.nota;
-		this.envioCertificado = builder.envioCertificado;
-		this.envioBiblia = builder.envioBiblia;
 		this.aluno = builder.aluno;
 		this.postagem = builder.postagem;
 		this.material = builder.material;
@@ -98,22 +94,6 @@ public class AtividadeEstudo implements Serializable {
 
 	public void setNota(Float nota) {
 		this.nota = nota;
-	}
-
-	public boolean isEnvioCertificado() {
-		return envioCertificado;
-	}
-
-	public void setEnvioCertificado(boolean envioCertificado) {
-		this.envioCertificado = envioCertificado;
-	}
-
-	public boolean isEnvioBiblia() {
-		return envioBiblia;
-	}
-
-	public void setEnvioBiblia(boolean envioBiblia) {
-		this.envioBiblia = envioBiblia;
 	}
 
 	public Aluno getAluno() {
@@ -192,10 +172,6 @@ public class AtividadeEstudo implements Serializable {
 	@Generated("SparkTools")
 	public static final class Builder {
 		private Long id;
-		private Calendar dataRetornoEstudo;
-		private Float nota;
-		private boolean envioCertificado;
-		private boolean envioBiblia;
 		private Aluno aluno;
 		private Postagem postagem;
 		private MaterialEstudo material;
@@ -205,26 +181,6 @@ public class AtividadeEstudo implements Serializable {
 
 		public Builder withId(Long id) {
 			this.id = id;
-			return this;
-		}
-
-		public Builder withDataRetornoEstudo(Calendar dataRetornoEstudo) {
-			this.dataRetornoEstudo = dataRetornoEstudo;
-			return this;
-		}
-
-		public Builder withNota(Float nota) {
-			this.nota = nota;
-			return this;
-		}
-
-		public Builder withEnvioCertificado(boolean envioCertificado) {
-			this.envioCertificado = envioCertificado;
-			return this;
-		}
-
-		public Builder withEnvioBiblia(boolean envioBiblia) {
-			this.envioBiblia = envioBiblia;
 			return this;
 		}
 

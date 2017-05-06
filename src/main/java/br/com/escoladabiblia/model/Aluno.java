@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -78,6 +79,7 @@ public class Aluno implements Serializable {
 	private List<Caracterizacao> caracterizacoes = new ArrayList<>();
 
 	@JsonInclude(value = Include.NON_EMPTY)
+	@OrderBy(value = "id")
 	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
 	private List<AtividadeEstudo> atividadesEstudo = new ArrayList<>();
 

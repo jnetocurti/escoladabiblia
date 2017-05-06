@@ -37,16 +37,10 @@ public class MaterialEstudo implements Serializable {
 	@Column(name = "numero_ordem", nullable = false)
 	private Integer numeroOrdem;
 
-	@Column(name = "envia_certificado", nullable = false)
-	private boolean enviaCertificado;
-
 	@NotNull
 	@Convert(converter = TipoEnvelopeConverter.class)
 	@Column(name = "tipo_envelope", nullable = false)
 	private TipoEnvelope tipoEnvelope;
-
-	@Column(name = "qtd_estoque", nullable = false, columnDefinition = "integer default 0")
-	private Integer qtdEstoque;
 
 	public MaterialEstudo() {
 	}
@@ -56,9 +50,7 @@ public class MaterialEstudo implements Serializable {
 		this.id = builder.id;
 		this.nome = builder.nome;
 		this.numeroOrdem = builder.numeroOrdem;
-		this.enviaCertificado = builder.enviaCertificado;
 		this.tipoEnvelope = builder.tipoEnvelope;
-		this.qtdEstoque = builder.qtdEstoque;
 	}
 
 	public Long getId() {
@@ -85,28 +77,12 @@ public class MaterialEstudo implements Serializable {
 		this.numeroOrdem = numeroOrdem;
 	}
 
-	public boolean isEnviaCertificado() {
-		return enviaCertificado;
-	}
-
-	public void setEnviaCertificado(boolean enviaCertificado) {
-		this.enviaCertificado = enviaCertificado;
-	}
-
 	public TipoEnvelope getTipoEnvelope() {
 		return tipoEnvelope;
 	}
 
 	public void setTipoEnvelope(TipoEnvelope tipoEnvelope) {
 		this.tipoEnvelope = tipoEnvelope;
-	}
-
-	public Integer getQtdEstoque() {
-		return qtdEstoque;
-	}
-
-	public void setQtdEstoque(Integer qtdEstoque) {
-		this.qtdEstoque = qtdEstoque;
 	}
 
 	@Override
@@ -157,9 +133,7 @@ public class MaterialEstudo implements Serializable {
 		private Long id;
 		private String nome;
 		private Integer numeroOrdem;
-		private boolean enviaCertificado;
 		private TipoEnvelope tipoEnvelope;
-		private Integer qtdEstoque;
 
 		private Builder() {
 		}
@@ -179,18 +153,8 @@ public class MaterialEstudo implements Serializable {
 			return this;
 		}
 
-		public Builder withEnviaCertificado(boolean enviaCertificado) {
-			this.enviaCertificado = enviaCertificado;
-			return this;
-		}
-
 		public Builder withTipoEnvelope(TipoEnvelope tipoEnvelope) {
 			this.tipoEnvelope = tipoEnvelope;
-			return this;
-		}
-
-		public Builder withQtdEstoque(Integer qtdEstoque) {
-			this.qtdEstoque = qtdEstoque;
 			return this;
 		}
 

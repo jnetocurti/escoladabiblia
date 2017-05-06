@@ -222,18 +222,17 @@
     <ownedAttribute xmi:id="_a3ahQBQIEeeJMetIJl5ejg" name="nota" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_fu7CwBQIEeeJMetIJl5ejg" name="envioCertificado" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_p6AWsBQIEeeJMetIJl5ejg" name="envioBiblia" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_1pSBQBQIEeeJMetIJl5ejg" name="observacao" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#String"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="_HhOTMBQJEeeJMetIJl5ejg" name="aluno" visibility="public" type="_CYTD4BNAEeeT3fti3uGRbA"/>
     <ownedAttribute xmi:id="_GCCTkCCaEeeOyoCkx9RtVQ" name="postagem" visibility="public" type="_UIGXUBQNEeeJMetIJl5ejg"/>
     <ownedAttribute xmi:id="_HsyNgBQKEeeJMetIJl5ejg" name="materialEstudo" visibility="public" type="_mWeJEBQJEeeJMetIJl5ejg"/>
+    <ownedAttribute xmi:id="_Wi4fkDKJEeeV0tJ1sTzQiw" name="certificado" visibility="public" type="_hbujUDKHEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Wi4fkTKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Wi4fkjKJEeeV0tJ1sTzQiw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_Wi4fkzKJEeeV0tJ1sTzQiw" name="biblia" visibility="public" type="_MKCR4DKIEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Wi4flDKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Wi4flTKJEeeV0tJ1sTzQiw" value="1"/>
+    </ownedAttribute>
     <ownedOperation xmi:id="_7B8vEBQIEeeJMetIJl5ejg" name="getters"/>
     <ownedOperation xmi:id="_8hPXkBQIEeeJMetIJl5ejg" name="setters"/>
   </packagedElement>
@@ -247,13 +246,7 @@
     <ownedAttribute xmi:id="_zRqwgB8HEeerSfBs_xE8Rg" name="numeroOrdem" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Integer"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_vGPVkBQJEeeJMetIJl5ejg" name="enviaCertificado" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="_oBXDUCCbEeeOyoCkx9RtVQ" name="tipoEnvelope" visibility="public" type="_7Fdb0CCaEeeOyoCkx9RtVQ"/>
-    <ownedAttribute xmi:id="_3De48BQJEeeJMetIJl5ejg" name="qtdEstoque" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Integer"/>
-    </ownedAttribute>
     <ownedOperation xmi:id="_FAhbkBQKEeeJMetIJl5ejg" name="getters"/>
     <ownedOperation xmi:id="_FAiCoBQKEeeJMetIJl5ejg" name="setters"/>
   </packagedElement>
@@ -267,9 +260,17 @@
     <ownedAttribute xmi:id="_ej1WYBQNEeeJMetIJl5ejg" name="dataEfetivaEnvio" visibility="public">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Date"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_z15k0BQYEeeJMetIJl5ejg" name="AtividadesEstudo" visibility="public" type="_5r3iYBQHEeeJMetIJl5ejg">
+    <ownedAttribute xmi:id="_z15k0BQYEeeJMetIJl5ejg" name="atividadesEstudo" visibility="public" type="_5r3iYBQHEeeJMetIJl5ejg">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_46pREBQYEeeJMetIJl5ejg"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4lJiMBQYEeeJMetIJl5ejg" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_veT30DKIEeeV0tJ1sTzQiw" name="bibliasEnviadas" visibility="public" type="_MKCR4DKIEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ysuUkDKIEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xobmADKIEeeV0tJ1sTzQiw" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_4ulJUDKIEeeV0tJ1sTzQiw" name="certificadosEnviados" visibility="public" type="_hbujUDKHEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__Pf4oDKIEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__veZMDKIEeeV0tJ1sTzQiw" value="*"/>
     </ownedAttribute>
     <ownedOperation xmi:id="_opwdgBQNEeeJMetIJl5ejg" name="getters"/>
     <ownedOperation xmi:id="_opwdgRQNEeeJMetIJl5ejg" name="setters"/>
@@ -336,6 +337,64 @@
     <ownedEnd xmi:id="_fZkHESCbEeeOyoCkx9RtVQ" name="tipoEnvelopes" type="_7Fdb0CCaEeeOyoCkx9RtVQ" association="_fZjgACCbEeeOyoCkx9RtVQ">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fZkHEiCbEeeOyoCkx9RtVQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fZkHEyCbEeeOyoCkx9RtVQ" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_hbujUDKHEeeV0tJ1sTzQiw" name="CertificadoEnviado">
+    <ownedAttribute xmi:id="_k2PiYDKHEeeV0tJ1sTzQiw" name="id" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Long"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_xPev8DKHEeeV0tJ1sTzQiw" name="postagem" visibility="public" type="_UIGXUBQNEeeJMetIJl5ejg"/>
+    <ownedAttribute xmi:id="_rQclsDKHEeeV0tJ1sTzQiw" name="atividadeEstudo" visibility="public" type="_5r3iYBQHEeeJMetIJl5ejg"/>
+    <ownedOperation xmi:id="_5y-bADKHEeeV0tJ1sTzQiw" name="getters"/>
+    <ownedOperation xmi:id="_5y-bATKHEeeV0tJ1sTzQiw" name="setters"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_MKCR4DKIEeeV0tJ1sTzQiw" name="BibliaEnviada">
+    <ownedAttribute xmi:id="_QsABMjKIEeeV0tJ1sTzQiw" name="id" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Long"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_QsABMDKIEeeV0tJ1sTzQiw" name="postagem" visibility="public" type="_UIGXUBQNEeeJMetIJl5ejg"/>
+    <ownedAttribute xmi:id="_QsABMTKIEeeV0tJ1sTzQiw" name="atividadeEstudo" visibility="public" type="_5r3iYBQHEeeJMetIJl5ejg"/>
+    <ownedOperation xmi:id="_Qr-zEDKIEeeV0tJ1sTzQiw" name="getters"/>
+    <ownedOperation xmi:id="_Qr-zETKIEeeV0tJ1sTzQiw" name="setters"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mbf-EDKJEeeV0tJ1sTzQiw" memberEnd="_mbglIDKJEeeV0tJ1sTzQiw _mbhzQjKJEeeV0tJ1sTzQiw" navigableOwnedEnd="_mbhzQjKJEeeV0tJ1sTzQiw">
+    <ownedEnd xmi:id="_mbglIDKJEeeV0tJ1sTzQiw" name="atividadeEstudos" type="_5r3iYBQHEeeJMetIJl5ejg" association="_mbf-EDKJEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mbhzQDKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mbhzQTKJEeeV0tJ1sTzQiw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_mbhzQjKJEeeV0tJ1sTzQiw" name="certificadoEnviados" type="_hbujUDKHEeeV0tJ1sTzQiw" aggregation="composite" association="_mbf-EDKJEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mbiaUDKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mbiaUTKJEeeV0tJ1sTzQiw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_omq1IDKJEeeV0tJ1sTzQiw" memberEnd="_omrcMDKJEeeV0tJ1sTzQiw _omtRYDKJEeeV0tJ1sTzQiw" navigableOwnedEnd="_omtRYDKJEeeV0tJ1sTzQiw">
+    <ownedEnd xmi:id="_omrcMDKJEeeV0tJ1sTzQiw" name="postagems" type="_UIGXUBQNEeeJMetIJl5ejg" association="_omq1IDKJEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_omsDQDKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_omsqUDKJEeeV0tJ1sTzQiw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_omtRYDKJEeeV0tJ1sTzQiw" name="certificadoEnviados" type="_hbujUDKHEeeV0tJ1sTzQiw" aggregation="composite" association="_omq1IDKJEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_omt4cDKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_omt4cTKJEeeV0tJ1sTzQiw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_u1XMADKJEeeV0tJ1sTzQiw" memberEnd="_u1YaIDKJEeeV0tJ1sTzQiw _u1a2YDKJEeeV0tJ1sTzQiw" navigableOwnedEnd="_u1a2YDKJEeeV0tJ1sTzQiw">
+    <ownedEnd xmi:id="_u1YaIDKJEeeV0tJ1sTzQiw" name="atividadeEstudos" type="_5r3iYBQHEeeJMetIJl5ejg" association="_u1XMADKJEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_u1ZoQDKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_u1aPUDKJEeeV0tJ1sTzQiw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_u1a2YDKJEeeV0tJ1sTzQiw" name="bibliaEnviadas" type="_MKCR4DKIEeeV0tJ1sTzQiw" aggregation="composite" association="_u1XMADKJEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_u1bdcDKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_u1cEgDKJEeeV0tJ1sTzQiw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_z9T9QDKJEeeV0tJ1sTzQiw" memberEnd="_z9UkUDKJEeeV0tJ1sTzQiw _z9VycDKJEeeV0tJ1sTzQiw" navigableOwnedEnd="_z9VycDKJEeeV0tJ1sTzQiw">
+    <ownedEnd xmi:id="_z9UkUDKJEeeV0tJ1sTzQiw" name="postagems" type="_UIGXUBQNEeeJMetIJl5ejg" association="_z9T9QDKJEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_z9VLYDKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_z9VLYTKJEeeV0tJ1sTzQiw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_z9VycDKJEeeV0tJ1sTzQiw" name="bibliaEnviadas" type="_MKCR4DKIEeeV0tJ1sTzQiw" aggregation="composite" association="_z9T9QDKJEeeV0tJ1sTzQiw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_z9VycTKJEeeV0tJ1sTzQiw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_z9WZgDKJEeeV0tJ1sTzQiw" value="*"/>
     </ownedEnd>
   </packagedElement>
 </uml:Model>

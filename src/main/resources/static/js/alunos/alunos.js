@@ -75,11 +75,11 @@ Sandbox('*', function(box) {
 					"material" : function(column, row) {
 						return row.material.nome;
 					},
-					"envioCertificado" : function(column, row) {
-						return row.envioCertificado ? 'Sim' : row.material.enviaCertificado ? 'Sim' : 'Não';
+					"certificado" : function(column, row) {
+						return _.isUndefined(row.certificado) ? '-' : 'Sim';
 					},
-					"envioBiblia" : function(column, row) {
-						return row.envioBiblia ? 'Sim' : 'Não';
+					"biblia" : function(column, row) {
+						return _.isUndefined(row.biblia) ? '-' : 'Sim';
 					},
 					"commands" : function(column, row) {
 						return box.smallGridButton(column, row, "command-edit-atividades", "fa-pencil");
