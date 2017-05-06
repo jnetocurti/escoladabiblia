@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Presidiario;
+import br.com.escoladabiblia.repository.MaterialEstudoRepository;
 import br.com.escoladabiblia.service.AlunoService;
 import br.com.escoladabiblia.service.PresidioService;
 import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
@@ -30,6 +31,9 @@ public class AlunosPresidiosController extends BaseController {
 
 	@Autowired
 	private PresidioService presidioService;
+	
+	@Autowired
+	private MaterialEstudoRepository materialEstudoRepository;
 
 	@GetMapping({ "", "/" })
 	public String index(Model model) {
@@ -37,6 +41,7 @@ public class AlunosPresidiosController extends BaseController {
 		model.addAttribute("aluno", Aluno.builder().build());
 		model.addAttribute("presidiario", Presidiario.builder().build());
 		model.addAttribute("presidios", presidioService.findAll());
+		model.addAttribute("materiais", materialEstudoRepository.findAll());
 
 		return "alunos/presidios/index";
 	}

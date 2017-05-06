@@ -1,11 +1,8 @@
 package br.com.escoladabiblia.util.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import br.com.escoladabiblia.model.Aluno;
-import br.com.escoladabiblia.model.MaterialEstudo;
 import br.com.escoladabiblia.model.Postagem;
 
 public class AtividadesEstudoEdicaoDTO implements Serializable {
@@ -19,8 +16,6 @@ public class AtividadesEstudoEdicaoDTO implements Serializable {
 
 	private final Postagem postagem;
 
-	private List<MaterialEstudo> materiais = new ArrayList<>();
-
 	public AtividadesEstudoEdicaoDTO(Aluno aluno, Postagem postagem) {
 		this.aluno = aluno;
 		this.postagem = postagem;
@@ -32,10 +27,6 @@ public class AtividadesEstudoEdicaoDTO implements Serializable {
 
 	public Postagem getPostagem() {
 		return postagem;
-	}
-
-	public List<MaterialEstudo> getMateriais() {
-		return materiais;
 	}
 
 }

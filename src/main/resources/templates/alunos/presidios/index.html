@@ -17,7 +17,7 @@
 		
 			<div th:replace="alunos/presidios/grid-alunos"></div>
 			
-			<button type="button" class="pull-right btn btn-default btn-primary novo-aluno">Novo</button>
+			<button type="button" class="pull-right btn btn-success novo-aluno">Novo</button>
 		</div>
 
 		<div class="area-form-alunos hide">
@@ -35,8 +35,8 @@
 				</div>
 				
 				<div class="form-group col-md-12 area-buttons">
-					<button id="save-aluno" type="button" class="pull-right btn btn-default btn-primary">Salvar</button>
-					<button type="button" class="pull-right btn btn-default btn-primary cancelar">Cancelar</button>
+					<button id="save-aluno" type="button" class="pull-right btn btn-success">Salvar</button>
+					<button type="button" class="pull-right btn btn-primary cancelar">Cancelar</button>
 				</div>
 				
 			</form>
@@ -50,6 +50,23 @@
 			
 			<div class="form-group col-md-12 area-buttons">
 				<button type="button" class="pull-right btn btn-default btn-primary cancelar">Cancelar</button>
+			</div>
+		
+		</div>
+		
+		<div class="area-cadastro-historico-atividades hide">
+		
+			<h3>Cadastro histórico atividades do aluno</h3>
+			
+			<div th:replace="alunos/common-fragments/historico-atividades-estudos"></div>
+			
+			<div class="form-group col-md-12">
+				<hr class="separator"></hr>
+			</div>
+			
+			<div class="form-group col-md-12 area-buttons">
+				<button id="save-historico-atividades" type="button" class="pull-right btn btn-success">Salvar</button>
+				<button type="button" class="pull-right btn btn-primary cancelar">Cancelar</button>
 			</div>
 		
 		</div>

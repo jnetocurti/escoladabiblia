@@ -6,7 +6,7 @@ Sandbox('*', function(box) {
 	});
 	
 	box.eventClick('.cancelar', function() {
-		box.switchArea('.area-form-alunos,.area-atualizacao-atividades', '.area-grid-alunos');
+		box.switchArea('.area-form-alunos,.area-atualizacao-atividades,.area-cadastro-historico-atividades', '.area-grid-alunos');
 	});
 	
 	box.eventClick('#save-aluno', function() {
@@ -25,24 +25,25 @@ Sandbox('*', function(box) {
 		{
 			formatters: {
 				"commands": function(column, row) {
-					return box.smallGridButton(column, row, "command-activities", "fa-graduation-cap")
-						 + box.smallGridButton(column, row, "command-edit", "fa-pencil")
-						 + box.smallGridButton(column, row, "command-delete", "fa-trash-o");
+					return box.smallGridButton(column, row, "command-edit", "fa-pencil")
+						 + box.smallGridButton(column, row, "command-activities", "fa-graduation-cap")
+						 + box.smallGridButton(column, row, "command-historic", "fa-history");
 				}
 			},
 			
 			callbacks : function() {
 				
-				box.eventClick('.command-activities', function() {
-					gerenciarAtividadesEstudo($(this).data("row-id"));
-				});
-				
 				box.eventClick('.command-edit', function() {
 					editar($(this).data("row-id"));
 				});
 				
-				box.eventClick('.command-delete', function() {
-					alert($(this).data("row-id"));
+				box.eventClick('.command-activities', function() {
+					gerenciarAtividadesEstudo($(this).data("row-id"));
+				});
+				
+				box.eventClick('.command-historic', function() {
+
+					box.switchArea('.area-grid-alunos', '.area-cadastro-historico-atividades');
 				});
 			}
 		}
@@ -57,24 +58,12 @@ Sandbox('*', function(box) {
 				box.text('#nome-aluno', data.aluno.nome);
 				box.set('#id-postagem', data.postagem.id);
 				box.set('#data-proximo-envio', data.postagem.dataPrevistaEnvio);
-				
-				loadComboMateriais(data);
+				box.set('#materiais-disponiveis', '');
 				
 				loadGridAtividadesEstudo(data);
 				
 				box.switchArea('.area-grid-alunos', '.area-atualizacao-atividades');
 			}
-		});
-	};
-	
-	loadComboMateriais = function(data) {
-		
-		var $materiais = $('#materiais-disponiveis');
-		
-		box.clearSelect($materiais);
-		
-		$(data.materiais).each(function() {
-			box.addOption($materiais, this.id, this.nome);
 		});
 	};
 	
@@ -101,7 +90,6 @@ Sandbox('*', function(box) {
 					box.eventClick('.command-edit-atividades', function() {
 						
 						$('#modal-edicao-atividade').modal('show');
-//						editar($(this).data("row-id"));
 					});
 				}
 			}
@@ -118,7 +106,7 @@ Sandbox('*', function(box) {
 			
 			box.showMsg({type: 'SUCCESS', message: 'Atividade cadastrada com sucesso!'});
 			
-			loadComboMateriais(data);
+			box.set('#materiais-disponiveis', '');
 			
 			loadGridAtividadesEstudo(data);
 		}

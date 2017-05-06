@@ -42,8 +42,6 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 
 		final AtividadesEstudoEdicaoDTO edicao = new AtividadesEstudoEdicaoDTO(aluno, postagem);
 
-		edicao.getMateriais().addAll(materialEstudoRepository.findAll());
-
 		return edicao;
 	}
 
@@ -53,7 +51,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 		final AtividadeEstudo atividadeEstudo = new AtividadeEstudo();
 
 		atividadeEstudo.setAluno(Aluno.builder().withId(idAluno).build());
-
+		
 		atividadeEstudo.setPostagem(postagemRepository.findOne(idPostagem));
 
 		atividadeEstudo.setMaterial(materialEstudoRepository.findOne(idMaterial));

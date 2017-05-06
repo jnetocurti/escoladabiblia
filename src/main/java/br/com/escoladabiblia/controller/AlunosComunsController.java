@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.repository.EstadoRepository;
+import br.com.escoladabiblia.repository.MaterialEstudoRepository;
 import br.com.escoladabiblia.service.AlunoService;
 import br.com.escoladabiblia.util.dto.AlunoComumDTO;
 import br.com.escoladabiblia.util.dto.MessageDTO;
@@ -28,14 +29,17 @@ public class AlunosComunsController extends BaseController {
 	private AlunoService alunoService;
 	
 	@Autowired
-	private EstadoRepository estadoRepository; 
+	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private MaterialEstudoRepository materialEstudoRepository;
 
 	@GetMapping({ "", "/" })
 	public String index(Model model) {
 
 		model.addAttribute("aluno", Aluno.builder().build());
-
 		model.addAttribute("estados", estadoRepository.findAll());
+		model.addAttribute("materiais", materialEstudoRepository.findAll());
 
 		return "alunos/comuns/index";
 	}

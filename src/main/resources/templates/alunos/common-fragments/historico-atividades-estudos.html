@@ -1,0 +1,46 @@
+<div th:fragment="historico-atividades-estudos" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+
+	<form id="atividades-estudos-form" class="form-inline" th:action="@{/atividades-estudo/adicionar-atividade}" method="post">
+
+		<div class="form-group col-md-12">
+			<p><strong>Aluno: </strong><span id="nome-aluno"></span></p>
+		</div>
+		
+		<div class="form-group col-md-3">
+			<label for="data-envio">Data envio</label> 
+			<input id="data-envio" name="dataProximoEnvio" class="form-control" data-inputmask="'alias': 'data'" />
+		</div>
+		
+		<div class="form-group col-md-3">
+			<label for="data-envio">Data retorno</label> 
+			<input id="data-envio" name="dataProximoEnvio" class="form-control" data-inputmask="'alias': 'data'" />
+		</div>
+		
+		<div class="form-group col-md-3">
+			<label for="data-envio">Envio de certificado</label> 
+			<input id="data-envio" name="dataProximoEnvio" class="form-control" data-inputmask="'alias': 'data'" />
+		</div>
+		
+		<div class="form-group col-md-3">
+			<label for="data-envio">Envio de bíblia</label> 
+			<input id="data-envio" name="dataProximoEnvio" class="form-control" data-inputmask="'alias': 'data'" />
+		</div>
+		
+		<div class="form-group col-md-6">
+			<label for="presidio">Material de estudo</label>
+			<div>
+		    	<select class="form-control" id="presidio">
+		    		<option th:value="${null}" th:text="Selecione"></option>
+					<option th:each="material : ${materiais}" th:value="${material.id}" th:text="${material.nome}"></option>
+				</select>
+	    	</div>
+		</div>
+		
+		<div class="form-group col-md-1">
+			<label for="data-envio">Nota</label> 
+			<input id="data-envio" name="dataProximoEnvio" class="form-control" />
+		</div>
+
+	</form>
+
+</div>
