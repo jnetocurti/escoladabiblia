@@ -58,5 +58,22 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 
 		atividadeEstudoRepository.save(atividadeEstudo);
 	}
+	
+	@Override
+	public AtividadeEstudo obterAtividadePorId(Long id) {
+
+		return atividadeEstudoRepository.findOne(id);
+	}
+
+	@Override
+	public void deletarAtividade(AtividadeEstudo atividadeEstudo) throws BusinessException {
+
+		if (atividadeEstudo.isPostagemEncerrada()) {
+
+			throw new BusinessException("erro.atividade.estudo.deletar.postagem.encerrada");
+		}
+
+		atividadeEstudoRepository.delete(atividadeEstudo);
+	}
 
 }

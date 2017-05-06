@@ -124,6 +124,11 @@ public class AtividadeEstudo implements Serializable {
 	public Calendar getDataEnvioEstudo() {
 		return postagem.getDataPrevistaEnvio();
 	}
+	
+	@Transient
+	public boolean isPostagemEncerrada() {
+		return postagem.getDataEfetivaEnvio() != null;
+	}
 
 	@Override
 	public int hashCode() {

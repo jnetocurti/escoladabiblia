@@ -76,24 +76,57 @@ Sandbox('*', function(box) {
 						return row.material.nome;
 					},
 					"certificado" : function(column, row) {
-						return _.isUndefined(row.certificado) ? '-' : 'Sim';
+						return _.isUndefined(row.certificado) ? '' : 'Sim';
 					},
 					"biblia" : function(column, row) {
-						return _.isUndefined(row.biblia) ? '-' : 'Sim';
+						return _.isUndefined(row.biblia) ? '' : 'Sim';
 					},
 					"commands" : function(column, row) {
-						return box.smallGridButton(column, row, "command-edit-atividades", "fa-pencil");
+						return getCommandsGridAtividadesEstudo(column, row);
 					}
 				},
 				callbacks : function() {
 					
-					box.eventClick('.command-edit-atividades', function() {
+					box.eventClick('.command-edit-atividade', function() {
 						
 						$('#modal-edicao-atividade').modal('show');
+					});
+					
+					box.eventClick('.command-delete-atividades', function() {
+						
+						box.set('#id-atividade-excluir', $(this).data("row-id"));
+						
+						$('#modal-deletar-atividade').modal('show');
 					});
 				}
 			}
 		);
+	};
+	
+	box.eventClick('#deletar-atividade', function() {
+		box.submitForm('#deletar-atividade-estudo-form');
+	});
+	
+	box.postForm('#deletar-atividade-estudo-form', {
+		success : function(data) {
+			box.showMsg({type: 'SUCCESS', message: 'Atividade excluida com sucesso!'});
+			loadGridAtividadesEstudo(data);
+		}
+	});
+	
+	getCommandsGridAtividadesEstudo = function(column, row) {
+		
+		var commands = '';
+		
+		if (row.postagemEncerrada) {
+			commands += box.smallGridButton(column, row, "command-edit-atividade", "fa-pencil");
+		}
+		
+		if (!row.postagemEncerrada) {
+			commands += box.smallGridButton(column, row, "command-delete-atividades", "fa-trash");
+		}
+		
+		return commands;
 	};
 	
 	box.eventClick('#add-atividade-estudo', function() {
