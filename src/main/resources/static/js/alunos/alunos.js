@@ -60,6 +60,10 @@ Sandbox('*', function(box) {
 				box.set('#data-proximo-envio', data.postagem.dataPrevistaEnvio);
 				box.set('#materiais-disponiveis', '');
 				
+				// Para posterior edição de alguma atividade
+				box.text('#certificado option[value=true]', data.postagem.dataPrevistaEnvio);
+				box.text('#biblia option[value=true]', data.postagem.dataPrevistaEnvio);
+				
 				loadGridAtividadesEstudo(data);
 				
 				box.switchArea('.area-grid-alunos', '.area-atualizacao-atividades');
@@ -76,10 +80,10 @@ Sandbox('*', function(box) {
 						return row.material.nome;
 					},
 					"certificado" : function(column, row) {
-						return _.isUndefined(row.certificado) ? '' : 'Sim';
+						return _.isNull(row.certificado) ? '' : 'Sim';
 					},
 					"biblia" : function(column, row) {
-						return _.isUndefined(row.biblia) ? '' : 'Sim';
+						return _.isNull(row.biblia) ? '' : 'Sim';
 					},
 					"commands" : function(column, row) {
 						return getCommandsGridAtividadesEstudo(column, row);
@@ -89,7 +93,7 @@ Sandbox('*', function(box) {
 					
 					box.eventClick('.command-edit-atividade', function() {
 						
-						$('#modal-edicao-atividade').modal('show');
+						editarAtividade($(this).data("row-id"));
 					});
 					
 					box.eventClick('.command-delete-atividades', function() {
@@ -102,6 +106,33 @@ Sandbox('*', function(box) {
 			}
 		);
 	};
+	
+	editarAtividade = function(id) {
+		
+		box.post(context + 'atividades-estudo/editar-atividade', id.toString(), {
+			success : function(data) {
+				box.set('#nota', data.nota);
+				box.set('#biblia', !_.isNull(data.biblia) + '');
+				box.set('#id-atividade-atualizar', data.id);
+				box.text('#nome-material', data.material.nome);
+				box.set('#data-retorno', data.dataRetornoEstudo);
+				box.set('#certificado', !_.isNull(data.certificado) + '');
+				$('#modal-edicao-atividade').modal('show');
+			}
+		});
+	};
+	
+	box.eventClick('#atualizar-atividade', function() {
+		box.submitForm('#atualizar-atividade-form');
+	});
+	
+	box.postForm('#atualizar-atividade-form', {
+		success : function(data) {
+			$('#modal-edicao-atividade').modal('hide');
+			box.showMsg({type: 'SUCCESS', message: 'Atividade atualizada com sucesso!'});
+			loadGridAtividadesEstudo(data);
+		}
+	});
 	
 	box.eventClick('#deletar-atividade', function() {
 		box.submitForm('#deletar-atividade-estudo-form');
@@ -118,12 +149,17 @@ Sandbox('*', function(box) {
 		
 		var commands = '';
 		
-		if (row.postagemEncerrada) {
-			commands += box.smallGridButton(column, row, "command-edit-atividade", "fa-pencil");
-		}
-		
 		if (!row.postagemEncerrada) {
+			
 			commands += box.smallGridButton(column, row, "command-delete-atividades", "fa-trash");
+			
+		} else if (row.postagemEncerrada) {
+			
+			commands += box.smallGridButton(column, row, "command-edit-atividade", "fa-pencil");
+			
+		} else {
+			
+			commands += box.smallGridButton(column, row, "command-visualizar-atividade", "fa-expand");
 		}
 		
 		return commands;

@@ -3,6 +3,7 @@ package br.com.escoladabiblia.model;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -55,10 +56,10 @@ public class AtividadeEstudo implements Serializable {
 	@JoinColumn(name = "material_id", nullable = false, foreignKey = @ForeignKey(name = "material_fk"))
 	private MaterialEstudo material;
 
-	@OneToOne(mappedBy = "atividadeEstudo")
+	@OneToOne(mappedBy = "atividadeEstudo", cascade = CascadeType.ALL)
 	private CertificadoEnviado certificado;
 
-	@OneToOne(mappedBy = "atividadeEstudo")
+	@OneToOne(mappedBy = "atividadeEstudo", cascade = CascadeType.ALL)
 	private BibliaEnviada biblia;
 
 	public AtividadeEstudo() {
@@ -118,6 +119,22 @@ public class AtividadeEstudo implements Serializable {
 
 	public void setMaterial(MaterialEstudo material) {
 		this.material = material;
+	}
+	
+	public CertificadoEnviado getCertificado() {
+		return certificado;
+	}
+
+	public void setCertificado(CertificadoEnviado certificado) {
+		this.certificado = certificado;
+	}
+
+	public BibliaEnviada getBiblia() {
+		return biblia;
+	}
+
+	public void setBiblia(BibliaEnviada biblia) {
+		this.biblia = biblia;
 	}
 
 	@Transient

@@ -2,14 +2,20 @@ package br.com.escoladabiblia.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.AtividadeEstudo;
+import br.com.escoladabiblia.model.BibliaEnviada;
+import br.com.escoladabiblia.model.CertificadoEnviado;
 import br.com.escoladabiblia.model.Postagem;
 import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.repository.AtividadeEstudoRepository;
+import br.com.escoladabiblia.repository.BibliaEnviadaRepository;
+import br.com.escoladabiblia.repository.CertificadoEnviadoRepository;
 import br.com.escoladabiblia.repository.MaterialEstudoRepository;
 import br.com.escoladabiblia.repository.PostagemRepository;
+import br.com.escoladabiblia.util.dto.AtividadeEstudoEdicaoDTO;
 import br.com.escoladabiblia.util.dto.AtividadesEstudoEdicaoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
 
@@ -27,6 +33,12 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 
 	@Autowired
 	private AtividadeEstudoRepository atividadeEstudoRepository;
+	
+	@Autowired
+	private CertificadoEnviadoRepository certificadoEnviadoRepository;
+	
+	@Autowired
+	private BibliaEnviadaRepository bibliaEnviadaRepository;
 
 	@Override
 	public AtividadesEstudoEdicaoDTO obterAtividadesEstudoAlunoParaEdicao(Long id) throws BusinessException {
@@ -63,6 +75,59 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	public AtividadeEstudo obterAtividadePorId(Long id) {
 
 		return atividadeEstudoRepository.findOne(id);
+	}
+
+	@Override
+	@Transactional
+	public AtividadeEstudo atualizarAtividade(AtividadeEstudoEdicaoDTO atividade) {
+
+		final Postagem postagem = postagemRepository.findLastOpen();
+
+		final AtividadeEstudo atividadeEstudo = this.obterAtividadePorId(atividade.getId());
+
+		atividadeEstudo.setDataRetornoEstudo(atividade.getDataRetornoEstudo());
+
+		atividadeEstudo.setNota(atividade.getNota());
+
+		proccessCertificado(atividade.isCertificado(), atividadeEstudo, postagem);
+
+		proccessBiblia(atividade.isBiblia(), atividadeEstudo, postagem);
+		
+		return atividadeEstudoRepository.save(atividadeEstudo);
+	}
+	
+	private void proccessCertificado(boolean isCertificado, AtividadeEstudo atividadeEstudo, Postagem postagem) {
+
+		if (isCertificado) {
+
+			if (!certificadoEnviadoRepository.existsByAtividadeEstudo_Id(atividadeEstudo.getId())) {
+
+				atividadeEstudo.setCertificado(CertificadoEnviado.builder()
+						.withAtividadeEstudo(atividadeEstudo)
+						.withPostagem(postagem).build());
+			}
+
+		} else {
+
+			certificadoEnviadoRepository.deleteByAtividadeEstudoId(atividadeEstudo.getId());
+		}
+	}
+
+	private void proccessBiblia(boolean isBiblia, AtividadeEstudo atividadeEstudo, Postagem postagem) {
+
+		if (isBiblia) {
+
+			if (!bibliaEnviadaRepository.existsByAtividadeEstudo_Id(atividadeEstudo.getId())) {
+				
+				atividadeEstudo.setBiblia(BibliaEnviada.builder()
+						.withAtividadeEstudo(atividadeEstudo)
+						.withPostagem(postagem).build());
+			}
+			
+		} else {
+
+			bibliaEnviadaRepository.deleteByAtividadeEstudoId(atividadeEstudo.getId());
+		}
 	}
 
 	@Override

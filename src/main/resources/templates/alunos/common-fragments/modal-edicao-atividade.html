@@ -1,0 +1,60 @@
+<div id="modal-edicao-atividade" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" xmlns:th="http://www.thymeleaf.org">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Atividades de Estudo do aluno</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<form id="atualizar-atividade-form" class="form-inline" th:action="@{/atividades-estudo/atualizar-atividade}" method="post">
+						
+						<input type="hidden" id="id-atividade-atualizar" name="id"></input>
+						
+						<div class="form-group col-md-12">
+							<p><strong>Atividade: </strong><span id="nome-material"></span></p>
+						</div>
+						
+						<div class="form-group col-md-5">
+							<label for="data-retorno">Data retorno</label> 
+							<input type="text" class="form-control" id="data-retorno" name="dataRetornoEstudo"
+								data-inputmask="'alias': 'data'" placeholder="Data de retorno" />
+						</div>
+						
+						<div class="form-group col-md-2">
+							<label for="nota">Nota</label>
+							<input type="text" class="form-control" id="nota" name="nota" />
+						</div>
+						
+						<div class="form-group col-md-5">
+							<label for="biblia">Envio de Bíblia</label>
+							<div>
+						    	<select class="form-control" id="biblia" name="biblia">
+						    		<option th:value="${T(java.lang.Boolean).FALSE}" th:text="Selecione"></option>
+						    		<option th:value="${T(java.lang.Boolean).TRUE}"></option>
+								</select>
+					    	</div>
+						</div>
+						
+						<div class="form-group col-md-5">
+							<label for="certificado">Envio de Certificado</label>
+							<div>
+						    	<select class="form-control" id="certificado" name="certificado">
+						    		<option th:value="${T(java.lang.Boolean).FALSE}" th:text="Selecione"></option>
+						    		<option th:value="${T(java.lang.Boolean).TRUE}"></option>
+								</select>
+					    	</div>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-success" id="atualizar-atividade">Salvar</button>
+			</div>
+		</div>
+	</div>
+</div>
