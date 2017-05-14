@@ -102,6 +102,16 @@ Sandbox('*', function(box) {
 						
 						$('#modal-deletar-atividade').modal('show');
 					});
+					
+					box.eventClick('.command-visualizar-atividade', function() {
+						
+						box.post(context + 'atividades-estudo/visualizar-atividade', $(this).data("row-id").toString(), {
+							success : function(data) {
+								$('#area-visualizacao-atividade').html(data);
+								$('#modal-visualizacao-atividade').modal('show');
+							}
+						});
+					});
 				}
 			}
 		);
@@ -153,7 +163,7 @@ Sandbox('*', function(box) {
 			
 			commands += box.smallGridButton(column, row, "command-delete-atividades", "fa-trash");
 			
-		} else if (row.postagemEncerrada) {
+		} else if (row.postagemEncerrada && !row.atividadeEncerrada) {
 			
 			commands += box.smallGridButton(column, row, "command-edit-atividade", "fa-pencil");
 			

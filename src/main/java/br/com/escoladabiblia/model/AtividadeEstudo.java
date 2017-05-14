@@ -61,6 +61,9 @@ public class AtividadeEstudo implements Serializable {
 
 	@OneToOne(mappedBy = "atividadeEstudo", cascade = CascadeType.ALL)
 	private BibliaEnviada biblia;
+	
+	@Column(name = "atividade_encerrada")
+	private boolean atividadeEncerrada;
 
 	public AtividadeEstudo() {
 	}
@@ -135,6 +138,14 @@ public class AtividadeEstudo implements Serializable {
 
 	public void setBiblia(BibliaEnviada biblia) {
 		this.biblia = biblia;
+	}
+	
+	public boolean isAtividadeEncerrada() {
+		return atividadeEncerrada;
+	}
+
+	public void setAtividadeEncerrada(boolean atividadeEncerrada) {
+		this.atividadeEncerrada = atividadeEncerrada;
 	}
 
 	@Transient

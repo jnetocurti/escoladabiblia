@@ -1,5 +1,5 @@
 create table alunos (id  bigserial not null, foi_batizado boolean, data_nascimento date, frequentou_igreja boolean, nome varchar(50) not null, observacao varchar(255), possui_biblia boolean, sexo varchar(1), endereco_id int8, primary key (id))
-create table atividades_estudo (id  bigserial not null, data_retorno_estudo date, nota float4, aluno_id int8 not null, material_id int8 not null, postagem_id int8 not null, primary key (id))
+create table atividades_estudo (id  bigserial not null, atividade_encerrada boolean, data_retorno_estudo date, nota float4, aluno_id int8 not null, material_id int8 not null, postagem_id int8 not null, primary key (id))
 create table biblias_enviadas (id  bigserial not null, atividade_estudo_id int8 not null, postagem_id int8 not null, primary key (id))
 create table caracterizacoes (id  bigserial not null, ativa boolean not null, data_registro date not null, tipo_caracterizacao varchar(50) not null, aluno_id int8, primary key (id))
 create table certificados_enviados (id  bigserial not null, atividade_estudo_id int8 not null, postagem_id int8 not null, primary key (id))

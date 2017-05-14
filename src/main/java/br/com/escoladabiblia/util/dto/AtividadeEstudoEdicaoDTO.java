@@ -1,12 +1,18 @@
 package br.com.escoladabiblia.util.dto;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class AtividadeEstudoEdicaoDTO {
+public class AtividadeEstudoEdicaoDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@NotNull
 	private Long id;
@@ -20,6 +26,8 @@ public class AtividadeEstudoEdicaoDTO {
 	private boolean certificado;
 
 	private boolean biblia;
+
+	private boolean atividadeEncerrada;
 
 	public Long getId() {
 		return id;
@@ -60,6 +68,14 @@ public class AtividadeEstudoEdicaoDTO {
 
 	public void setBiblia(boolean biblia) {
 		this.biblia = biblia;
+	}
+
+	public boolean isAtividadeEncerrada() {
+		return atividadeEncerrada;
+	}
+
+	public void setAtividadeEncerrada(boolean atividadeEncerrada) {
+		this.atividadeEncerrada = atividadeEncerrada;
 	}
 
 }

@@ -1,0 +1,46 @@
+<div id="modal-visualizacao-atividade" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" xmlns:th="http://www.thymeleaf.org">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Atividades de Estudo do aluno</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+				
+					<div class="form-group col-md-12">
+						<p><strong>Material: </strong><span th:text="${atividade.material.nome}"></span></p>
+					</div>
+					
+					<div class="form-group col-md-12">
+						<p><strong>Data de envio: </strong><span th:text="${#calendars.format(atividade.dataEnvioEstudo, 'dd/MM/yyyy')}"></span></p>
+					</div>
+					
+					<div class="form-group col-md-12">
+						<p><strong>Data de retorno: </strong><span th:text="${#calendars.format(atividade.dataRetornoEstudo, 'dd/MM/yyyy')}"></span></p>
+					</div>
+					
+					<div class="form-group col-md-12">
+						<p><strong>Nota: </strong><span th:text="${atividade.nota}"></span></p>
+					</div>
+					
+					<div class="form-group col-md-12" th:unless="${atividade.certificado == null}">
+						<p><strong>Envio de certificado: </strong>
+						<span th:text="${#calendars.format(atividade.certificado.postagem.dataPrevistaEnvio, 'dd/MM/yyyy')}"></span></p>
+					</div>
+					
+					<div class="form-group col-md-12" th:unless="${atividade.biblia == null}">
+						<p><strong>Envio de bíblia: </strong>
+						<span th:text="${#calendars.format(atividade.biblia.postagem.dataPrevistaEnvio, 'dd/MM/yyyy')}"></span></p>
+					</div>
+					
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>

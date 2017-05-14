@@ -3,6 +3,7 @@ package br.com.escoladabiblia.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.AtividadeEstudo;
@@ -81,27 +82,30 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	@Transactional
 	public AtividadeEstudo atualizarAtividade(AtividadeEstudoEdicaoDTO atividade) {
 
-		final Postagem postagem = postagemRepository.findLastOpen();
-
 		final AtividadeEstudo atividadeEstudo = this.obterAtividadePorId(atividade.getId());
 
 		atividadeEstudo.setDataRetornoEstudo(atividade.getDataRetornoEstudo());
 
 		atividadeEstudo.setNota(atividade.getNota());
+		
+		atividadeEstudo.setAtividadeEncerrada(atividade.isAtividadeEncerrada());
 
-		proccessCertificado(atividade.isCertificado(), atividadeEstudo, postagem);
+		proccessCertificado(atividade.isCertificado(), atividadeEstudo);
 
-		proccessBiblia(atividade.isBiblia(), atividadeEstudo, postagem);
+		proccessBiblia(atividade.isBiblia(), atividadeEstudo);
 		
 		return atividadeEstudoRepository.save(atividadeEstudo);
 	}
 	
-	private void proccessCertificado(boolean isCertificado, AtividadeEstudo atividadeEstudo, Postagem postagem) {
+	private void proccessCertificado(boolean isCertificado, AtividadeEstudo atividadeEstudo) {
 
 		if (isCertificado) {
 
 			if (!certificadoEnviadoRepository.existsByAtividadeEstudo_Id(atividadeEstudo.getId())) {
 
+				Postagem postagem = postagemRepository.findLastOpen();
+				Assert.notNull(postagem, "postagem não pode ser null");
+				
 				atividadeEstudo.setCertificado(CertificadoEnviado.builder()
 						.withAtividadeEstudo(atividadeEstudo)
 						.withPostagem(postagem).build());
@@ -113,11 +117,14 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 		}
 	}
 
-	private void proccessBiblia(boolean isBiblia, AtividadeEstudo atividadeEstudo, Postagem postagem) {
+	private void proccessBiblia(boolean isBiblia, AtividadeEstudo atividadeEstudo) {
 
 		if (isBiblia) {
 
 			if (!bibliaEnviadaRepository.existsByAtividadeEstudo_Id(atividadeEstudo.getId())) {
+				
+				Postagem postagem = postagemRepository.findLastOpen();
+				Assert.notNull(postagem, "postagem não pode ser null");
 				
 				atividadeEstudo.setBiblia(BibliaEnviada.builder()
 						.withAtividadeEstudo(atividadeEstudo)

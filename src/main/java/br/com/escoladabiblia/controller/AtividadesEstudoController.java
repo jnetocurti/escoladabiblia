@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,6 +67,14 @@ public class AtividadesEstudoController extends BaseController {
 		atividadesEstudoService.deletarAtividade(atividadeEstudo);
 
 		return atividadesEstudoService.obterAtividadesEstudoAlunoParaEdicao(idAluno);
+	}
+	
+	@PostMapping(path = "visualizar-atividade")
+	public String visualizarAtividade(@RequestBody Long id, Model model) {
+
+		model.addAttribute("atividade", atividadesEstudoService.obterAtividadePorId(id));
+		
+		return "alunos/common-fragments/modal-visualizacao-atividade";
 	}
 
 }
