@@ -53,10 +53,29 @@
 			</div>
 		
 		</div>
+		
+		<div class="area-cadastro-historico-atividades hide">
+		
+			<h3>Cadastro histórico atividades do aluno</h3>
+			
+			<div th:replace="alunos/common-fragments/historico-atividades-estudos"></div>
+			
+			<div class="form-group col-md-12">
+				<hr class="separator"></hr>
+			</div>
+			
+			<div class="form-group col-md-12 area-buttons">
+				<button id="save-historico-atividades" type="button" class="pull-right btn btn-success">Salvar</button>
+				<button type="button" class="pull-right btn btn-primary cancelar">Cancelar</button>
+			</div>
+		
+		</div>
 
 	</div>
 	<div layout:fragment="scripts">
 		<script th:src="@{/js/alunos/alunos.js}"></script>
 		<script th:src="@{/js/alunos/alunos-comuns.js}"></script>
+		<script th:src="@{/js/alunos/alunos-atividades-estudo.js}"></script>
+		<script th:src="@{/js/alunos/alunos-historico-atividades.js}"></script>
 	</div>
 </html>

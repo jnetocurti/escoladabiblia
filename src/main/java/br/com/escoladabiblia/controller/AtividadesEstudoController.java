@@ -21,7 +21,7 @@ import br.com.escoladabiblia.util.exception.BusinessException;
 
 @Controller
 @RequestMapping("/atividades-estudo")
-public class AtividadesEstudoController extends BaseController {
+public class AtividadesEstudoController {
 
 	@Autowired
 	private AtividadesEstudoService atividadesEstudoService;
