@@ -1,35 +1,41 @@
 <div th:fragment="historico-atividades-estudos" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
 
-	<form id="atividades-estudos-form" class="form-inline" th:action="@{/atividades-estudo/adicionar-atividade}" method="post">
+	<form id="historico-atividades-form" class="form-inline" th:action="@{/atividades-estudo/cadastrar-historico}" method="post">
+
+		<input type="hidden" id="id-aluno-historico" name="aluno"></input>
 
 		<div class="form-group col-md-12">
-			<p><strong>Aluno: </strong><span id="nome-aluno"></span></p>
+			<p><strong>Aluno: </strong><span id="nome-aluno-historico"></span></p>
 		</div>
 		
 		<div class="form-group col-md-3">
-			<label for="data-envio">Data envio</label> 
-			<input id="data-envio" name="dataProximoEnvio" class="form-control" data-inputmask="'alias': 'data'" />
+			<label for="data-envio-historico">Data envio</label> 
+			<input type="text" id="data-envio-historico" class="form-control" name="dataEnvioEstudo" data-inputmask="'alias': 'data'" 
+				placeholder="Data de envio" />
 		</div>
 		
 		<div class="form-group col-md-3">
-			<label for="data-envio">Data retorno</label> 
-			<input id="data-envio" name="dataProximoEnvio" class="form-control" data-inputmask="'alias': 'data'" />
+			<label for="data-retorno-historico">Data retorno</label> 
+			<input type="text" id="data-retorno-historico" class="form-control" name="dataRetornoEstudo" data-inputmask="'alias': 'data'" 
+				placeholder="Data de retorno" />
 		</div>
 		
 		<div class="form-group col-md-3">
-			<label for="data-envio">Envio de certificado</label> 
-			<input id="data-envio" name="dataProximoEnvio" class="form-control" data-inputmask="'alias': 'data'" />
+			<label for="data-envio-certificado-historico">Envio de certificado</label> 
+			<input type="text" id="data-envio-certificado-historico" class="form-control" name="certificado" data-inputmask="'alias': 'data'" 
+				placeholder="Data envio certificado" />
 		</div>
 		
 		<div class="form-group col-md-3">
-			<label for="data-envio">Envio de bíblia</label> 
-			<input id="data-envio" name="dataProximoEnvio" class="form-control" data-inputmask="'alias': 'data'" />
+			<label for="data-envio-biblia-historico">Envio de bíblia</label> 
+			<input type="text" id="data-envio-biblia-historico" class="form-control" name="biblia" data-inputmask="'alias': 'data'" 
+				placeholder="Data envio bíblia" />
 		</div>
 		
 		<div class="form-group col-md-6">
-			<label for="presidio">Material de estudo</label>
+			<label for="material-historico">Material de estudo</label>
 			<div>
-		    	<select class="form-control" id="presidio">
+		    	<select class="form-control" id="material-historico" name="material" >
 		    		<option th:value="${null}" th:text="Selecione"></option>
 					<option th:each="material : ${materiais}" th:value="${material.id}" th:text="${material.nome}"></option>
 				</select>
@@ -38,7 +44,25 @@
 		
 		<div class="form-group col-md-1">
 			<label for="data-envio">Nota</label> 
-			<input id="data-envio" name="dataProximoEnvio" class="form-control" />
+			<input type="text" id="data-envio" class="form-control" name="nota" data-inputmask="'alias': 'nota'" placeholder="nota" />
+		</div>
+		
+		<div class="form-group col-md-12">
+			<br></br>
+			<table id="historico-atividades" class="table table-condensed table-hover table-striped" >
+				<thead>
+					<tr>
+						<th data-column-id="id" data-type="numeric" data-identifier="true" data-visible="false"></th>
+						<th data-column-id="dataEnvioEstudo" data-sortable="false">Data envio</th>
+						<th data-column-id="material" data-formatter="material" data-sortable="false" data-width="400">Material</th>
+						<th data-column-id="dataRetornoEstudo" data-sortable="false">Data retorno</th>
+						<th data-column-id="nota" data-sortable="false">Nota</th>
+						<th data-column-id="certificado" data-formatter="certificado" data-sortable="false">Certificado</th>
+						<th data-column-id="biblia" data-formatter="biblia" data-sortable="false">Bíblia</th>
+						<th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="40"></th>
+					</tr>
+				</thead>
+			</table>
 		</div>
 
 	</form>

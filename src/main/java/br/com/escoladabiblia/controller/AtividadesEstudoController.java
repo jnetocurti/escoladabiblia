@@ -16,7 +16,9 @@ import br.com.escoladabiblia.model.AtividadeEstudo;
 import br.com.escoladabiblia.service.AtividadesEstudoService;
 import br.com.escoladabiblia.util.dto.AtividadeEstudoDTO;
 import br.com.escoladabiblia.util.dto.AtividadeEstudoEdicaoDTO;
+import br.com.escoladabiblia.util.dto.AtividadeEstudoHistoricoDTO;
 import br.com.escoladabiblia.util.dto.AtividadesEstudoEdicaoDTO;
+import br.com.escoladabiblia.util.dto.AtividadesEstudoHistoricoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
 
 @Controller
@@ -43,7 +45,7 @@ public class AtividadesEstudoController {
 	}
 	
 	@PostMapping(path = "editar-atividade")
-	public @ResponseBody AtividadeEstudo editarAtividade(@RequestBody Long id) throws BusinessException {
+	public @ResponseBody AtividadeEstudo editarAtividade(@RequestBody Long id) {
 
 		return atividadesEstudoService.obterAtividadePorId(id);
 	}
@@ -75,6 +77,21 @@ public class AtividadesEstudoController {
 		model.addAttribute("atividade", atividadesEstudoService.obterAtividadePorId(id));
 		
 		return "alunos/common-fragments/modal-visualizacao-atividade";
+	}
+	
+	@PostMapping(path = "editar-historicos")
+	public @ResponseBody AtividadesEstudoHistoricoDTO editarHistoricos(@RequestBody Long id) {
+
+		return atividadesEstudoService.obterHistoricoAtividadesEstudoAluno(id);
+	}
+	
+	@PostMapping(path = "cadastrar-historico")
+	public @ResponseBody AtividadesEstudoHistoricoDTO cadastrarHistorico(
+			@Valid @ModelAttribute AtividadeEstudoHistoricoDTO atividadeHistorico) {
+		
+		atividadesEstudoService.adicionarAtividadeHistorico(atividadeHistorico);
+
+		return atividadesEstudoService.obterHistoricoAtividadesEstudoAluno(atividadeHistorico.getAluno());
 	}
 
 }

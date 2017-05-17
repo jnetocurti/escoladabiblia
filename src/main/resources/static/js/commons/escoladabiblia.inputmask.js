@@ -6,6 +6,10 @@ Sandbox.modules.inputmask = function(box) {
 		},
 		'cep' : {
 			mask : "99999-999"
+		},
+		'nota' : {
+			mask : "9[9].99",
+			placeholder : ''
 		}
 	});
 

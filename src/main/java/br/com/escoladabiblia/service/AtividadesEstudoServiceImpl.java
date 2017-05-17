@@ -17,7 +17,9 @@ import br.com.escoladabiblia.repository.CertificadoEnviadoRepository;
 import br.com.escoladabiblia.repository.MaterialEstudoRepository;
 import br.com.escoladabiblia.repository.PostagemRepository;
 import br.com.escoladabiblia.util.dto.AtividadeEstudoEdicaoDTO;
+import br.com.escoladabiblia.util.dto.AtividadeEstudoHistoricoDTO;
 import br.com.escoladabiblia.util.dto.AtividadesEstudoEdicaoDTO;
+import br.com.escoladabiblia.util.dto.AtividadesEstudoHistoricoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
 
 @Service
@@ -146,6 +148,24 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 		}
 
 		atividadeEstudoRepository.delete(atividadeEstudo);
+	}
+
+	@Override
+	public AtividadesEstudoHistoricoDTO obterHistoricoAtividadesEstudoAluno(Long id) {
+
+		final Aluno aluno = alunoRepository.findOne(id);
+
+		AtividadesEstudoHistoricoDTO historico = new AtividadesEstudoHistoricoDTO(aluno.getId(), aluno.getNome());
+
+		historico.getHistorico().addAll(atividadeEstudoRepository.obterHistoricoAtividadesEstudoAluno(id));
+
+		return historico;
+	}
+
+	@Override
+	public void adicionarAtividadeHistorico(AtividadeEstudoHistoricoDTO atividadeHistorico) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
