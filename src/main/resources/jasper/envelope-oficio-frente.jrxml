@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-05-17T17:55:25 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="envelope-oficio-frente" pageWidth="323" pageHeight="649" columnWidth="279" leftMargin="9" rightMargin="35" topMargin="9" bottomMargin="9" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" uuid="9319a13d-37da-4a39-b58c-cb6598a8a63f">
+<!-- 2017-05-17T20:47:06 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="envelope-oficio-frente" pageWidth="649" pageHeight="323" orientation="Landscape" columnWidth="605" leftMargin="9" rightMargin="35" topMargin="9" bottomMargin="9" isFloatColumnFooter="true" uuid="9319a13d-37da-4a39-b58c-cb6598a8a63f">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
@@ -10,6 +10,8 @@
 	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
 	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -38,59 +40,56 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="630" splitType="Stretch">
+		<band height="305" splitType="Stretch">
 			<textField>
-				<reportElement x="88" y="100" width="20" height="430" uuid="1ca6f8dd-8b67-4469-bd73-53ab4bf48766">
+				<reportElement x="110" y="88" width="410" height="20" uuid="1ca6f8dd-8b67-4469-bd73-53ab4bf48766">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
-				<textElement rotation="Left">
+				<textElement>
 					<font fontName="Book Antiqua" size="16" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="108" y="100" width="20" height="430" isRemoveLineWhenBlank="true" uuid="d1d48194-a031-4c24-a72c-95c4ec8a63e7"/>
-				<textElement rotation="Left">
+				<reportElement x="110" y="108" width="410" height="20" isRemoveLineWhenBlank="true" uuid="d1d48194-a031-4c24-a72c-95c4ec8a63e7"/>
+				<textElement>
 					<font fontName="Book Antiqua" size="16" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{identificacao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="128" y="100" width="16" height="430" uuid="6f3376b0-30f0-4073-86d1-c2d84c4fc970"/>
-				<textElement rotation="Left">
+				<reportElement x="110" y="128" width="410" height="16" uuid="6f3376b0-30f0-4073-86d1-c2d84c4fc970"/>
+				<textElement>
 					<font fontName="Book Antiqua" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{logradouro}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="160" y="100" width="16" height="430" isRemoveLineWhenBlank="true" uuid="b5f38cd1-f545-4308-b19e-2ce743ae37e4"/>
-				<textElement rotation="Left">
+				<reportElement x="110" y="160" width="410" height="16" isRemoveLineWhenBlank="true" uuid="b5f38cd1-f545-4308-b19e-2ce743ae37e4"/>
+				<textElement>
 					<font fontName="Book Antiqua" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="160" y="100" width="16" height="430" uuid="68dee4a9-8aac-4b73-bd40-2548912f5f34"/>
-				<textElement rotation="Left">
+				<reportElement x="110" y="176" width="410" height="16" uuid="68dee4a9-8aac-4b73-bd40-2548912f5f34"/>
+				<textElement>
 					<font fontName="Book Antiqua" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{localidadeAndUF}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="176" y="100" width="20" height="430" isRemoveLineWhenBlank="true" uuid="67decc37-b122-44ac-93f0-d1e9ddc06219">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<textElement rotation="Left">
-					<font fontName="Book Antiqua" size="16"/>
+				<reportElement x="110" y="192" width="410" height="22" isRemoveLineWhenBlank="true" uuid="67decc37-b122-44ac-93f0-d1e9ddc06219"/>
+				<textElement>
+					<font fontName="Book Antiqua" size="18"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CEP}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="144" y="100" width="16" height="430" isRemoveLineWhenBlank="true" uuid="699ed7c0-e03f-4f0f-93d1-3dcd809c6221">
+				<reportElement x="110" y="144" width="410" height="16" isRemoveLineWhenBlank="true" uuid="699ed7c0-e03f-4f0f-93d1-3dcd809c6221">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement rotation="Left">
+				<textElement>
 					<font fontName="Book Antiqua" size="13"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{complemento}]]></textFieldExpression>

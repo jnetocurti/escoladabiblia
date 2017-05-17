@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-04-17T19:12:18 -->
+<!-- 2017-05-17T20:46:49 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="envelope-medio-frente" pageWidth="790" pageHeight="612" orientation="Landscape" columnWidth="677" leftMargin="28" rightMargin="85" topMargin="28" bottomMargin="28" uuid="d1db7540-849e-427e-acaa-cd64c681fc37">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -42,49 +42,49 @@
 	<detail>
 		<band height="555" splitType="Stretch">
 			<textField>
-				<reportElement x="130" y="252" width="550" height="22" uuid="4cb899bc-e313-4493-9213-43df0941c8d4"/>
+				<reportElement x="92" y="202" width="550" height="22" uuid="4cb899bc-e313-4493-9213-43df0941c8d4"/>
 				<textElement>
 					<font fontName="Book Antiqua" size="17" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="130" y="275" width="550" height="22" isRemoveLineWhenBlank="true" uuid="aed9169c-002c-4f2f-884d-e2df6fa4bff1"/>
+				<reportElement x="92" y="225" width="550" height="22" isRemoveLineWhenBlank="true" uuid="aed9169c-002c-4f2f-884d-e2df6fa4bff1"/>
 				<textElement>
 					<font fontName="Book Antiqua" size="17" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{identificacao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="130" y="297" width="550" height="20" uuid="1391310f-0f3b-4d3e-bc3c-ce389869d79a"/>
+				<reportElement x="92" y="247" width="550" height="20" uuid="1391310f-0f3b-4d3e-bc3c-ce389869d79a"/>
 				<textElement>
 					<font fontName="Book Antiqua" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{logradouro}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="130" y="337" width="550" height="20" isRemoveLineWhenBlank="true" uuid="93b3e3bf-e95e-4e6e-96f9-ae5c26d65100"/>
+				<reportElement x="92" y="287" width="550" height="20" isRemoveLineWhenBlank="true" uuid="93b3e3bf-e95e-4e6e-96f9-ae5c26d65100"/>
 				<textElement>
 					<font fontName="Book Antiqua" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="130" y="357" width="550" height="20" uuid="e79a1f44-8d58-437b-b707-c9b785a00b92"/>
+				<reportElement x="92" y="307" width="550" height="20" uuid="e79a1f44-8d58-437b-b707-c9b785a00b92"/>
 				<textElement>
 					<font fontName="Book Antiqua" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{localidadeAndUF}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="129" y="377" width="550" height="30" isRemoveLineWhenBlank="true" uuid="7223f940-6bb6-452c-aaee-dfca7904bd78"/>
+				<reportElement x="91" y="327" width="550" height="30" isRemoveLineWhenBlank="true" uuid="7223f940-6bb6-452c-aaee-dfca7904bd78"/>
 				<textElement>
 					<font fontName="Book Antiqua" size="22"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CEP}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="130" y="317" width="550" height="20" isRemoveLineWhenBlank="true" uuid="01b71ae5-f4b6-418b-b29b-033edfb62d62">
+				<reportElement x="92" y="267" width="550" height="20" isRemoveLineWhenBlank="true" uuid="01b71ae5-f4b6-418b-b29b-033edfb62d62">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement>

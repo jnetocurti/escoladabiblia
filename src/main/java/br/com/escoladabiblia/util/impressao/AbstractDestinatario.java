@@ -90,7 +90,7 @@ public abstract class AbstractDestinatario implements Destinatario {
 
 	private String appendNumero(Endereco endereco) {
 
-		return endereco.getNumero() != null ? ", " + endereco.getNumero() : "";
+		return endereco.getNumero() != null && !endereco.getNumero().equals(0) ? ", " + endereco.getNumero() : "";
 	}
 
 	protected String resultFromBuilder(StringBuilder builder) {
