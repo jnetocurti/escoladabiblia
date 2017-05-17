@@ -18,5 +18,7 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 
 	@Query("select p from Postagem p where p.dataPrevistaEnvio between :dataDe and :dataAte")
 	List<Postagem> findByPeriod(@Param("dataDe") Calendar dataDe, @Param("dataAte") Calendar dataAte);
+	
+	Postagem findByDataPrevistaEnvio(@Param("dataPostagem") Calendar dataPostagem);
 
 }

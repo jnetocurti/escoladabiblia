@@ -79,7 +79,7 @@ public class Aluno implements Serializable {
 	private List<Caracterizacao> caracterizacoes = new ArrayList<>();
 
 	@JsonInclude(value = Include.NON_EMPTY)
-	@OrderBy(value = "id")
+	@OrderBy(value = "dataRetornoEstudo")
 	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.ALL })
 	private List<AtividadeEstudo> atividadesEstudo = new ArrayList<>();
 

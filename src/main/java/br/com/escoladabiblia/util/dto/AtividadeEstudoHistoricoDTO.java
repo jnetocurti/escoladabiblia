@@ -3,7 +3,10 @@ package br.com.escoladabiblia.util.dto;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,17 +23,23 @@ public class AtividadeEstudoHistoricoDTO implements Serializable {
 	@NotNull
 	private Long material;
 
+	@Past
 	@NotNull
 	private Calendar dataEnvioEstudo;
 
+	@Past
 	@NotNull
 	private Calendar dataRetornoEstudo;
 
 	@NotNull
+	@DecimalMin(value = "0")
+	@DecimalMax(value = "10.00")
 	private Float nota;
 
+	@Past
 	private Calendar certificado;
 
+	@Past
 	private Calendar biblia;
 
 	public Long getAluno() {

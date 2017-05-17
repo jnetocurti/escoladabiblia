@@ -1,5 +1,7 @@
 package br.com.escoladabiblia.service;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,13 +65,11 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	@Override
 	public void adicionarAtividade(Long idAluno, Long idPostagem, Long idMaterial) {
 
-		final AtividadeEstudo atividadeEstudo = new AtividadeEstudo();
-
-		atividadeEstudo.setAluno(Aluno.builder().withId(idAluno).build());
-		
-		atividadeEstudo.setPostagem(postagemRepository.findOne(idPostagem));
-
-		atividadeEstudo.setMaterial(materialEstudoRepository.findOne(idMaterial));
+		final AtividadeEstudo atividadeEstudo = AtividadeEstudo.builder()
+				.withAluno(Aluno.builder().withId(idAluno).build())
+				.withPostagem(postagemRepository.findOne(idPostagem))
+				.withMaterial(materialEstudoRepository.findOne(idMaterial))
+				.build();
 
 		atividadeEstudoRepository.save(atividadeEstudo);
 	}
@@ -164,8 +164,67 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 
 	@Override
 	public void adicionarAtividadeHistorico(AtividadeEstudoHistoricoDTO atividadeHistorico) {
-		// TODO Auto-generated method stub
+		
+		Postagem postagemAtividade = obterPostagem(atividadeHistorico.getDataEnvioEstudo());
+		
+		AtividadeEstudo atividadeEstudo = AtividadeEstudo.builder()
+				.withPostagem(postagemAtividade)
+				.withAluno(alunoRepository.findOne(atividadeHistorico.getAluno()))
+				.withMaterial(materialEstudoRepository.findOne(atividadeHistorico.getMaterial())).build();
+		
+		atividadeEstudo.setAtividadeEncerrada(true);
+		atividadeEstudo.setNota(atividadeHistorico.getNota());
+		atividadeEstudo.setDataRetornoEstudo(atividadeHistorico.getDataRetornoEstudo());
+		
+		atividadeEstudo.setCertificado(obterCertificado(atividadeHistorico.getCertificado(), atividadeEstudo));
+		atividadeEstudo.setBiblia(obterBiblia(atividadeHistorico.getBiblia(), atividadeEstudo));
+		
+		atividadeEstudoRepository.save(atividadeEstudo);
 
+	}
+
+	private Postagem obterPostagem(Calendar dataPostagem) {
+		
+		Postagem postagem = postagemRepository.findByDataPrevistaEnvio(dataPostagem);
+
+		if (postagem == null) {
+
+			postagem = Postagem.builder().withDataPrevistaEnvio(dataPostagem).build();
+
+			postagem.setDataEfetivaEnvio(dataPostagem);
+
+			postagemRepository.save(postagem);
+		}
+		
+		return postagem;
+	}
+	
+	private CertificadoEnviado obterCertificado(Calendar certificado, AtividadeEstudo atividadeEstudo) {
+		
+		if (certificado == null) {
+			return null;
+		}
+			
+		Postagem postagemCertificado = obterPostagem(certificado);
+		
+		return CertificadoEnviado.builder()
+				.withAtividadeEstudo(atividadeEstudo)
+				.withPostagem(postagemCertificado)
+				.build();
+	}
+
+	private BibliaEnviada obterBiblia(Calendar biblia, AtividadeEstudo atividadeEstudo) {
+
+		if (biblia == null) {
+			return null;
+		}
+			
+		Postagem postagemBiblia = obterPostagem(biblia);
+		
+		return BibliaEnviada.builder()
+				.withAtividadeEstudo(atividadeEstudo)
+				.withPostagem(postagemBiblia)
+				.build();
 	}
 
 }

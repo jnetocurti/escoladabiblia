@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -40,7 +39,6 @@ public class Postagem implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-	@Future
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_prevista_envio", updatable = false, nullable = false)
