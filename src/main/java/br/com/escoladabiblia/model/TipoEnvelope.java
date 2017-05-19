@@ -16,7 +16,9 @@ package br.com.escoladabiblia.model;
  */
 public enum TipoEnvelope {
 
-	OFICIO_114_X_229(1, "jasper/envelope-oficio-frente.jasper"), ENVELOPE_162_X_229(2, "jasper/envelope-medio-frente.jasper");
+	OFICIO_114_X_229(1, "jasper/envelope-oficio-frente.jasper"), 
+	ENVELOPE_162_X_229(2, "jasper/envelope-medio-frente.jasper"), 
+	ENVELOPE_185_X_248(3, "jasper/envelope-medio-2-frente.jasper");
 
 	public final Integer size;
 

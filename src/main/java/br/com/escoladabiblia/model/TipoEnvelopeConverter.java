@@ -16,6 +16,9 @@ public class TipoEnvelopeConverter implements AttributeConverter<TipoEnvelope, I
 
 		case ENVELOPE_162_X_229:
 			return TipoEnvelope.ENVELOPE_162_X_229.size;
+			
+		case ENVELOPE_185_X_248:
+			return TipoEnvelope.ENVELOPE_185_X_248.size;
 
 		default:
 			throw new IllegalArgumentException("Case converter não implementado para: " + tipoEnvelope);
