@@ -23,7 +23,7 @@ public class AlunoServiceImpl implements AlunoService {
 
 		return new BootgridResponse<AlunoPresidioDTO>(
 				alunoRepository.findAlunosPresidiosByNomeOrMatriculaOrNomePresidio(
-						"%" + bootgridRequest.getSearchPhrase() + "%", bootgridRequest.getPageRequest()));
+						"%" + bootgridRequest.getSearchPhrase().toUpperCase() + "%", bootgridRequest.getPageRequest()));
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class AlunoServiceImpl implements AlunoService {
 	public BootgridResponse<AlunoComumDTO> findAlunosComunsByNome(BootgridRequest bootgridRequest) {
 
 		return new BootgridResponse<AlunoComumDTO>(alunoRepository.findAlunosComunsByName(
-				"%" + bootgridRequest.getSearchPhrase() + "%", bootgridRequest.getPageRequest()));
+				"%" + bootgridRequest.getSearchPhrase().toUpperCase() + "%", bootgridRequest.getPageRequest()));
 	}
 
 	@Override
