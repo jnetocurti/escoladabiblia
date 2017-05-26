@@ -3,6 +3,7 @@ package br.com.escoladabiblia.util.impressao;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -17,12 +18,20 @@ public class JasperUtil {
 	private JasperUtil() {
 	}
 
-	public static JasperPrint getJasperPrint(final List<Destinatario> destinatarios, String jasperFile)
+	public static JasperPrint getJasperPrintEnvelopes(final List<Destinatario> destinatarios, String jasperFile)
 			throws JRException {
 
 		final InputStream jasper = Thread.currentThread().getContextClassLoader().getResourceAsStream(jasperFile);
 
 		return JasperFillManager.fillReport(jasper, null, new JRBeanCollectionDataSource(destinatarios));
+	}
+	
+	public static JasperPrint getJasperPrintAtividadesPostagem(final List<MateriaisPostagem> materiaisPostagem,
+			Map<String, Object> parameters, String jasperFile) throws JRException {
+
+		final InputStream jasper = Thread.currentThread().getContextClassLoader().getResourceAsStream(jasperFile);
+
+		return JasperFillManager.fillReport(jasper, parameters, new JRBeanCollectionDataSource(materiaisPostagem));
 	}
 
 	public static byte[] exportReport(final List<JasperPrint> jasperPrints) throws JRException {

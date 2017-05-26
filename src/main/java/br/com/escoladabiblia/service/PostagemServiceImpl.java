@@ -2,7 +2,9 @@ package br.com.escoladabiblia.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import br.com.escoladabiblia.util.exception.BusinessException;
 import br.com.escoladabiblia.util.impressao.Destinatario;
 import br.com.escoladabiblia.util.impressao.DestinatarioFactory;
 import br.com.escoladabiblia.util.impressao.JasperUtil;
+import br.com.escoladabiblia.util.impressao.MateriaisPostagem;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 
@@ -28,7 +31,7 @@ public class PostagemServiceImpl implements PostagemService {
 
 	@Autowired
 	private AtividadeEstudoRepository atividadeEstudoRepository;
-
+	
 	@Override
 	public void salvar(Postagem postagem) throws BusinessException {
 
@@ -67,7 +70,7 @@ public class PostagemServiceImpl implements PostagemService {
 
 			if (!destinatarios.isEmpty()) {
 
-				jasperPrints.add(JasperUtil.getJasperPrint(destinatarios, tipoEnvelope.jasperFile));
+				jasperPrints.add(JasperUtil.getJasperPrintEnvelopes(destinatarios, tipoEnvelope.jasperFile));
 			}
 		}
 
@@ -96,6 +99,28 @@ public class PostagemServiceImpl implements PostagemService {
 		postagem.setDataEfetivaEnvio(Calendar.getInstance());
 
 		postagemRepository.save(postagem);
+	}
+
+	@Override
+	public byte[] gerarRelatorio(Long id) throws JRException {
+
+		final Postagem postagem = postagemRepository.findOne(id);
+
+		final List<JasperPrint> jasperPrints = new ArrayList<>();
+
+		final List<MateriaisPostagem> materiaisPostagem = 
+				atividadeEstudoRepository.obterRelatorioAtividadesPostagem(id);
+
+		Map<String, Object> parameters = new HashMap<>();
+
+		parameters.put("DATA_POSTAGEM", postagem.getDataPrevistaEnvio().getTime());
+
+		parameters.put("QTD_BIBLIAS", Long.valueOf(postagem.getCertificadosEnviados().size()));
+
+		jasperPrints.add(JasperUtil.getJasperPrintAtividadesPostagem(materiaisPostagem, parameters,
+				"jasper/relatorio_postagem.jasper"));
+
+		return JasperUtil.exportReport(jasperPrints);
 	}
 
 }

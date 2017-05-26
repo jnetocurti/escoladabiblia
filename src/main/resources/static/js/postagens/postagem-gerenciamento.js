@@ -33,6 +33,10 @@ Sandbox('*', function(box) {
 						
 						$('#modal-processamento-postagem').modal('show');
 					});
+					
+					box.eventClick('.command-show-report', function() {
+						window.open(context + 'postagens/gerenciamento/relatorio/' + $(this).data("row-id"));
+					});
 				}
 			}
 		);

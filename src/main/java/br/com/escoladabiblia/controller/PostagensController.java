@@ -74,5 +74,13 @@ public class PostagensController extends BaseController {
 
 		return super.getPDFResponse(envelopes, "envelopes.pdf");
 	}
+	
+	@GetMapping(path = "gerenciamento/relatorio/{id}")
+	public ResponseEntity<byte[]> relatorio(@PathVariable Long id) throws JRException {
+
+		final byte[] envelopes = postagemService.gerarRelatorio(id);
+
+		return super.getPDFResponse(envelopes, "relatorio.pdf");
+	}
 
 }
