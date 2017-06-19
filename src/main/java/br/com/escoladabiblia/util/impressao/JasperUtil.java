@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -26,7 +27,7 @@ public class JasperUtil {
 		return JasperFillManager.fillReport(jasper, null, new JRBeanCollectionDataSource(destinatarios));
 	}
 	
-	public static JasperPrint getJasperPrintAtividadesPostagem(final List<MateriaisPostagem> materiaisPostagem,
+	public static JasperPrint getJasperPrintRelatorioPostagem(final List<MateriaisPostagem> materiaisPostagem,
 			Map<String, Object> parameters, String jasperFile) throws JRException {
 
 		final InputStream jasper = Thread.currentThread().getContextClassLoader().getResourceAsStream(jasperFile);
@@ -47,6 +48,11 @@ public class JasperUtil {
 		exporter.exportReport();
 
 		return out.toByteArray();
+	}
+	
+	public static byte[] exportReport(final JasperPrint jasperPrint) throws JRException {
+
+		return JasperExportManager.exportReportToPdf(jasperPrint);
 	}
 
 }

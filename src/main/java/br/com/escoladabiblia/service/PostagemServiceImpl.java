@@ -112,8 +112,6 @@ public class PostagemServiceImpl implements PostagemService {
 
 		final Postagem postagem = postagemRepository.findOne(id);
 
-		final List<JasperPrint> jasperPrints = new ArrayList<>();
-
 		final List<MateriaisPostagem> materiaisPostagem = 
 				atividadeEstudoRepository.obterRelatorioAtividadesPostagem(id);
 		
@@ -128,10 +126,10 @@ public class PostagemServiceImpl implements PostagemService {
 		
 		parameters.put("certificados", obterCertificadosDaPostagem(id));
 
-		jasperPrints.add(JasperUtil.getJasperPrintAtividadesPostagem(materiaisPostagem, parameters,
-				"jasper/relatorio-postagem.jasper"));
+		JasperPrint jasperPrint = JasperUtil.getJasperPrintRelatorioPostagem(materiaisPostagem, 
+				parameters, "jasper/relatorio-postagem.jasper");
 
-		return JasperUtil.exportReport(jasperPrints);
+		return JasperUtil.exportReport(jasperPrint);
 	}
 
 	private void obterBiliasPostagem(final Postagem postagem, final List<MateriaisPostagem> materiaisPostagem) {
