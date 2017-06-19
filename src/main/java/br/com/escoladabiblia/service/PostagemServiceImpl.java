@@ -122,6 +122,9 @@ public class PostagemServiceImpl implements PostagemService {
 
 		parameters.put("dataPostagem", postagem.getDataPrevistaEnvio().getTime());
 		
+		parameters.put("subReportPath", Thread.currentThread().getContextClassLoader()
+				.getResource("jasper/sub-certificados-postagem.jasper").getPath());
+		
 		//TODO implementar serviço
 		parameters.put("certificados", Arrays.asList());
 

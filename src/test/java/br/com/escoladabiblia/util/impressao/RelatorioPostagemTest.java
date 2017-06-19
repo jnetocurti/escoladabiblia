@@ -35,9 +35,14 @@ public class RelatorioPostagemTest {
 		InputStream jasper = Thread.currentThread().getContextClassLoader()
 				.getResourceAsStream("jasper/relatorio-postagem.jasper");
 
+		String subReportPath = Thread.currentThread().getContextClassLoader()
+				.getResource("jasper/sub-certificados-postagem.jasper").getPath();
+
 		Map<String, Object> parameters = new HashMap<>();
 
 		parameters.put("dataPostagem", new Date());
+
+		parameters.put("subReportPath", subReportPath);
 
 		parameters.put("certificados", getCertificados());
 
