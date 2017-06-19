@@ -1,6 +1,7 @@
 package br.com.escoladabiblia.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -110,12 +111,19 @@ public class PostagemServiceImpl implements PostagemService {
 
 		final List<MateriaisPostagem> materiaisPostagem = 
 				atividadeEstudoRepository.obterRelatorioAtividadesPostagem(id);
+		
+		if (postagem.getBibliasEnviadas().size() > 0) {
+
+			materiaisPostagem.add(new MateriaisPostagem("BÍBLIA", 
+					Long.valueOf(postagem.getCertificadosEnviados().size())));
+		}
 
 		Map<String, Object> parameters = new HashMap<>();
 
-		parameters.put("DATA_POSTAGEM", postagem.getDataPrevistaEnvio().getTime());
-
-		parameters.put("QTD_BIBLIAS", Long.valueOf(postagem.getCertificadosEnviados().size()));
+		parameters.put("dataPostagem", postagem.getDataPrevistaEnvio().getTime());
+		
+		//TODO implementar serviço
+		parameters.put("certificados", Arrays.asList());
 
 		jasperPrints.add(JasperUtil.getJasperPrintAtividadesPostagem(materiaisPostagem, parameters,
 				"jasper/relatorio_postagem.jasper"));

@@ -72,6 +72,12 @@
 			<version>1.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>fontes.calibri</groupId>
+			<artifactId>calibri</artifactId>
+			<version>1.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -85,6 +91,7 @@
 				<artifactId>maven-install-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>book-antiqua</id>
 						<phase>initialize</phase>
 						<goals>
 							<goal>install-file</goal>
@@ -95,6 +102,20 @@
 							<version>1.0</version>
 							<packaging>jar</packaging>
 							<file>${basedir}/src/site/lib/book-antiqua.jar</file>
+						</configuration>
+					</execution>
+					<execution>
+						<id>calibri</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>fontes.calibri</groupId>
+							<artifactId>calibri</artifactId>
+							<version>1.0</version>
+							<packaging>jar</packaging>
+							<file>${basedir}/src/site/lib/calibri.jar</file>
 						</configuration>
 					</execution>
 				</executions>
