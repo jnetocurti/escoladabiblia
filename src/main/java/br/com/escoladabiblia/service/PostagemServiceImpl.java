@@ -1,11 +1,13 @@
 package br.com.escoladabiblia.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,16 +15,16 @@ import org.springframework.stereotype.Service;
 import br.com.escoladabiblia.model.Postagem;
 import br.com.escoladabiblia.model.TipoEnvelope;
 import br.com.escoladabiblia.repository.AtividadeEstudoRepository;
+import br.com.escoladabiblia.repository.CertificadoEnviadoRepository;
 import br.com.escoladabiblia.repository.PostagemRepository;
 import br.com.escoladabiblia.util.dto.AtividadeEstudoImpressaoDTO;
 import br.com.escoladabiblia.util.dto.PeriodoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
+import br.com.escoladabiblia.util.impressao.CertificadosPostagemVO;
 import br.com.escoladabiblia.util.impressao.Destinatario;
 import br.com.escoladabiblia.util.impressao.DestinatarioFactory;
 import br.com.escoladabiblia.util.impressao.JasperUtil;
 import br.com.escoladabiblia.util.impressao.MateriaisPostagem;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
 public class PostagemServiceImpl implements PostagemService {
@@ -32,6 +34,9 @@ public class PostagemServiceImpl implements PostagemService {
 
 	@Autowired
 	private AtividadeEstudoRepository atividadeEstudoRepository;
+	
+	@Autowired
+	private CertificadoEnviadoRepository certificadoEnviadoRepository;
 	
 	@Override
 	public void salvar(Postagem postagem) throws BusinessException {
@@ -112,11 +117,7 @@ public class PostagemServiceImpl implements PostagemService {
 		final List<MateriaisPostagem> materiaisPostagem = 
 				atividadeEstudoRepository.obterRelatorioAtividadesPostagem(id);
 		
-		if (postagem.getBibliasEnviadas().size() > 0) {
-
-			materiaisPostagem.add(new MateriaisPostagem("BÍBLIA", 
-					Long.valueOf(postagem.getCertificadosEnviados().size())));
-		}
+		obterBiliasPostagem(postagem, materiaisPostagem);
 
 		Map<String, Object> parameters = new HashMap<>();
 
@@ -125,13 +126,35 @@ public class PostagemServiceImpl implements PostagemService {
 		parameters.put("subReportPath", Thread.currentThread().getContextClassLoader()
 				.getResource("jasper/sub-certificados-postagem.jasper").getPath());
 		
-		//TODO implementar serviço
-		parameters.put("certificados", Arrays.asList());
+		parameters.put("certificados", obterCertificadosDaPostagem(id));
 
 		jasperPrints.add(JasperUtil.getJasperPrintAtividadesPostagem(materiaisPostagem, parameters,
-				"jasper/relatorio_postagem.jasper"));
+				"jasper/relatorio-postagem.jasper"));
 
 		return JasperUtil.exportReport(jasperPrints);
+	}
+
+	private void obterBiliasPostagem(final Postagem postagem, final List<MateriaisPostagem> materiaisPostagem) {
+
+		if (postagem.getBibliasEnviadas().size() > 0) {
+
+			materiaisPostagem.add(new MateriaisPostagem("BÍBLIA", Long
+					.valueOf(postagem.getCertificadosEnviados().size())));
+		}
+	}
+	
+	private List<CertificadosPostagemVO> obterCertificadosDaPostagem(Long idPostagem) {
+		
+		final List<CertificadosPostagemVO> certificadosPostagem = certificadoEnviadoRepository
+				.findCertificadosPostagem(idPostagem);
+		
+		for (CertificadosPostagemVO certificadoPostagem : certificadosPostagem) {
+			
+			certificadoPostagem.getAlunos().addAll(certificadoEnviadoRepository.
+					findAlunosCertificados(idPostagem, certificadoPostagem.getCertificado()));
+		}
+
+		return certificadosPostagem;
 	}
 
 }

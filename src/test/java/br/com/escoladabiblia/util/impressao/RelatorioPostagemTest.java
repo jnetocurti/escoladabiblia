@@ -62,7 +62,7 @@ public class RelatorioPostagemTest {
 
 	private List<CertificadosPostagemVO> getCertificados() {
 
-		CertificadosPostagemVO certificado1 = new CertificadosPostagemVO("DEUS TEM FALADO", 2);
+		CertificadosPostagemVO certificado1 = new CertificadosPostagemVO("DEUS TEM FALADO", 2L);
 
 		certificado1.getAlunos()
 				.addAll(Arrays.asList(new AlunosCertificadosPostagemVO("ADALBERTO DE SOUZA FERREIRA"),
@@ -70,18 +70,18 @@ public class RelatorioPostagemTest {
 						new AlunosCertificadosPostagemVO("GUSTAVO EDUARDO MARTINS FRANÇA"),
 						new AlunosCertificadosPostagemVO("ISABELA CRISTINA GONÇALVES DE OLIVEIRA")));
 
-		CertificadosPostagemVO certificado2 = new CertificadosPostagemVO("NASCIDOS DA ÁGUA E DO ESPÍRITO", 12);
+		CertificadosPostagemVO certificado2 = new CertificadosPostagemVO("NASCIDOS DA ÁGUA E DO ESPÍRITO", 12L);
 
 		certificado2.getAlunos()
 				.addAll(Arrays.asList(new AlunosCertificadosPostagemVO("ADRIANA CRISTINA ROSA ZACHARIAS"),
 						new AlunosCertificadosPostagemVO("ADRIANA HENRIQUE MIRANDA")));
 
-		CertificadosPostagemVO certificado3 = new CertificadosPostagemVO("O QUE A BÍBLIA DIZ", 5);
+		CertificadosPostagemVO certificado3 = new CertificadosPostagemVO("O QUE A BÍBLIA DIZ", 5L);
 
 		certificado3.getAlunos().addAll(Arrays.asList(new AlunosCertificadosPostagemVO("CÉLIO FERREIRA DE MATOS"),
 				new AlunosCertificadosPostagemVO("CÍCERO DE ASSIS VIEIRA DA SILVA")));
 
-		CertificadosPostagemVO certificado4 = new CertificadosPostagemVO("CRISTIANISMO EM AÇÃO", 25);
+		CertificadosPostagemVO certificado4 = new CertificadosPostagemVO("CRISTIANISMO EM AÇÃO", 25L);
 
 		certificado4.getAlunos()
 				.addAll(Arrays.asList(new AlunosCertificadosPostagemVO("EWERTON FELIX DA PAIXÃO MARYAMA"),

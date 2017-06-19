@@ -13,11 +13,11 @@ public class CertificadosPostagemVO implements Serializable {
 
 	private String certificado;
 
-	private Integer quantidade;
+	private Long quantidade;
 
 	private List<AlunosCertificadosPostagemVO> alunos = new ArrayList<>();
 
-	public CertificadosPostagemVO(String certificado, Integer quantidade) {
+	public CertificadosPostagemVO(String certificado, Long quantidade) {
 		this.certificado = certificado;
 		this.quantidade = quantidade;
 	}
@@ -26,7 +26,7 @@ public class CertificadosPostagemVO implements Serializable {
 		return certificado;
 	}
 
-	public Integer getQuantidade() {
+	public Long getQuantidade() {
 		return quantidade;
 	}
 
