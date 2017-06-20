@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Escola da B&iacute;blia</title>
+		
+		<!-- Bootstrap -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+		
+		<!-- Bootgrid -->
+		<link rel="stylesheet" th:href="@{/css/jquery.bootgrid.min.css}" />
+		
+		<!-- Custom CSS -->
+		<link rel="stylesheet" th:href="@{/css/signin.css}" />
+		
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	</head>
+    <body>
+    	<div class="container">
+    	
+			<form class="form-signin" th:action="@{/login}" method="post">
+	    		
+				<div class="alert alert-danger" th:if="${param.error}">
+				  <strong>Usuário ou senha inválidos!</strong>
+				</div>
+				
+				<label for="inputEmail" class="sr-only">Username</label> 
+				<input type="text" id="username" class="form-control" name="username"
+					placeholder="Username" />
+				
+				<label for="inputPassword" class="sr-only">Password</label> 
+				<input type="password" id="password" class="form-control" name="password"
+					placeholder="Password" />
+				
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+			</form>
+		</div> <!-- /container -->
+    </body>
+</html>
