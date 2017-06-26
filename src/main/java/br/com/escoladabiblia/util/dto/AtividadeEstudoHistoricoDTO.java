@@ -36,10 +36,8 @@ public class AtividadeEstudoHistoricoDTO implements Serializable {
 	@DecimalMax(value = "10.00")
 	private Float nota;
 
-	@Past
 	private Calendar certificado;
 
-	@Past
 	private Calendar biblia;
 
 	public Long getAluno() {

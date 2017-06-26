@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.ControleImportacao;
@@ -59,6 +60,7 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 	private ControleImportacaoRepository controleImportacaoRepository;
 
 	@Override
+	@Transactional
 	public void importAlunosPresidiosFromXLSXFile(InputStream stream, String fileName)
 			throws IOException, BusinessException {
 
@@ -179,9 +181,12 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 
 	private String getCellValue(Row row, int index) {
 
-		if (row.getCell(index).getCellTypeEnum().equals(CellType.NUMERIC)) {
+		if (row.getCell(index) != null) {
 
-			return String.format("%1$,.0f", row.getCell(index).getNumericCellValue());
+			if (row.getCell(index).getCellTypeEnum().equals(CellType.NUMERIC)) {
+
+				return String.format("%1$,.0f", row.getCell(index).getNumericCellValue());
+			}
 		}
 
 		return row.getCell(index) != null ? row.getCell(index).toString().trim() : "";

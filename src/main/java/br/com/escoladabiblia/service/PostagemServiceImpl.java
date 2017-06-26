@@ -1,5 +1,6 @@
 package br.com.escoladabiblia.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -10,6 +11,9 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
 import br.com.escoladabiblia.model.Postagem;
@@ -108,7 +112,7 @@ public class PostagemServiceImpl implements PostagemService {
 	}
 
 	@Override
-	public byte[] gerarRelatorio(Long id) throws JRException {
+	public byte[] gerarRelatorio(Long id) throws JRException, IOException {
 
 		final Postagem postagem = postagemRepository.findOne(id);
 
@@ -121,8 +125,7 @@ public class PostagemServiceImpl implements PostagemService {
 
 		parameters.put("dataPostagem", postagem.getDataPrevistaEnvio().getTime());
 		
-		parameters.put("subReportPath", Thread.currentThread().getContextClassLoader()
-				.getResource("jasper/sub-certificados-postagem.jasper").getPath());
+		parameters.put("subReportPath", getSubReportFilePath());
 		
 		parameters.put("certificados", obterCertificadosDaPostagem(id));
 
@@ -153,6 +156,16 @@ public class PostagemServiceImpl implements PostagemService {
 		}
 
 		return certificadosPostagem;
+	}
+	
+	private String getSubReportFilePath() throws IOException {
+
+		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(
+				Thread.currentThread().getContextClassLoader());
+
+		Resource resource = resolver.getResource("jasper/sub-certificados-postagem.jasper");
+
+		return resource.getURI().toString();
 	}
 
 }

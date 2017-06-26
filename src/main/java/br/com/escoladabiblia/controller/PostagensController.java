@@ -1,5 +1,6 @@
 package br.com.escoladabiblia.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class PostagensController extends BaseController {
 	}
 	
 	@GetMapping(path = "gerenciamento/relatorio/{id}")
-	public ResponseEntity<byte[]> relatorio(@PathVariable Long id) throws JRException {
+	public ResponseEntity<byte[]> relatorio(@PathVariable Long id) throws JRException, IOException {
 
 		final byte[] envelopes = postagemService.gerarRelatorio(id);
 
