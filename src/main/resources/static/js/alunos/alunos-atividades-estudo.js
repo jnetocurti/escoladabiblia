@@ -12,6 +12,8 @@ Sandbox('*', function(box) {
 			
 			box.set('#materiais-disponiveis', '');
 			
+			box.check('#enviarBiblia', false);
+			
 			loadGridAtividadesEstudo(data);
 		}
 	});

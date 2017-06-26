@@ -19,6 +19,8 @@ public class AtividadeEstudoDTO implements Serializable {
 
 	@NotNull
 	private Long idMaterial;
+	
+	private boolean enviarBiblia;
 
 	public Long getIdAluno() {
 		return idAluno;
@@ -44,4 +46,12 @@ public class AtividadeEstudoDTO implements Serializable {
 		this.idMaterial = isMaterial;
 	}
 
+	public boolean isEnviarBiblia() {
+		return enviarBiblia;
+	}
+
+	public void setEnviarBiblia(boolean enviarBiblia) {
+		this.enviarBiblia = enviarBiblia;
+	}
+	
 }

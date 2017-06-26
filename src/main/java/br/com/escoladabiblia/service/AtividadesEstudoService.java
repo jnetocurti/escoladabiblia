@@ -11,7 +11,7 @@ public interface AtividadesEstudoService {
 
 	AtividadesEstudoEdicaoDTO obterAtividadesEstudoAlunoParaEdicao(Long id) throws BusinessException;
 
-	void adicionarAtividade(Long idAluno, Long idPostagem, Long idMaterial);
+	void adicionarAtividade(Long idAluno, Long idPostagem, Long idMaterial, boolean enviarBiblia);
 
 	AtividadeEstudo obterAtividadePorId(Long id);
 

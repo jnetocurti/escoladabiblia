@@ -63,13 +63,19 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	}
 
 	@Override
-	public void adicionarAtividade(Long idAluno, Long idPostagem, Long idMaterial) {
+	public void adicionarAtividade(Long idAluno, Long idPostagem, Long idMaterial, boolean enviarBiblia) {
+
+		final Postagem postagem = postagemRepository.findOne(idPostagem);
 
 		final AtividadeEstudo atividadeEstudo = AtividadeEstudo.builder()
+				.withPostagem(postagem)
 				.withAluno(Aluno.builder().withId(idAluno).build())
-				.withPostagem(postagemRepository.findOne(idPostagem))
-				.withMaterial(materialEstudoRepository.findOne(idMaterial))
-				.build();
+				.withMaterial(materialEstudoRepository.findOne(idMaterial)).build();
+
+		if (enviarBiblia) {
+			atividadeEstudo.setBiblia(
+					BibliaEnviada.builder().withPostagem(postagem).withAtividadeEstudo(atividadeEstudo).build());
+		}
 
 		atividadeEstudoRepository.save(atividadeEstudo);
 	}

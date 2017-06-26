@@ -39,7 +39,7 @@ public class AtividadesEstudoController {
 			@Valid @ModelAttribute AtividadeEstudoDTO atividadeEstudo) throws BusinessException {
 
 		atividadesEstudoService.adicionarAtividade(atividadeEstudo.getIdAluno(), atividadeEstudo.getIdPostagem(),
-				atividadeEstudo.getIdMaterial());
+				atividadeEstudo.getIdMaterial(), atividadeEstudo.isEnviarBiblia());
 
 		return atividadesEstudoService.obterAtividadesEstudoAlunoParaEdicao(atividadeEstudo.getIdAluno());
 	}
