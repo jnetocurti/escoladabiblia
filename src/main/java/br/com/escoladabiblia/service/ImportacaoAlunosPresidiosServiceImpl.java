@@ -34,6 +34,7 @@ import br.com.escoladabiblia.util.exception.BusinessException;
  *             de facilitar o cadastro/setup destas informações.
  */
 @Service
+@Transactional(readOnly = true)
 public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPresidiosService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ImportacaoAlunosPresidiosService.class);
@@ -60,7 +61,7 @@ public class ImportacaoAlunosPresidiosServiceImpl implements ImportacaoAlunosPre
 	private ControleImportacaoRepository controleImportacaoRepository;
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = false)
 	public void importAlunosPresidiosFromXLSXFile(InputStream stream, String fileName)
 			throws IOException, BusinessException {
 

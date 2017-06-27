@@ -15,6 +15,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.escoladabiblia.model.Postagem;
 import br.com.escoladabiblia.model.TipoEnvelope;
@@ -31,6 +32,7 @@ import br.com.escoladabiblia.util.impressao.JasperUtil;
 import br.com.escoladabiblia.util.impressao.MateriaisPostagem;
 
 @Service
+@Transactional(readOnly = true)
 public class PostagemServiceImpl implements PostagemService {
 
 	@Autowired
@@ -43,6 +45,7 @@ public class PostagemServiceImpl implements PostagemService {
 	private CertificadoEnviadoRepository certificadoEnviadoRepository;
 	
 	@Override
+	@Transactional(readOnly = false)
 	public void salvar(Postagem postagem) throws BusinessException {
 
 		if (this.obterPostagemEmAberto() != null) {
@@ -66,6 +69,7 @@ public class PostagemServiceImpl implements PostagemService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public byte[] processarPostagem(Long id, boolean encerrar) throws JRException {
 
 		final List<JasperPrint> jasperPrints = new ArrayList<>();

@@ -28,6 +28,7 @@ import br.com.escoladabiblia.util.exception.BusinessException;
  *             de facilitar o cadastro/setup destas informações.
  */
 @Service
+@Transactional(readOnly = true)
 public class ImportacaoPresidiosServiceImpl implements ImportacaoPresidiosService {
 
 	@Autowired
@@ -40,7 +41,7 @@ public class ImportacaoPresidiosServiceImpl implements ImportacaoPresidiosServic
 	private ControleImportacaoRepository controleImportacaoRepository;
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = false)
 	public void importPresidiosFromXLSXFile(InputStream stream) throws IOException, BusinessException {
 		
 		if (controleImportacaoRepository.existsByTipoImportacao(TipoImportacao.DADOS_PRESIDIOS)) {

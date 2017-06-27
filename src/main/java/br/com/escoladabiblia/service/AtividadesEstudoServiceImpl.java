@@ -25,6 +25,7 @@ import br.com.escoladabiblia.util.dto.AtividadesEstudoHistoricoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
 
 @Service
+@Transactional(readOnly = true)
 public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 
 	@Autowired
@@ -63,6 +64,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void adicionarAtividade(Long idAluno, Long idPostagem, Long idMaterial, boolean enviarBiblia) {
 
 		final Postagem postagem = postagemRepository.findOne(idPostagem);
@@ -87,7 +89,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = false)
 	public AtividadeEstudo atualizarAtividade(AtividadeEstudoEdicaoDTO atividade) {
 
 		final AtividadeEstudo atividadeEstudo = this.obterAtividadePorId(atividade.getId());
@@ -146,6 +148,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void deletarAtividade(AtividadeEstudo atividadeEstudo) throws BusinessException {
 
 		if (atividadeEstudo.isPostagemEncerrada()) {
@@ -169,6 +172,7 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void adicionarAtividadeHistorico(AtividadeEstudoHistoricoDTO atividadeHistorico) {
 		
 		Postagem postagemAtividade = obterPostagem(atividadeHistorico.getDataEnvioEstudo());

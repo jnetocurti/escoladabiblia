@@ -2,6 +2,7 @@ package br.com.escoladabiblia.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Presidiario;
@@ -12,6 +13,7 @@ import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
 
 @Service
+@Transactional(readOnly = true)
 public class AlunoServiceImpl implements AlunoService {
 
 	@Autowired
@@ -27,6 +29,7 @@ public class AlunoServiceImpl implements AlunoService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public Aluno salvarAlunoPresidio(Aluno aluno, Presidiario presidiario) {
 
 		presidiario.setAluno(aluno);
@@ -44,6 +47,7 @@ public class AlunoServiceImpl implements AlunoService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public Aluno salvarAlunoComum(Aluno aluno) {
 		
 		return alunoRepository.save(aluno);
