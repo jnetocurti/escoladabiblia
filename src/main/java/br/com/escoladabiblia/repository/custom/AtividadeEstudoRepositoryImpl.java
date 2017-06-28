@@ -20,10 +20,11 @@ public class AtividadeEstudoRepositoryImpl extends AbstractRepositoryImpl<Ativid
 	public List<AtividadeEstudoImpressaoDTO> obterAtividadesEstudoAlunosParaImpressao(Long idPostagem) {
 
 		Query query = createQuery(
-				" select new br.com.escoladabiblia.util.dto.AtividadeEstudoImpressaoDTO(a, max(m.tipoEnvelope)) "
+				" select new br.com.escoladabiblia.util.dto.AtividadeEstudoImpressaoDTO(a, max(m.tipoEnvelope), count(b.id)) "
 			  + "   from AtividadeEstudo ae "
 			  + "   join ae.aluno a "
 			  + "   join ae.material m "
+			  + "	left join ae.biblia b "
 			  + "  where ae.postagem.id = :idPostagem "
 			  + "  group by a.id ");
 		

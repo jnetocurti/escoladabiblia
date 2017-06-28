@@ -15,10 +15,13 @@ public class AtividadeEstudoImpressaoDTO implements Serializable {
 	private final Aluno aluno;
 
 	private final TipoEnvelope tipoEnvelope;
+	
+	private final Long biblias;
 
-	public AtividadeEstudoImpressaoDTO(Aluno aluno, TipoEnvelope tipoEnvelope) {
+	public AtividadeEstudoImpressaoDTO(Aluno aluno, TipoEnvelope tipoEnvelope, Long biblias) {
 		this.aluno = aluno;
 		this.tipoEnvelope = tipoEnvelope;
+		this.biblias = biblias;
 	}
 
 	public Aluno getAluno() {
@@ -26,6 +29,9 @@ public class AtividadeEstudoImpressaoDTO implements Serializable {
 	}
 
 	public TipoEnvelope getTipoEnvelope() {
+		if (biblias > 0) {
+			return TipoEnvelope.ENVELOPE_185_X_248;
+		}
 		return tipoEnvelope;
 	}
 

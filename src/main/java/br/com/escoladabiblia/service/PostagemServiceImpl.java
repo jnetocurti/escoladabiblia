@@ -144,7 +144,7 @@ public class PostagemServiceImpl implements PostagemService {
 		if (postagem.getBibliasEnviadas().size() > 0) {
 
 			materiaisPostagem.add(new MateriaisPostagem("BÍBLIA", Long
-					.valueOf(postagem.getCertificadosEnviados().size())));
+					.valueOf(postagem.getBibliasEnviadas().size())));
 		}
 	}
 	
