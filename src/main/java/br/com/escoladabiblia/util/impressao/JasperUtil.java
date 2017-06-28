@@ -1,9 +1,15 @@
 package br.com.escoladabiblia.util.impressao;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -20,11 +26,17 @@ public class JasperUtil {
 	}
 
 	public static JasperPrint getJasperPrintEnvelopes(final List<Destinatario> destinatarios, String jasperFile)
-			throws JRException {
+			throws JRException, IOException {
 
 		final InputStream jasper = Thread.currentThread().getContextClassLoader().getResourceAsStream(jasperFile);
 
-		return JasperFillManager.fillReport(jasper, null, new JRBeanCollectionDataSource(destinatarios));
+		Map<String, Object> parameters = new HashMap<>();
+
+		parameters.put("carimboImg", getFilePath("images/carimbo.png"));
+
+		parameters.put("remetenteImg", getFilePath("images/remetente.png"));
+
+		return JasperFillManager.fillReport(jasper, parameters, new JRBeanCollectionDataSource(destinatarios));
 	}
 	
 	public static JasperPrint getJasperPrintRelatorioPostagem(final List<MateriaisPostagem> materiaisPostagem,
@@ -53,6 +65,16 @@ public class JasperUtil {
 	public static byte[] exportReport(final JasperPrint jasperPrint) throws JRException {
 
 		return JasperExportManager.exportReportToPdf(jasperPrint);
+	}
+	
+	public static String getFilePath(String file) throws IOException {
+
+		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(
+				Thread.currentThread().getContextClassLoader());
+
+		Resource resource = resolver.getResource(file);
+
+		return resource.getURI().toString();
 	}
 
 }

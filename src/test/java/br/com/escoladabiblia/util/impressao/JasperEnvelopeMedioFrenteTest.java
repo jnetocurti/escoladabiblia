@@ -2,6 +2,8 @@ package br.com.escoladabiblia.util.impressao;
 
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -45,8 +47,10 @@ public class JasperEnvelopeMedioFrenteTest {
 
 		InputStream jasper = Thread.currentThread().getContextClassLoader()
 				.getResourceAsStream("jasper/envelope-medio-frente.jasper");
+		
+		Map<String, Object> parameters = getParameters();
 
-		JasperPrint jasperPrintPDF = JasperFillManager.fillReport(jasper, null,
+		JasperPrint jasperPrintPDF = JasperFillManager.fillReport(jasper, parameters,
 				new JRBeanCollectionDataSource(Arrays.asList(new PresidiarioDestinatario(aluno))));
 
 		JasperExportManager.exportReportToPdfFile(jasperPrintPDF, "target/envelope-medio-dados-completos-frente.pdf");
@@ -74,12 +78,27 @@ public class JasperEnvelopeMedioFrenteTest {
 
 		InputStream jasper = Thread.currentThread().getContextClassLoader()
 				.getResourceAsStream("jasper/envelope-medio-frente.jasper");
+		
+		Map<String, Object> parameters = getParameters();
 
-		JasperPrint jasperPrintPDF = JasperFillManager.fillReport(jasper, null,
+		JasperPrint jasperPrintPDF = JasperFillManager.fillReport(jasper, parameters,
 				new JRBeanCollectionDataSource(Arrays.asList(new PresidiarioDestinatario(aluno))));
 
 		JasperExportManager.exportReportToPdfFile(jasperPrintPDF, "target/envelope-medio-dados-incompletos-frente.pdf");
 
+	}
+	
+	private Map<String, Object> getParameters() {
+		
+		Map<String, Object> parameters = new HashMap<>();
+
+		parameters.put("carimboImg",
+				Thread.currentThread().getContextClassLoader().getResource("images/carimbo.png").getPath());
+
+		parameters.put("remetenteImg",
+				Thread.currentThread().getContextClassLoader().getResource("images/remetente.png").getPath());
+		
+		return parameters;
 	}
 
 }

@@ -18,7 +18,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-public class JasperEnvelopeOficioFrenteTest {
+public class JasperEnvelopeMedio2FrenteTest {
 
 	@Test
 	public void jasperDadosCompletosTest() throws JRException {
@@ -46,17 +46,17 @@ public class JasperEnvelopeOficioFrenteTest {
 						.build());
 
 		InputStream jasper = Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream("jasper/envelope-oficio-frente.jasper");
+				.getResourceAsStream("jasper/envelope-medio-2-frente.jasper");
 		
 		Map<String, Object> parameters = getParameters();
 
 		JasperPrint jasperPrintPDF = JasperFillManager.fillReport(jasper, parameters,
 				new JRBeanCollectionDataSource(Arrays.asList(new PresidiarioDestinatario(aluno))));
 
-		JasperExportManager.exportReportToPdfFile(jasperPrintPDF, "target/envelope-oficio-dados-completos-frente.pdf");
+		JasperExportManager.exportReportToPdfFile(jasperPrintPDF, "target/envelope-medio-2-dados-completos-frente.pdf");
 
 	}
-
+	
 	@Test
 	public void jasperDadosIncompletosTest() throws JRException {
 
@@ -77,14 +77,14 @@ public class JasperEnvelopeOficioFrenteTest {
 						.build());
 
 		InputStream jasper = Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream("jasper/envelope-oficio-frente.jasper");
+				.getResourceAsStream("jasper/envelope-medio-2-frente.jasper");
 		
 		Map<String, Object> parameters = getParameters();
 
 		JasperPrint jasperPrintPDF = JasperFillManager.fillReport(jasper, parameters,
 				new JRBeanCollectionDataSource(Arrays.asList(new PresidiarioDestinatario(aluno))));
 
-		JasperExportManager.exportReportToPdfFile(jasperPrintPDF, "target/envelope-oficio-dados-incompletos-frente.pdf");
+		JasperExportManager.exportReportToPdfFile(jasperPrintPDF, "target/envelope-medio-2-dados-incompletos-frente.pdf");
 
 	}
 	

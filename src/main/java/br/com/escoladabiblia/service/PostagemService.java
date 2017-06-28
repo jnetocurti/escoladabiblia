@@ -16,7 +16,7 @@ public interface PostagemService {
 
 	List<Postagem> listarPorPeriodo(PeriodoDTO periodo);
 
-	byte[] processarPostagem(Long id, boolean encerrar) throws JRException;
+	byte[] processarPostagem(Long id, boolean encerrar) throws JRException, IOException;
 
 	byte[] gerarRelatorio(Long id) throws JRException, IOException;
 

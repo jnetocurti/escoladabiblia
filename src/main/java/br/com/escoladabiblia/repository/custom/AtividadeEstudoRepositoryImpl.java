@@ -26,7 +26,8 @@ public class AtividadeEstudoRepositoryImpl extends AbstractRepositoryImpl<Ativid
 			  + "   join ae.material m "
 			  + "	left join ae.biblia b "
 			  + "  where ae.postagem.id = :idPostagem "
-			  + "  group by a.id ");
+			  + "  group by a.id"
+			  + "  order by a.nome ");
 		
 		query.setParameter("idPostagem", idPostagem);
 

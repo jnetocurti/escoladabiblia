@@ -69,7 +69,7 @@ public class PostagensController extends BaseController {
 
 	@GetMapping(path = "gerenciamento/processar/{id}/{encerrar}")
 	public ResponseEntity<byte[]> processar(@PathVariable Long id, @PathVariable boolean encerrar)
-			throws BusinessException, JRException {
+			throws BusinessException, JRException, IOException {
 
 		final byte[] envelopes = postagemService.processarPostagem(id, encerrar);
 

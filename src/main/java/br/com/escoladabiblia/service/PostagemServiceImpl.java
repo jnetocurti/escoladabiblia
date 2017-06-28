@@ -7,13 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperPrint;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +24,8 @@ import br.com.escoladabiblia.util.impressao.Destinatario;
 import br.com.escoladabiblia.util.impressao.DestinatarioFactory;
 import br.com.escoladabiblia.util.impressao.JasperUtil;
 import br.com.escoladabiblia.util.impressao.MateriaisPostagem;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
 @Transactional(readOnly = true)
@@ -70,7 +66,7 @@ public class PostagemServiceImpl implements PostagemService {
 
 	@Override
 	@Transactional(readOnly = false)
-	public byte[] processarPostagem(Long id, boolean encerrar) throws JRException {
+	public byte[] processarPostagem(Long id, boolean encerrar) throws JRException, IOException {
 
 		final List<JasperPrint> jasperPrints = new ArrayList<>();
 
@@ -129,7 +125,7 @@ public class PostagemServiceImpl implements PostagemService {
 
 		parameters.put("dataPostagem", postagem.getDataPrevistaEnvio().getTime());
 		
-		parameters.put("subReportPath", getSubReportFilePath());
+		parameters.put("subReportPath", JasperUtil.getFilePath("jasper/sub-certificados-postagem.jasper"));
 		
 		parameters.put("certificados", obterCertificadosDaPostagem(id));
 
@@ -162,14 +158,4 @@ public class PostagemServiceImpl implements PostagemService {
 		return certificadosPostagem;
 	}
 	
-	private String getSubReportFilePath() throws IOException {
-
-		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(
-				Thread.currentThread().getContextClassLoader());
-
-		Resource resource = resolver.getResource("jasper/sub-certificados-postagem.jasper");
-
-		return resource.getURI().toString();
-	}
-
 }
