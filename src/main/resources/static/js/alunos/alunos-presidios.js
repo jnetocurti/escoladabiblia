@@ -18,6 +18,7 @@ Sandbox('*', function(box) {
 				box.check('#frequentouIgreja', data.frequentouIgreja);
 				box.set('#matricula', getCaracterizacao(data).matricula);
 				box.set('#complemento', getCaracterizacao(data).complemento);
+				box.set('#idPresidiario', getCaracterizacao(data).idPresidiario);
 				
 				box.switchArea('.area-grid-alunos', '.area-form-alunos');
 			}

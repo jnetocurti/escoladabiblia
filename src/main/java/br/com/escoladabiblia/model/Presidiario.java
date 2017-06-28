@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -57,6 +58,15 @@ public class Presidiario extends Caracterizacao {
 		this.cela = builder.cela;
 		this.complemento = builder.complemento;
 		this.presidio = builder.presidio;
+	}
+	
+	@Transient
+	public Long getIdPresidiario() {
+		return super.id;
+	}
+
+	public void setIdPresidiario(Long idPresidiario) {
+		super.id = idPresidiario;
 	}
 
 	public String getMatricula() {
