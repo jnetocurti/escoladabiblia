@@ -1,5 +1,7 @@
 package br.com.escoladabiblia.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,5 +34,21 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 		 + "    and c = null or c.ativa = false "
 		 + "  order by a.nome asc ")
 	Page<AlunoComumDTO> findAlunosComunsByName(@Param("filter") String filter, Pageable pageable);
+	
+	@Query(" select aluno from Aluno aluno "
+		 + "   join aluno.atividadesEstudo atividade "
+		 + "   join atividade.material material "
+		 + "  where atividade.postagem.id = :idPostagem "
+		 + "    and material.numeroOrdem = 1"
+		 + "  group by aluno.id ")
+	List<Aluno> findAlunosNovosByPostagem(@Param("idPostagem") Long idPostagem);
+	
+	@Query(" select aluno from Aluno aluno "
+		 + "   join aluno.atividadesEstudo atividade "
+		 + "   join atividade.material material "
+		 + "  where atividade.postagem.id = :idPostagem "
+		 + "    and material.numeroOrdem > 1 "
+		 + "  group by aluno.id ")
+	List<Aluno> findAlunosSequenciaisByPostagem(@Param("idPostagem") Long idPostagem);
 
 }

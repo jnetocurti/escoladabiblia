@@ -45,6 +45,14 @@ public class RelatorioPostagemTest {
 		parameters.put("subReportPath", subReportPath);
 
 		parameters.put("certificados", getCertificados());
+		
+		parameters.put("presidiariosNov", 20L);
+		
+		parameters.put("presidiariosSeq", 60L);
+		
+		parameters.put("comunsNov", 2L);
+		
+		parameters.put("comunsSeq", 12L);
 
 		JasperPrint jasperPrintPDF = JasperFillManager.fillReport(jasper, parameters,
 				new JRBeanCollectionDataSource(Arrays.asList(new MateriaisPostagem("INTRODUTÓRIA", 1L),

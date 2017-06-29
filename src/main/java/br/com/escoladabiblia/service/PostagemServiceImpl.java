@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Postagem;
+import br.com.escoladabiblia.model.TipoCaracterizacao;
 import br.com.escoladabiblia.model.TipoEnvelope;
+import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.repository.AtividadeEstudoRepository;
 import br.com.escoladabiblia.repository.CertificadoEnviadoRepository;
 import br.com.escoladabiblia.repository.PostagemRepository;
@@ -36,6 +39,9 @@ public class PostagemServiceImpl implements PostagemService {
 
 	@Autowired
 	private AtividadeEstudoRepository atividadeEstudoRepository;
+	
+	@Autowired
+	private AlunoRepository alunoRepository;
 	
 	@Autowired
 	private CertificadoEnviadoRepository certificadoEnviadoRepository;
@@ -128,6 +134,20 @@ public class PostagemServiceImpl implements PostagemService {
 		parameters.put("subReportPath", JasperUtil.getFilePath("jasper/sub-certificados-postagem.jasper"));
 		
 		parameters.put("certificados", obterCertificadosDaPostagem(id));
+		
+		List<Aluno> alunosNovos = alunoRepository.findAlunosNovosByPostagem(id);
+		
+		List<Aluno> alunosSequenciais = alunoRepository.findAlunosSequenciaisByPostagem(id);
+		
+		parameters.put("presidiariosNov",
+				obterTotalAlunosPorCaracterizacao(alunosNovos, TipoCaracterizacao.PRESIDIARIO));
+
+		parameters.put("presidiariosSeq",
+				obterTotalAlunosPorCaracterizacao(alunosSequenciais, TipoCaracterizacao.PRESIDIARIO));
+
+		parameters.put("comunsNov", obterTotalAlunosPorCaracterizacao(alunosNovos, null));
+
+		parameters.put("comunsSeq", obterTotalAlunosPorCaracterizacao(alunosSequenciais, null));
 
 		JasperPrint jasperPrint = JasperUtil.getJasperPrintRelatorioPostagem(materiaisPostagem, 
 				parameters, "jasper/relatorio-postagem.jasper");
@@ -156,6 +176,11 @@ public class PostagemServiceImpl implements PostagemService {
 		}
 
 		return certificadosPostagem;
+	}
+	
+	private long obterTotalAlunosPorCaracterizacao(List<Aluno> alunos, TipoCaracterizacao caracterizacao) {
+
+		return alunos.stream().filter(a -> a.getTipoCaracterizacao() == caracterizacao).count();
 	}
 	
 }
