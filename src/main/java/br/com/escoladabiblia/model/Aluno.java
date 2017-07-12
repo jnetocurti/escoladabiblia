@@ -194,8 +194,8 @@ public class Aluno implements Serializable {
 
 	@Transient
 	public TipoCaracterizacao getTipoCaracterizacao() {
-		
-		return this.getCaracterizacao() != null ? this.getCaracterizacao().getTipo() : null;
+
+		return this.getCaracterizacao() != null ? this.getCaracterizacao().getTipo() : TipoCaracterizacao.NONE;
 	}
 
 	@Transient
