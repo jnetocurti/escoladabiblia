@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.escoladabiblia.model.Aluno;
+import br.com.escoladabiblia.model.Endereco;
 import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.util.dto.AlunoComumDTO;
@@ -57,6 +58,22 @@ public class AlunoServiceImpl implements AlunoService {
 	public Aluno editar(Long id) {
 
 		return alunoRepository.findOne(id);
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void adicionarEnderecoAluno(Long id, Endereco endereco) {
+
+		Aluno aluno = alunoRepository.findOne(id);
+
+		if (aluno.getCaracterizacao() != null) {
+			
+			aluno.getCaracterizacao().setAtiva(false);
+		}
+
+		aluno.setEndereco(endereco);
+
+		alunoRepository.save(aluno);
 	}
 
 }

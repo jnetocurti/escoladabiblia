@@ -1,0 +1,35 @@
+<div th:fragment="aluno-liberto" th:remove="tag" xmlns:th="http://www.thymeleaf.org">
+
+	<form id="aluno-liberto-form" class="form-inline" th:action="@{/alunos-presidios/salvar-liberto}" method="post">
+				
+		<input type="hidden" id="id-liberto" th:field="${aluno.id}"></input>
+		<input type="hidden" class="nome-liberto" th:field="${aluno.nome}"></input>
+		
+		<div class="form-group col-md-6">
+			<label for="nome">Nome</label>
+			<input type="text" class="form-control nome-liberto" th:disabled="true"></input>
+		</div>
+		
+		<div class="form-group col-md-2">
+			<label for="matricula">Matrícula</label>
+			<input type="text" class="form-control" id="matricula-liberto" th:disabled="true"></input>
+		</div>
+		
+		<div class="form-group col-md-2">
+			<label for="raio">Raio</label>
+			<input type="text" class="form-control" id="raio-liberto" th:disabled="true"></input>
+		</div>
+		
+		<div class="form-group col-md-2">
+			<label for="cela">Cela</label>
+			<input type="text" class="form-control" id="cela-liberto" th:disabled="true"></input>
+		</div>
+	
+		<div th:replace="alunos/comuns/endereco-aluno"></div>
+	
+		<div class="form-group col-md-12 area-buttons">
+			<button id="save-aluno-liberdade" type="button" class="pull-right btn btn-success">Salvar</button>
+			<button type="button" class="pull-right btn btn-primary" id="cancelar-endereco-liberto">Cancelar</button>
+		</div>			
+	</form>
+</div>

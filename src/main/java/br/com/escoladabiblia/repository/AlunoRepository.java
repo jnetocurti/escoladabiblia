@@ -20,10 +20,10 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 		 + "   from Aluno a "
 		 + "   join a.caracterizacoes c "
 		 + "   join c.presidio p "
-		 + "  where upper(a.nome) like :filter "
-		 + "    and c.ativa = true "
+		 + "  where c.ativa = true "
+		 + "    and ( upper(a.nome) like :filter "
 		 + "     or c.matricula like :filter "
-		 + "     or upper(p.nome) like :filter "
+		 + "     or upper(p.nome) like :filter ) "
 		 + "  order by p.nome asc, a.nome asc ")
 	Page<AlunoPresidioDTO> findAlunosPresidiosByNomeOrMatriculaOrNomePresidio(@Param("filter") String filter, Pageable pageable);
 	
@@ -31,7 +31,7 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 		 + "   from Aluno a "
 		 + "   left join a.caracterizacoes c "
 		 + "  where upper(a.nome) like :filter "
-		 + "    and c = null or c.ativa = false "
+		 + "    and ( c = null or c.ativa = false ) "
 		 + "  order by a.nome asc ")
 	Page<AlunoComumDTO> findAlunosComunsByName(@Param("filter") String filter, Pageable pageable);
 	

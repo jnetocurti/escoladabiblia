@@ -47,5 +47,19 @@ Sandbox('*', function(box) {
 			}
 		}
 	);
+	
+	box.eventKeyup('#cep', function() {
+
+		box.getEnderecoByCEP(box.get('#cep'), function(data) {
+
+			box.set('#logradouro', data.logradouro);
+			box.set('#bairro', data.bairro);
+			box.set('#cidade', data.localidade);
+			box.set('#estado', $('#estado option').filter(function() {	return $(this).html() == data.uf; }).val());
+			
+		}, function() {
+			box.set('#logradouro,#bairro,#cidade,#estado', '');
+		});
+	});
 		
 });

@@ -1,11 +1,13 @@
 Sandbox.modules.util = function(box) {
 
-	box.getEnderecoByCEP = function(cep, callback) {
+	box.getEnderecoByCEP = function(cep, callback, failure) {
 
 		var param = cep.replace(/[^\d]/, ''), url = 'https://viacep.com.br/ws/';
 
-		if (!cep || cep.length < 8 || !validCEP(cep))
+		if (!cep || cep.length < 8 || !validCEP(cep)) {
+			if(_.isFunction(failure)) failure();
 			return false;
+		}
 
 		url += param + '/json';
 

@@ -1,6 +1,7 @@
 package br.com.escoladabiblia.service;
 
 import br.com.escoladabiblia.model.Aluno;
+import br.com.escoladabiblia.model.Endereco;
 import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.util.dto.AlunoComumDTO;
 import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
@@ -19,5 +20,7 @@ public interface AlunoService {
 	Aluno salvarAlunoComum(Aluno aluno);
 
 	Aluno editar(Long id);
+
+	void adicionarEnderecoAluno(Long id, Endereco endereco);
 
 }

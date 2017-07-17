@@ -185,7 +185,8 @@ public class Aluno implements Serializable {
 	@Transient
 	public Caracterizacao getCaracterizacao() {
 
-		if (this.caracterizacoes.isEmpty()) {
+		if (this.caracterizacoes.isEmpty()
+				|| this.caracterizacoes.get(this.caracterizacoes.size() - 1).isAtiva() == false) {
 			return null;
 		}
 

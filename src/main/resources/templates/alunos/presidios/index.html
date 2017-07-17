@@ -29,6 +29,13 @@
 				<div th:replace="alunos/common-fragments/dados-aluno"></div>
 				
 				<div th:replace="alunos/presidios/presidio-aluno"></div>
+				
+				<div class="col-md-12">
+					<br></br>
+					<div class="pull-right">
+						<a href="javascript:" id="cadastrar-endereco-liberto">O aluno obteve liberdade</a>
+					</div>
+				</div>
 			    
 			    <div class="form-group col-md-12">
 					<hr class="separator"></hr>
@@ -40,6 +47,13 @@
 				</div>
 				
 			</form>
+		</div>
+		
+		<div class="area-form-alunos-libertos hide">
+		
+			<h3>Cadastro endereço de alunos libertos</h3>
+			
+			<div th:replace="alunos/presidios/aluno-liberto"></div>
 		</div>
 		
 		<div class="area-atualizacao-atividades hide">

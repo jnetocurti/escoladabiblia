@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Presidiario;
+import br.com.escoladabiblia.repository.EstadoRepository;
 import br.com.escoladabiblia.repository.MaterialEstudoRepository;
 import br.com.escoladabiblia.service.AlunoService;
 import br.com.escoladabiblia.service.PresidioService;
@@ -34,6 +35,9 @@ public class AlunosPresidiosController extends BaseController {
 	
 	@Autowired
 	private MaterialEstudoRepository materialEstudoRepository;
+	
+	@Autowired
+	private EstadoRepository estadoRepository;
 
 	@GetMapping({ "", "/" })
 	public String index(Model model) {
@@ -42,6 +46,7 @@ public class AlunosPresidiosController extends BaseController {
 		model.addAttribute("presidiario", Presidiario.builder().build());
 		model.addAttribute("presidios", presidioService.findAll());
 		model.addAttribute("materiais", materialEstudoRepository.findAll());
+		model.addAttribute("estados", estadoRepository.findAll());
 
 		return "alunos/presidios/index";
 	}
@@ -63,6 +68,14 @@ public class AlunosPresidiosController extends BaseController {
 			@Valid @ModelAttribute Presidiario presidiario) {
 
 		alunoService.salvarAlunoPresidio(aluno, presidiario);
+
+		return super.getSuccessMessage("sucesso.aluno.salvo");
+	}
+	
+	@PostMapping(path = "salvar-liberto")
+	public @ResponseBody MessageDTO salvarLiberto(@Valid @ModelAttribute Aluno aluno) {
+		
+		alunoService.adicionarEnderecoAluno(aluno.getId(), aluno.getEndereco());
 
 		return super.getSuccessMessage("sucesso.aluno.salvo");
 	}
