@@ -145,9 +145,9 @@ public class PostagemServiceImpl implements PostagemService {
 		parameters.put("presidiariosSeq",
 				obterTotalAlunosPorCaracterizacao(alunosSequenciais, TipoCaracterizacao.PRESIDIARIO));
 
-		parameters.put("comunsNov", obterTotalAlunosPorCaracterizacao(alunosNovos, null));
+		parameters.put("comunsNov", obterTotalAlunosPorCaracterizacao(alunosNovos, TipoCaracterizacao.NONE));
 
-		parameters.put("comunsSeq", obterTotalAlunosPorCaracterizacao(alunosSequenciais, null));
+		parameters.put("comunsSeq", obterTotalAlunosPorCaracterizacao(alunosSequenciais, TipoCaracterizacao.NONE));
 
 		JasperPrint jasperPrint = JasperUtil.getJasperPrintRelatorioPostagem(materiaisPostagem, 
 				parameters, "jasper/relatorio-postagem.jasper");
