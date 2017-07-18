@@ -28,4 +28,12 @@ Sandbox('*', function(box) {
 		});
 	};
 	
+	(function loadIfExistsPathParamIdAluno(){
+		var id = /(alunos-comuns\/?)(\d*)/g.exec(window.location.href)[2];
+		if (id) {
+			box.showMsg({type: 'SUCCESS', message: 'Dados do aluno atualizados com sucesso!'});
+			$('.grid-alunos').bootgrid('search', box.get('#alunoPath'));
+		}
+	})();
+	
 });

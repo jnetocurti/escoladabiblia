@@ -21,6 +21,6 @@ public interface AlunoService {
 
 	Aluno editar(Long id);
 
-	void adicionarEnderecoAluno(Long id, Endereco endereco);
+	void alterarAlunoEmLiberdade(Long id, String observacao, Endereco endereco);
 
 }

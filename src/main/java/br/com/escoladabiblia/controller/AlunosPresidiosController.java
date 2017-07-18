@@ -75,7 +75,7 @@ public class AlunosPresidiosController extends BaseController {
 	@PostMapping(path = "salvar-liberto")
 	public @ResponseBody MessageDTO salvarLiberto(@Valid @ModelAttribute Aluno aluno) {
 		
-		alunoService.adicionarEnderecoAluno(aluno.getId(), aluno.getEndereco());
+		alunoService.alterarAlunoEmLiberdade(aluno.getId(), aluno.getObservacao(), aluno.getEndereco());
 
 		return super.getSuccessMessage("sucesso.aluno.salvo");
 	}

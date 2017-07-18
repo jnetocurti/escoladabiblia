@@ -62,7 +62,7 @@ public class AlunoServiceImpl implements AlunoService {
 
 	@Override
 	@Transactional(readOnly = false)
-	public void adicionarEnderecoAluno(Long id, Endereco endereco) {
+	public void alterarAlunoEmLiberdade(Long id, String observacao, Endereco endereco) {
 
 		Aluno aluno = alunoRepository.findOne(id);
 
@@ -71,6 +71,7 @@ public class AlunoServiceImpl implements AlunoService {
 			aluno.getCaracterizacao().setAtiva(false);
 		}
 
+		aluno.setObservacao(observacao);
 		aluno.setEndereco(endereco);
 
 		alunoRepository.save(aluno);

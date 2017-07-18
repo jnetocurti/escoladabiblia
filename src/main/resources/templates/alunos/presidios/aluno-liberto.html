@@ -6,23 +6,29 @@
 		<input type="hidden" class="nome-liberto" th:field="${aluno.nome}"></input>
 		
 		<div class="form-group col-md-6">
-			<label for="nome">Nome</label>
+			<label for="nome-liberto">Nome</label>
 			<input type="text" class="form-control nome-liberto" th:disabled="true"></input>
 		</div>
 		
 		<div class="form-group col-md-2">
-			<label for="matricula">Matrícula</label>
+			<label for="matricula-liberto">Matrícula</label>
 			<input type="text" class="form-control" id="matricula-liberto" th:disabled="true"></input>
 		</div>
 		
 		<div class="form-group col-md-2">
-			<label for="raio">Raio</label>
+			<label for="raio-liberto">Raio</label>
 			<input type="text" class="form-control" id="raio-liberto" th:disabled="true"></input>
 		</div>
 		
 		<div class="form-group col-md-2">
-			<label for="cela">Cela</label>
+			<label for="cela-liberto">Cela</label>
 			<input type="text" class="form-control" id="cela-liberto" th:disabled="true"></input>
+		</div>
+		
+		<div class="form-group col-md-12">
+			<label for="observacao-liberto">Observação</label>
+			<textarea id="observacao-liberto" rows="2" th:field="${aluno.observacao}" class="form-control" 
+				placeholder="Observações do aluno"></textarea>
 		</div>
 	
 		<div th:replace="alunos/comuns/endereco-aluno"></div>

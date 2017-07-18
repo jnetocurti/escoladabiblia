@@ -61,5 +61,5 @@ Sandbox('*', function(box) {
 			box.set('#logradouro,#bairro,#cidade,#estado', '');
 		});
 	});
-		
+	
 });

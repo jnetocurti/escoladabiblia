@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,12 +35,17 @@ public class AlunosComunsController extends BaseController {
 	@Autowired
 	private MaterialEstudoRepository materialEstudoRepository;
 
-	@GetMapping({ "", "/" })
-	public String index(Model model) {
+	@GetMapping({ "", "/{id}" })
+	public String index(Model model, @PathVariable(name = "id", required = false) Long id) {
 
 		model.addAttribute("aluno", Aluno.builder().build());
 		model.addAttribute("estados", estadoRepository.findAll());
 		model.addAttribute("materiais", materialEstudoRepository.findAll());
+		
+		if (id != null) {
+			Aluno alunoPath = alunoService.editar(id);
+			model.addAttribute("alunoPath", alunoPath != null ? alunoPath.getNome() : null);
+		}
 
 		return "alunos/comuns/index";
 	}

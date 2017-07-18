@@ -8,7 +8,7 @@ Sandbox('*', function(box) {
 				box.set('#id,#id-liberto', data.id);
 				box.set('#nome,.nome-liberto', data.nome);
 				box.check('#batizado', data.batizado);
-				box.set('#observacao', data.observacao);
+				box.set('#observacao,#observacao-liberto', data.observacao);
 				box.set('#nascimento', data.dataNascimento);
 				box.check('#possuiBiblia', data.possuiBiblia);
 				box.set('#cela,#cela-liberto', getCaracterizacao(data).cela);
@@ -47,7 +47,7 @@ Sandbox('*', function(box) {
 
 	box.postForm('#aluno-liberto-form', {
 		success : function(data) {
-			window.location.href = context + "alunos-comuns/";
+			window.location.href = context + "alunos-comuns/" + box.get('#id-liberto');
 		}
 	});
 	

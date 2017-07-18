@@ -13,6 +13,8 @@
 		
 		<div class="area-grid-alunos">
 		
+			<input type="hidden" id="alunoPath" th:if="${alunoPath}" th:value="${alunoPath}"></input>
+		
 			<h3>Alunos cadastrados</h3>
 		
 			<div th:replace="alunos/comuns/grid-alunos"></div>
