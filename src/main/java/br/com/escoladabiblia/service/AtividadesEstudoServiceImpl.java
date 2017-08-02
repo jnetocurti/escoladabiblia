@@ -14,7 +14,6 @@ import br.com.escoladabiblia.model.CertificadoEnviado;
 import br.com.escoladabiblia.model.Postagem;
 import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.repository.AtividadeEstudoRepository;
-import br.com.escoladabiblia.repository.BibliaEnviadaRepository;
 import br.com.escoladabiblia.repository.CertificadoEnviadoRepository;
 import br.com.escoladabiblia.repository.MaterialEstudoRepository;
 import br.com.escoladabiblia.repository.PostagemRepository;
@@ -43,9 +42,6 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	@Autowired
 	private CertificadoEnviadoRepository certificadoEnviadoRepository;
 	
-	@Autowired
-	private BibliaEnviadaRepository bibliaEnviadaRepository;
-
 	@Override
 	public AtividadesEstudoEdicaoDTO obterAtividadesEstudoAlunoParaEdicao(Long id) throws BusinessException {
 
@@ -74,12 +70,33 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 				.withAluno(Aluno.builder().withId(idAluno).build())
 				.withMaterial(materialEstudoRepository.findOne(idMaterial)).build();
 
+		this.proccessBiblia(idAluno, enviarBiblia, postagem, atividadeEstudo);
+
+		atividadeEstudoRepository.save(atividadeEstudo);
+	}
+
+	/**
+	 * 
+	 * Se {@code enviarBiblia} igual à {@code true}, cria uma instancia de
+	 * {@code BibliaEnviada}, associa à atividade de estudo e postagem recebidas
+	 * e realiza o update da informação {@code possuiBiblia} da entidade
+	 * {@code Aluno}.
+	 * 
+	 * @param idAluno
+	 * @param enviarBiblia
+	 * @param postagem
+	 * @param atividadeEstudo
+	 */
+	private void proccessBiblia(Long idAluno, boolean enviarBiblia, final Postagem postagem,
+			final AtividadeEstudo atividadeEstudo) {
+		
 		if (enviarBiblia) {
+
+			alunoRepository.updateBibliaStatus(idAluno, true);
+
 			atividadeEstudo.setBiblia(
 					BibliaEnviada.builder().withPostagem(postagem).withAtividadeEstudo(atividadeEstudo).build());
 		}
-
-		atividadeEstudoRepository.save(atividadeEstudo);
 	}
 	
 	@Override
@@ -100,13 +117,24 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 		
 		atividadeEstudo.setAtividadeEncerrada(atividade.isAtividadeEncerrada());
 
-		proccessCertificado(atividade.isCertificado(), atividadeEstudo);
+		this.proccessCertificado(atividade.isCertificado(), atividadeEstudo);
 
-		proccessBiblia(atividade.isBiblia(), atividadeEstudo);
-		
 		return atividadeEstudoRepository.save(atividadeEstudo);
 	}
 	
+	/**
+	 * 
+	 * Se {@code isCertificado} igual à {@code true}, cria uma instância de
+	 * {@code CertificadoEnviado}, associa à atividade de estudo recebida e à
+	 * postagem em aberto. Senão remove qualquer registro de
+	 * {@code CertificadoEnviado} associado à atividade de estudo recebida.
+	 * 
+	 * @param isCertificado
+	 * @param atividadeEstudo
+	 * 
+	 * @throws IllegalArgumentException
+	 *             se não houver uma postagem em aberto
+	 */
 	private void proccessCertificado(boolean isCertificado, AtividadeEstudo atividadeEstudo) {
 
 		if (isCertificado) {
@@ -118,32 +146,15 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 				
 				atividadeEstudo.setCertificado(CertificadoEnviado.builder()
 						.withAtividadeEstudo(atividadeEstudo)
-						.withPostagem(postagem).build());
+						.withPostagem(postagem)
+						.build());
 			}
 
 		} else {
 
-			certificadoEnviadoRepository.deleteByAtividadeEstudoId(atividadeEstudo.getId());
-		}
-	}
-
-	private void proccessBiblia(boolean isBiblia, AtividadeEstudo atividadeEstudo) {
-
-		if (isBiblia) {
-
-			if (!bibliaEnviadaRepository.existsByAtividadeEstudo_Id(atividadeEstudo.getId())) {
-				
-				Postagem postagem = postagemRepository.findLastOpen();
-				Assert.notNull(postagem, "postagem não pode ser null");
-				
-				atividadeEstudo.setBiblia(BibliaEnviada.builder()
-						.withAtividadeEstudo(atividadeEstudo)
-						.withPostagem(postagem).build());
-			}
+			atividadeEstudo.setCertificado(null);
 			
-		} else {
-
-			bibliaEnviadaRepository.deleteByAtividadeEstudoId(atividadeEstudo.getId());
+			certificadoEnviadoRepository.deleteByAtividadeEstudoId(atividadeEstudo.getId());
 		}
 	}
 
@@ -154,6 +165,11 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 		if (atividadeEstudo.isPostagemEncerrada()) {
 
 			throw new BusinessException("erro.atividade.estudo.deletar.postagem.encerrada");
+		}
+
+		if (atividadeEstudo.getBiblia() != null) {
+
+			alunoRepository.updateBibliaStatus(atividadeEstudo.getAluno().getId(), false);
 		}
 
 		atividadeEstudoRepository.delete(atividadeEstudo);
@@ -174,26 +190,43 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 	@Override
 	@Transactional(readOnly = false)
 	public void adicionarAtividadeHistorico(AtividadeEstudoHistoricoDTO atividadeHistorico) {
-		
-		Postagem postagemAtividade = obterPostagem(atividadeHistorico.getDataEnvioEstudo());
-		
+
+		final Postagem postagemAtividade = this.obterPostagemHistorico(atividadeHistorico.getDataEnvioEstudo());
+
 		AtividadeEstudo atividadeEstudo = AtividadeEstudo.builder()
 				.withPostagem(postagemAtividade)
 				.withAluno(alunoRepository.findOne(atividadeHistorico.getAluno()))
-				.withMaterial(materialEstudoRepository.findOne(atividadeHistorico.getMaterial())).build();
-		
+				.withMaterial(materialEstudoRepository.findOne(atividadeHistorico.getMaterial()))
+				.build();
+
 		atividadeEstudo.setAtividadeEncerrada(true);
 		atividadeEstudo.setNota(atividadeHistorico.getNota());
 		atividadeEstudo.setDataRetornoEstudo(atividadeHistorico.getDataRetornoEstudo());
-		
-		atividadeEstudo.setCertificado(obterCertificado(atividadeHistorico.getCertificado(), atividadeEstudo));
-		atividadeEstudo.setBiblia(obterBiblia(atividadeHistorico.getBiblia(), atividadeEstudo));
-		
+
+		atividadeEstudo.setCertificado(
+				this.obterCertificadoHistorico(atividadeHistorico.getDataEnvioCertificado(), atividadeEstudo));
+
+		atividadeEstudo.setBiblia(
+				this.obterBibliaHistorico(atividadeHistorico.getDataEnvioBiblia(), atividadeEstudo));
+
+		if (atividadeEstudo.getBiblia() != null) {
+
+			alunoRepository.updateBibliaStatus(atividadeHistorico.getAluno(), true);
+		}
+
 		atividadeEstudoRepository.save(atividadeEstudo);
 
 	}
 
-	private Postagem obterPostagem(Calendar dataPostagem) {
+	/**
+	 * Busca uma {@code Postagem} pela data prevista de envio. Caso não exista
+	 * cria uma nova com data efetiva de envio igual à data prevista, ou seja,
+	 * uma postagem já encerrada e retorna.
+	 * 
+	 * @param dataPostagem
+	 * @return {@code Postagem} da data informada.
+	 */
+	private Postagem obterPostagemHistorico(Calendar dataPostagem) {
 		
 		Postagem postagem = postagemRepository.findByDataPrevistaEnvio(dataPostagem);
 
@@ -209,13 +242,23 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 		return postagem;
 	}
 	
-	private CertificadoEnviado obterCertificado(Calendar certificado, AtividadeEstudo atividadeEstudo) {
+	/**
+	 * Cria e retorna uma instância de {@code CertificadoEnviado} associada à
+	 * atividade de estudo recebida e à postagem com data de envio igual à data
+	 * de envio do certificado recebida.
+	 * 
+	 * @param dataEnvioCertificado
+	 * @param atividadeEstudo
+	 * @return Se dataEnvioCertificado diferente de {@code null} uma nova
+	 *         instância de {@code CertificadoEnviado}, senão {@code null}.
+	 */
+	private CertificadoEnviado obterCertificadoHistorico(Calendar dataEnvioCertificado, AtividadeEstudo atividadeEstudo) {
 		
-		if (certificado == null) {
+		if (dataEnvioCertificado == null) {
 			return null;
 		}
 			
-		Postagem postagemCertificado = obterPostagem(certificado);
+		Postagem postagemCertificado = this.obterPostagemHistorico(dataEnvioCertificado);
 		
 		return CertificadoEnviado.builder()
 				.withAtividadeEstudo(atividadeEstudo)
@@ -223,13 +266,23 @@ public class AtividadesEstudoServiceImpl implements AtividadesEstudoService {
 				.build();
 	}
 
-	private BibliaEnviada obterBiblia(Calendar biblia, AtividadeEstudo atividadeEstudo) {
+	/**
+	 * Cria e retorna uma instância de {@code BibliaEnviada} associada à
+	 * atividade de estudo recebida e à postagem com data de envio igual à data
+	 * de envio da bíblia recebida.
+	 * 
+	 * @param dataEnvioBiblia
+	 * @param atividadeEstudo
+	 * @return Se dataEnvioBiblia diferente de {@code null} uma nova instância
+	 *         de {@code BibliaEnviada}, senão {@code null}.
+	 */
+	private BibliaEnviada obterBibliaHistorico(Calendar dataEnvioBiblia, AtividadeEstudo atividadeEstudo) {
 
-		if (biblia == null) {
+		if (dataEnvioBiblia == null) {
 			return null;
 		}
 			
-		Postagem postagemBiblia = obterPostagem(biblia);
+		Postagem postagemBiblia = this.obterPostagemHistorico(dataEnvioBiblia);
 		
 		return BibliaEnviada.builder()
 				.withAtividadeEstudo(atividadeEstudo)

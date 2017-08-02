@@ -104,7 +104,6 @@ Sandbox('*', function(box) {
 		box.post(context + 'atividades-estudo/editar-atividade', id.toString(), {
 			success : function(data) {
 				box.set('#nota', data.nota);
-				box.set('#biblia', !_.isNull(data.biblia) + '');
 				box.set('#id-atividade-atualizar', data.id);
 				box.text('#nome-material', data.material.nome);
 				box.set('#data-retorno', data.dataRetornoEstudo);

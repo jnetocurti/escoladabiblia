@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -50,5 +51,9 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 		 + "    and material.numeroOrdem > 1 "
 		 + "  group by aluno.id ")
 	List<Aluno> findAlunosSequenciaisByPostagem(@Param("idPostagem") Long idPostagem);
+
+	@Modifying
+	@Query("update Aluno aluno set aluno.possuiBiblia = :possuiBiblia where aluno.id = :id")
+	void updateBibliaStatus(@Param("id") Long id, @Param("possuiBiblia") boolean possuiBiblia);
 
 }

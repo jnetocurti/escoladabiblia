@@ -36,9 +36,9 @@ public class AtividadeEstudoHistoricoDTO implements Serializable {
 	@DecimalMax(value = "10.00")
 	private Float nota;
 
-	private Calendar certificado;
+	private Calendar dataEnvioCertificado;
 
-	private Calendar biblia;
+	private Calendar dataEnvioBiblia;
 
 	public Long getAluno() {
 		return aluno;
@@ -82,22 +82,22 @@ public class AtividadeEstudoHistoricoDTO implements Serializable {
 		this.nota = nota;
 	}
 
-	public Calendar getCertificado() {
-		return certificado;
+	public Calendar getDataEnvioCertificado() {
+		return dataEnvioCertificado;
 	}
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	public void setCertificado(Calendar certificado) {
-		this.certificado = certificado;
+	public void setDataEnvioCertificado(Calendar dataEnvioCertificado) {
+		this.dataEnvioCertificado = dataEnvioCertificado;
 	}
 
-	public Calendar getBiblia() {
-		return biblia;
+	public Calendar getDataEnvioBiblia() {
+		return dataEnvioBiblia;
 	}
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	public void setBiblia(Calendar biblia) {
-		this.biblia = biblia;
+	public void setDataEnvioBiblia(Calendar dataEnvioBiblia) {
+		this.dataEnvioBiblia = dataEnvioBiblia;
 	}
 
 }
