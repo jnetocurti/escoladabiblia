@@ -4,8 +4,8 @@ package br.com.escoladabiblia.model;
  * Representa os tipos de envelopes para impressão suportados pelo sistema
  * <p>
  * O atributo {@code size} define o tamanho em "pontos" para o envelope sendo
- * também seu identificador. Ex: <b>OFICIO_114_X_229</b> é um envelope menor que
- * <b>ENVELOPE_162_X_229</b>
+ * também seu identificador. Ex: <b>OFICIO_114_X_229 (size = 1)</b> é um
+ * envelope menor que <b>ENVELOPE_162_X_229 (size = 2)</b>
  * <p>
  * O atributo {@code jasperFile} define o jasper template correspondente ao tipo
  * de envelope

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-28T11:14:07 -->
+<!-- 2017-08-07T22:14:37 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="envelope-oficio-frente" pageWidth="649" pageHeight="323" orientation="Landscape" columnWidth="605" leftMargin="9" rightMargin="35" topMargin="9" bottomMargin="9" isFloatColumnFooter="true" uuid="9319a13d-37da-4a39-b58c-cb6598a8a63f">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="mm"/>
 	<parameter name="remetenteImg" class="java.lang.String"/>
-	<parameter name="carimboImg" class="java.lang.String"/>
+	<parameter name="showRemetenteImg" class="java.lang.Boolean"/>
+	<parameter name="carimboImpressoImg" class="java.lang.String"/>
+	<parameter name="showCarimboImpressoImg" class="java.lang.Boolean"/>
+	<parameter name="carimboMalaDiretaImg" class="java.lang.String"/>
+	<parameter name="showCarimboMalaDiretaImg" class="java.lang.Boolean"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -89,7 +93,9 @@
 				<textFieldExpression><![CDATA[$F{complemento}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="12" y="12" width="157" height="77" uuid="dece1d56-3ae9-4fb8-8cbe-45d71e518d3b"/>
+				<reportElement x="12" y="12" width="157" height="77" uuid="dece1d56-3ae9-4fb8-8cbe-45d71e518d3b">
+					<printWhenExpression><![CDATA[$P{showRemetenteImg}]]></printWhenExpression>
+				</reportElement>
 				<imageExpression><![CDATA[$P{remetenteImg}]]></imageExpression>
 			</image>
 			<image>
@@ -97,8 +103,18 @@
 					<property name="com.jaspersoft.studio.unit.y" value="mm"/>
 					<property name="com.jaspersoft.studio.unit.x" value="mm"/>
 					<property name="com.jaspersoft.studio.unit.width" value="mm"/>
+					<printWhenExpression><![CDATA[$P{showCarimboImpressoImg}]]></printWhenExpression>
 				</reportElement>
-				<imageExpression><![CDATA[$P{carimboImg}]]></imageExpression>
+				<imageExpression><![CDATA[$P{carimboImpressoImg}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="430" y="248" width="168" height="43" uuid="531192ec-a450-49cf-921e-580f714cdb12">
+					<property name="com.jaspersoft.studio.unit.y" value="mm"/>
+					<property name="com.jaspersoft.studio.unit.x" value="mm"/>
+					<property name="com.jaspersoft.studio.unit.width" value="mm"/>
+					<printWhenExpression><![CDATA[$P{showCarimboMalaDiretaImg}]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{carimboMalaDiretaImg}]]></imageExpression>
 			</image>
 		</band>
 	</detail>

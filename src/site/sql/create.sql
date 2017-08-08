@@ -7,6 +7,7 @@ create table controle_importacoes (id  bigserial not null, tipo_importacao varch
 create table enderecos (id  bigserial not null, bairro varchar(100), cep varchar(9), cidade varchar(100) not null, complemento varchar(100), logradouro varchar(100) not null, numero integer default 0 not null, estado_id int8 not null, primary key (id))
 create table estados (id  bigserial not null, descricao varchar(50) not null, uf varchar(2) not null, primary key (id))
 create table materiais_estudo (id  bigserial not null, nome varchar(100) not null, numero_ordem int4 not null, tipo_envelope int4 not null, primary key (id))
+create table parametros (id  bigserial not null, exibir_carimbo_impresso boolean, exibir_carimbo_mala_direta boolean, exibir_remetente boolean, primary key (id))
 create table postagens (id  bigserial not null, data_efetiva_envio date, data_prevista_envio date not null, primary key (id))
 create table presidiarios (cela int4, complemento varchar(50), matricula varchar(30), raio int4, id int8 not null, presidio_id int8 not null, primary key (id))
 create table presidios (id  bigserial not null, nome varchar(100) not null, endereco_id int8 not null, primary key (id))

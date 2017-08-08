@@ -18,6 +18,4 @@ public interface PostagemService {
 
 	byte[] processarPostagem(Long id, boolean encerrar) throws JRException, IOException;
 
-	byte[] gerarRelatorio(Long id) throws JRException, IOException;
-
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.escoladabiblia.model.Postagem;
 import br.com.escoladabiblia.service.PostagemService;
+import br.com.escoladabiblia.service.RelatorioPostagemService;
 import br.com.escoladabiblia.util.dto.MessageDTO;
 import br.com.escoladabiblia.util.dto.PeriodoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
@@ -30,6 +31,9 @@ public class PostagensController extends BaseController {
 
 	@Autowired
 	private PostagemService postagemService;
+	
+	@Autowired
+	private RelatorioPostagemService relatorioPostagemService;
 
 	@GetMapping(path = "agendamento")
 	public String agendamentoIndex(Model model) throws BusinessException {
@@ -79,9 +83,9 @@ public class PostagensController extends BaseController {
 	@GetMapping(path = "gerenciamento/relatorio/{id}")
 	public ResponseEntity<byte[]> relatorio(@PathVariable Long id) throws JRException, IOException {
 
-		final byte[] envelopes = postagemService.gerarRelatorio(id);
+		final byte[] relatorio = relatorioPostagemService.obterRelatorioPostagem(id);
 
-		return super.getPDFResponse(envelopes, "relatorio.pdf");
+		return super.getPDFResponse(relatorio, "relatorio.pdf");
 	}
 
 }

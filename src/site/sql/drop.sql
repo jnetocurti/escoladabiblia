@@ -20,6 +20,7 @@ drop table if exists controle_importacoes cascade
 drop table if exists enderecos cascade
 drop table if exists estados cascade
 drop table if exists materiais_estudo cascade
+drop table if exists parametros cascade
 drop table if exists postagens cascade
 drop table if exists presidiarios cascade
 drop table if exists presidios cascade

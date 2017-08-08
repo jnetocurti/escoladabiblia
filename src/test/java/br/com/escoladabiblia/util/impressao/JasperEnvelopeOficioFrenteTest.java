@@ -93,7 +93,7 @@ public class JasperEnvelopeOficioFrenteTest {
 		Map<String, Object> parameters = new HashMap<>();
 
 		parameters.put("carimboImg",
-				Thread.currentThread().getContextClassLoader().getResource("images/carimbo.png").getPath());
+				Thread.currentThread().getContextClassLoader().getResource("images/carimbo-impresso.png").getPath());
 
 		parameters.put("remetenteImg",
 				Thread.currentThread().getContextClassLoader().getResource("images/remetente.png").getPath());
