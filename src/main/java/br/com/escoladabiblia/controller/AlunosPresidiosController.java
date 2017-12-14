@@ -3,6 +3,7 @@ package br.com.escoladabiblia.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.model.Presidiario;
@@ -24,6 +26,7 @@ import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
 
 @Controller
+@RequestScope
 @RequestMapping("/alunos-presidios")
 public class AlunosPresidiosController extends BaseController {
 
@@ -45,7 +48,7 @@ public class AlunosPresidiosController extends BaseController {
 		model.addAttribute("aluno", Aluno.builder().build());
 		model.addAttribute("presidiario", Presidiario.builder().build());
 		model.addAttribute("presidios", presidioService.findAll());
-		model.addAttribute("materiais", materialEstudoRepository.findAll());
+		model.addAttribute("materiais", materialEstudoRepository.findAll(new Sort("numeroOrdem")));
 		model.addAttribute("estados", estadoRepository.findAll());
 
 		return "alunos/presidios/index";

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.repository.EstadoRepository;
@@ -23,6 +24,7 @@ import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
 
 @Controller
+@RequestScope
 @RequestMapping("/alunos-comuns")
 public class AlunosComunsController extends BaseController {
 

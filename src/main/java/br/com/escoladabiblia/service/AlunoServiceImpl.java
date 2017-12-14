@@ -37,7 +37,7 @@ public class AlunoServiceImpl implements AlunoService {
 
 		aluno.getCaracterizacoes().add(presidiario);
 
-		return alunoRepository.save(aluno);
+		return alunoRepository.saveAndFlush(aluno);
 	}
 	
 	@Override

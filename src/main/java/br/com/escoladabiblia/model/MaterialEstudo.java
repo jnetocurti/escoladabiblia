@@ -41,7 +41,11 @@ public class MaterialEstudo implements Serializable {
 	@Convert(converter = TipoEnvelopeConverter.class)
 	@Column(name = "tipo_envelope", nullable = false)
 	private TipoEnvelope tipoEnvelope;
-
+	
+	@NotNull
+	@Column(name = "corrigible", nullable = false)
+	private boolean corrigible;
+	
 	public MaterialEstudo() {
 	}
 
@@ -51,6 +55,7 @@ public class MaterialEstudo implements Serializable {
 		this.nome = builder.nome;
 		this.numeroOrdem = builder.numeroOrdem;
 		this.tipoEnvelope = builder.tipoEnvelope;
+		this.corrigible = builder.corrigible;
 	}
 
 	public Long getId() {
@@ -83,6 +88,14 @@ public class MaterialEstudo implements Serializable {
 
 	public void setTipoEnvelope(TipoEnvelope tipoEnvelope) {
 		this.tipoEnvelope = tipoEnvelope;
+	}
+	
+	public boolean isCorrigible() {
+		return corrigible;
+	}
+
+	public void setCorrigible(boolean corrigible) {
+		this.corrigible = corrigible;
 	}
 
 	@Override
@@ -134,6 +147,7 @@ public class MaterialEstudo implements Serializable {
 		private String nome;
 		private Integer numeroOrdem;
 		private TipoEnvelope tipoEnvelope;
+		private boolean corrigible;
 
 		private Builder() {
 		}
@@ -155,6 +169,11 @@ public class MaterialEstudo implements Serializable {
 
 		public Builder withTipoEnvelope(TipoEnvelope tipoEnvelope) {
 			this.tipoEnvelope = tipoEnvelope;
+			return this;
+		}
+		
+		public Builder withCorrigible(boolean corrigible) {
+			this.corrigible = corrigible;
 			return this;
 		}
 

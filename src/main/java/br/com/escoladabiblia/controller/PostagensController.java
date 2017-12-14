@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
 import br.com.escoladabiblia.model.Postagem;
 import br.com.escoladabiblia.service.PostagemService;
@@ -26,6 +27,7 @@ import br.com.escoladabiblia.util.exception.BusinessException;
 import net.sf.jasperreports.engine.JRException;
 
 @Controller
+@RequestScope
 @RequestMapping("/postagens")
 public class PostagensController extends BaseController {
 

@@ -18,11 +18,11 @@
 						<p><strong>Data de envio: </strong><span th:text="${#calendars.format(atividade.dataEnvioEstudo, 'dd/MM/yyyy')}"></span></p>
 					</div>
 					
-					<div class="form-group col-md-12">
+					<div class="form-group col-md-12" th:unless="${!atividade.corrigible}">
 						<p><strong>Data de retorno: </strong><span th:text="${#calendars.format(atividade.dataRetornoEstudo, 'dd/MM/yyyy')}"></span></p>
 					</div>
 					
-					<div class="form-group col-md-12">
+					<div class="form-group col-md-12" th:unless="${!atividade.corrigible}">
 						<p><strong>Nota: </strong><span th:text="${atividade.nota}"></span></p>
 					</div>
 					

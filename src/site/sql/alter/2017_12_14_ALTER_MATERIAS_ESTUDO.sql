@@ -1,0 +1,1 @@
+ALTER TABLE materiais_estudo ADD COLUMN corrigible boolean default true not null;

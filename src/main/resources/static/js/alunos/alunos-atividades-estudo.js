@@ -87,7 +87,7 @@ Sandbox('*', function(box) {
 			
 			commands += box.smallGridButton(column, row, "command-delete-atividades", "fa-trash");
 			
-		} else if (row.postagemEncerrada && !row.atividadeEncerrada) {
+		} else if (row.postagemEncerrada && !row.atividadeEncerrada && row.corrigible) {
 			
 			commands += box.smallGridButton(column, row, "command-edit-atividade", "fa-pencil");
 			

@@ -9,11 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.RequestScope;
 
 import br.com.escoladabiblia.util.dto.MessageDTO;
 import br.com.escoladabiblia.util.dto.MessageDTO.TipoMensagem;
 
 @Controller
+@RequestScope
 public abstract class BaseController {
 
 	@Autowired

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
 import br.com.escoladabiblia.model.AtividadeEstudo;
 import br.com.escoladabiblia.service.AtividadesEstudoService;
@@ -22,6 +23,7 @@ import br.com.escoladabiblia.util.dto.AtividadesEstudoHistoricoDTO;
 import br.com.escoladabiblia.util.exception.BusinessException;
 
 @Controller
+@RequestScope
 @RequestMapping("/atividades-estudo")
 public class AtividadesEstudoController {
 

@@ -157,6 +157,11 @@ public class AtividadeEstudo implements Serializable {
 	public boolean isPostagemEncerrada() {
 		return postagem.getDataEfetivaEnvio() != null;
 	}
+	
+	@Transient
+	public boolean isCorrigible() {
+		return material.isCorrigible();
+	}
 
 	@Override
 	public int hashCode() {
