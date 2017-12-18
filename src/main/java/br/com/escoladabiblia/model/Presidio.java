@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -38,7 +39,7 @@ public class Presidio implements Serializable {
 	@NotNull
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "endereco_id", nullable = false, foreignKey = @ForeignKey(name = "endereco_fk"))
-	private Endereco endereco;
+	private @Valid Endereco endereco;
 
 	public Presidio() {
 	}

@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="index">
+	
+	<div layout:fragment="content">
+
+		<ol class="breadcrumb">
+			<li><a th:href="@{/}">Home</a></li>
+			<li class="breadcrumb-item active">Presídios</li>
+		</ol>
+		
+		<div th:replace="fragments/messages"></div>
+		
+		<div class="area-grid-presidios">
+		
+			<h3>Presidios cadastrados</h3>
+		
+			<div th:replace="presidios/grid-presidios"></div>
+			
+			<button id="novo-presidio" type="button" class="pull-right btn btn-default btn-success">Novo</button>
+		</div>
+
+		<div class="area-form-presidios hide">
+		
+			<h3>Cadastro de presidios</h3>
+			
+			<div th:replace="presidios/form-presidios"></div>
+		</div>
+
+	</div>
+	<div layout:fragment="scripts">
+		<script th:src="@{/js/presidios/presidios.js}"></script>
+	</div>
+</html>

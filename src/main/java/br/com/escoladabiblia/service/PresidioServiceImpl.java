@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.escoladabiblia.model.Presidio;
 import br.com.escoladabiblia.repository.PresidioRepository;
+import br.com.escoladabiblia.util.pagination.BootgridRequest;
+import br.com.escoladabiblia.util.pagination.BootgridResponse;
 
 @Service
 @Transactional(readOnly = true)
@@ -27,6 +29,20 @@ public class PresidioServiceImpl implements PresidioService {
 	public Presidio findById(Long id) {
 
 		return presidioRepository.findOne(id);
+	}
+
+	@Override
+	public BootgridResponse<Presidio> findPresidiosByNome(BootgridRequest bootgridRequest) {
+
+		return new BootgridResponse<Presidio>(presidioRepository.findByNome(
+				"%" + bootgridRequest.getSearchPhrase().toUpperCase() + "%", bootgridRequest.getPageRequest()));
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void salvar(Presidio presidio) {
+		
+		presidioRepository.save(presidio);
 	}
 
 }
