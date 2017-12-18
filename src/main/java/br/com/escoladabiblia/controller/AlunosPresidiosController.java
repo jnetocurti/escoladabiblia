@@ -3,7 +3,6 @@ package br.com.escoladabiblia.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +47,7 @@ public class AlunosPresidiosController extends BaseController {
 		model.addAttribute("aluno", Aluno.builder().build());
 		model.addAttribute("presidiario", Presidiario.builder().build());
 		model.addAttribute("presidios", presidioService.findAll());
-		model.addAttribute("materiais", materialEstudoRepository.findAll(new Sort("numeroOrdem")));
+		model.addAttribute("materiais", materialEstudoRepository.findByAtivoIsTrueOrderByNumeroOrdem());
 		model.addAttribute("estados", estadoRepository.findAll());
 
 		return "alunos/presidios/index";

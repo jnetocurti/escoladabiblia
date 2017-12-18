@@ -10,13 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "materiais_estudo", uniqueConstraints = @UniqueConstraint(name = "numero_ordem_uk", columnNames = "numero_ordem"))
+@Table(name = "materiais_estudo")
 public class MaterialEstudo implements Serializable {
 
 	/**
@@ -46,6 +45,10 @@ public class MaterialEstudo implements Serializable {
 	@Column(name = "corrigible", nullable = false)
 	private boolean corrigible;
 	
+	@NotNull
+	@Column(name = "ativo", nullable = false)
+	private boolean ativo;
+	
 	public MaterialEstudo() {
 	}
 
@@ -56,6 +59,7 @@ public class MaterialEstudo implements Serializable {
 		this.numeroOrdem = builder.numeroOrdem;
 		this.tipoEnvelope = builder.tipoEnvelope;
 		this.corrigible = builder.corrigible;
+		this.ativo = builder.ativo;
 	}
 
 	public Long getId() {
@@ -96,6 +100,14 @@ public class MaterialEstudo implements Serializable {
 
 	public void setCorrigible(boolean corrigible) {
 		this.corrigible = corrigible;
+	}
+	
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override
@@ -148,6 +160,7 @@ public class MaterialEstudo implements Serializable {
 		private Integer numeroOrdem;
 		private TipoEnvelope tipoEnvelope;
 		private boolean corrigible;
+		private boolean ativo;
 
 		private Builder() {
 		}
@@ -174,6 +187,11 @@ public class MaterialEstudo implements Serializable {
 		
 		public Builder withCorrigible(boolean corrigible) {
 			this.corrigible = corrigible;
+			return this;
+		}
+		
+		public Builder withAtivo(boolean ativo) {
+			this.ativo = ativo;
 			return this;
 		}
 

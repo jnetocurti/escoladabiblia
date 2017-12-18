@@ -41,3 +41,20 @@ h1.page-header {
 div.area-buttons button {
 	margin-right: 10px;
 }
+
+/* Tela de Materiais Estudo */
+.acoes-materiais {
+	margin-bottom: 10px;
+}
+
+.acoes-materiais #btn-salvar-todos {
+	margin-right: 10px;
+}
+
+.area-lista-materiais .list-materiais-info {
+	margin-right: 10px;
+}
+
+.area-lista-materiais #nome-material {
+	width: 500px;
+}

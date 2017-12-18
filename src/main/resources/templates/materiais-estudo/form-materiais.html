@@ -1,0 +1,36 @@
+<form id="materiais-form" class="form-inline" th:action="@{/materiais-estudo/salvar}" 
+	method="post" xmlns:th="http://www.thymeleaf.org">
+	
+	<input type="hidden" class="form-control" th:field="${material.ativo}"></input>
+	<input type="hidden" class="form-control" th:field="${material.numeroOrdem}"></input>
+	
+	<div class="form-group col-md-6">
+		<label for="nome">Nome</label>
+		<input type="text" id="nome" class="form-control" th:field="${material.nome}" placeholder="Nome do Material"></input>
+	</div>
+	
+	<div class="form-group col-md-4">
+		<label for="envelope">Tipo de envelope</label>
+		<div>
+	    	<select class="form-control" id="envelope" th:field="${material.tipoEnvelope}">
+	    		<option th:value="${null}" th:text="Selecione"></option>
+	    		<option th:each="env : ${T(br.com.escoladabiblia.model.TipoEnvelope).values()}"
+					th:value="${env}" th:text="${env}">
+				</option>
+			</select>
+	   	</div>
+	</div>
+	
+	<div class="checkbox form-group col-md-2">
+		<br></br>
+		<label>
+			<input type="checkbox" id="batizado" th:field="${material.corrigible}" th:checked="${material.corrigible}"></input> Corrigível?
+		</label>
+	</div>
+	
+	<div class="form-group col-md-12 area-buttons">
+		<button id="btn-save-material" type="button" class="pull-right btn btn-default btn-success">Salvar</button>
+		<button type="button" class="pull-right btn btn-default btn-primary cancelar">Cancelar</button>
+	</div>
+	
+</form>

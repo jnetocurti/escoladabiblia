@@ -1,0 +1,29 @@
+<div class="col-md-12 list-materiais" xmlns:th="http://www.thymeleaf.org">
+	<ul id="sortable" class="list-group">
+		<li class="list-group-item" th:each="material : ${materiais}">
+			<div class="form-inline">
+			
+				<span class="ui-icon ui-icon-arrowthick-2-n-s list-materiais-info"></span>
+				
+				<input type="hidden" id="id-material" th:value="${material.id}"></input>
+				
+				<input type="text" id="nome-material" class="form-control list-materiais-info"
+					th:value="${material.nome}"></input> 
+					
+				<select id="tipo-envelope" class="form-control list-materiais-info">
+					<option th:each="env : ${T(br.com.escoladabiblia.model.TipoEnvelope).values()}"
+						th:value="${env}" th:text="${env}" th:selected="${env == material.tipoEnvelope}">
+					</option>
+				</select> 
+				
+				<label class="list-materiais-info"> 
+					<input type="checkbox" id="corrigible" th:checked="${material.corrigible}"></input> Corrigível?
+				</label>
+				
+				<label class="list-materiais-info">
+					<input type="checkbox" id="ativo" th:checked="${material.ativo}"></input> Ativo?
+				</label>
+			</div>
+		</li>
+	</ul>
+</div>

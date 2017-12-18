@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="index">
+	
+	<div layout:fragment="content">
+
+		<ol class="breadcrumb">
+			<li><a th:href="@{/}">Home</a></li>
+			<li class="breadcrumb-item active">Materiais de Estudo</li>
+		</ol>
+		
+		<div th:replace="fragments/messages"></div>
+		
+		<div class="row acoes-materiais">
+			<div class="col-md-12">
+				<button type="button" id="btn-novo-material" class="pull-right btn btn-success">Novo</button>
+				<button type="button" id="btn-salvar-todos" class="pull-right btn btn-primary">Salvar todos</button>
+			</div>
+		</div>
+
+		<div class="area-lista-materiais">
+			<h3>Materiais cadastrados</h3>
+			<div class="row">
+				<div th:replace="materiais-estudo/lista-materiais"></div>
+			</div>
+		</div>
+		
+		<div class="area-form-materiais hide">
+			<h3>Cadastro de Materiais</h3>
+			<div class="row">
+				<div th:replace="materiais-estudo/form-materiais"></div>
+			</div>
+		</div>
+		
+	</div>
+	<div layout:fragment="scripts">
+		<script th:src="@{/js/materiais-estudo/materiais.js}"></script>
+	</div>
+</html>

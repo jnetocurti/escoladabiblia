@@ -42,7 +42,7 @@ public class AlunosComunsController extends BaseController {
 
 		model.addAttribute("aluno", Aluno.builder().build());
 		model.addAttribute("estados", estadoRepository.findAll());
-		model.addAttribute("materiais", materialEstudoRepository.findAll());
+		model.addAttribute("materiais", materialEstudoRepository.findByAtivoIsTrueOrderByNumeroOrdem());
 		
 		if (id != null) {
 			Aluno alunoPath = alunoService.editar(id);
