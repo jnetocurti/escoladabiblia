@@ -7,6 +7,7 @@ import br.com.escoladabiblia.util.dto.AlunoComumDTO;
 import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
 import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
+import net.sf.jasperreports.engine.JRException;
 
 public interface AlunoService {
 
@@ -22,5 +23,7 @@ public interface AlunoService {
 	Aluno editar(Long id);
 
 	void alterarAlunoEmLiberdade(Long id, String observacao, Endereco endereco);
+
+	byte[] relatorioAlunosPorPresidio() throws JRException;
 
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.util.dto.AlunoComumDTO;
 import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
+import br.com.escoladabiblia.util.impressao.QuantidadeAlunosPresidioVO;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
@@ -55,5 +56,14 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 	@Modifying
 	@Query("update Aluno aluno set aluno.possuiBiblia = :possuiBiblia where aluno.id = :id")
 	void updateBibliaStatus(@Param("id") Long id, @Param("possuiBiblia") boolean possuiBiblia);
+
+	@Query(" select new br.com.escoladabiblia.util.impressao.QuantidadeAlunosPresidioVO(p.nome, count(a.id)) "
+		 + "   from Aluno a "
+		 + "   join a.caracterizacoes c "
+		 + "   join c.presidio p "
+		 + "  where c.ativa = true "
+		 + "  group by p.nome "
+		 + "  order by p.nome asc ")
+	List<QuantidadeAlunosPresidioVO> obterQuantidadeAlunosPorPresidio();
 
 }

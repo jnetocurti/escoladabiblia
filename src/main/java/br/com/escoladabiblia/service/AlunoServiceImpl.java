@@ -1,5 +1,8 @@
 package br.com.escoladabiblia.service;
 
+import java.io.InputStream;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,8 +13,14 @@ import br.com.escoladabiblia.model.Presidiario;
 import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.util.dto.AlunoComumDTO;
 import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
+import br.com.escoladabiblia.util.impressao.JasperUtil;
+import br.com.escoladabiblia.util.impressao.QuantidadeAlunosPresidioVO;
 import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 @Transactional(readOnly = true)
@@ -75,6 +84,20 @@ public class AlunoServiceImpl implements AlunoService {
 		aluno.setEndereco(endereco);
 
 		alunoRepository.save(aluno);
+	}
+
+	@Override
+	public byte[] relatorioAlunosPorPresidio() throws JRException {
+
+		final List<QuantidadeAlunosPresidioVO> alunosPresidios = alunoRepository.obterQuantidadeAlunosPorPresidio();
+
+		final InputStream jasper = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream("jasper/relatorio-alunos-por-presidio.jasper");
+
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper, null,
+				new JRBeanCollectionDataSource(alunosPresidios));
+
+		return JasperUtil.exportReport(jasperPrint);
 	}
 
 }
