@@ -1,6 +1,7 @@
 package br.com.escoladabiblia.service;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import br.com.escoladabiblia.repository.AlunoRepository;
 import br.com.escoladabiblia.util.dto.AlunoComumDTO;
 import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
 import br.com.escoladabiblia.util.impressao.JasperUtil;
-import br.com.escoladabiblia.util.impressao.QuantidadeAlunosPresidioVO;
+import br.com.escoladabiblia.util.impressao.AlunosPorPresidioVO;
+import br.com.escoladabiblia.util.impressao.AlunosStatusPorPeriodoVO;
+import br.com.escoladabiblia.util.impressao.AlunosStatusPorPeriodoVO.Periodo;
 import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
 import net.sf.jasperreports.engine.JRException;
@@ -89,7 +92,7 @@ public class AlunoServiceImpl implements AlunoService {
 	@Override
 	public byte[] relatorioAlunosPorPresidio() throws JRException {
 
-		final List<QuantidadeAlunosPresidioVO> alunosPresidios = alunoRepository.obterQuantidadeAlunosPorPresidio();
+		final List<AlunosPorPresidioVO> alunosPresidios = alunoRepository.obterAlunosPorPresidio();
 
 		final InputStream jasper = Thread.currentThread().getContextClassLoader()
 				.getResourceAsStream("jasper/relatorio-alunos-por-presidio.jasper");
@@ -99,5 +102,59 @@ public class AlunoServiceImpl implements AlunoService {
 
 		return JasperUtil.exportReport(jasperPrint);
 	}
+	
+	@Override
+	public byte[] relatorioAlunosAtivosPorPeriodo() throws JRException {
 
+		
+		final InputStream jasper = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream("jasper/relatorio-alunos-ativos-periodo.jasper");
+		
+		final List<AlunosStatusPorPeriodoVO> alunosPeriodos = obterAlunosStatusPeriodo(true);
+
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper, null,
+				new JRBeanCollectionDataSource(alunosPeriodos));
+
+		return JasperUtil.exportReport(jasperPrint);
+	}
+
+
+	@Override
+	public byte[] relatorioAlunosInativosPorPeriodo() throws JRException {
+
+		final InputStream jasper = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream("jasper/relatorio-alunos-inativos-periodo.jasper");
+
+		final List<AlunosStatusPorPeriodoVO> alunosPeriodos = obterAlunosStatusPeriodo(false);
+
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper, null,
+				new JRBeanCollectionDataSource(alunosPeriodos));
+
+		return JasperUtil.exportReport(jasperPrint);
+	}
+
+	private List<AlunosStatusPorPeriodoVO> obterAlunosStatusPeriodo(boolean ativo) {
+
+		final List<AlunosStatusPorPeriodoVO> alunosPeriodos = new ArrayList<>();
+
+		for (Periodo periodo : Periodo.values()) {
+
+			AlunosStatusPorPeriodoVO alunosStatusPeriodo = new AlunosStatusPorPeriodoVO(periodo);
+
+			if (ativo) {
+
+				alunosStatusPeriodo.getAlunos().addAll(alunoRepository.obterAlunosAtivosPeriodo(
+						alunosStatusPeriodo.getPeriodoInicio(), alunosStatusPeriodo.getPeriodoFinal()));
+			} else {
+
+				alunosStatusPeriodo.getAlunos()
+						.addAll(alunoRepository.obterAlunosInativosPeriodo(alunosStatusPeriodo.getPeriodoInicio()));
+			}
+
+			alunosPeriodos.add(alunosStatusPeriodo);
+		}
+
+		return alunosPeriodos;
+	}
+	
 }

@@ -3,7 +3,6 @@ package br.com.escoladabiblia.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +23,6 @@ import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
 import br.com.escoladabiblia.util.dto.MessageDTO;
 import br.com.escoladabiblia.util.pagination.BootgridRequest;
 import br.com.escoladabiblia.util.pagination.BootgridResponse;
-import net.sf.jasperreports.engine.JRException;
 
 @Controller
 @RequestScope
@@ -82,14 +80,6 @@ public class AlunosPresidiosController extends BaseController {
 		alunoService.alterarAlunoEmLiberdade(aluno.getId(), aluno.getObservacao(), aluno.getEndereco());
 
 		return super.getSuccessMessage("sucesso.aluno.salvo");
-	}
-	
-	@GetMapping(path = "alunos-por-presidio")
-	public ResponseEntity<byte[]> relatorioAlunosPorPresidio() throws JRException {
-
-		final byte[] envelopes = alunoService.relatorioAlunosPorPresidio();
-
-		return super.getPDFResponse(envelopes, "alunos-por-presidio.pdf");
 	}
 
 }

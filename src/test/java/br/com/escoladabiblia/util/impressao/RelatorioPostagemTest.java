@@ -73,27 +73,27 @@ public class RelatorioPostagemTest {
 		CertificadosPostagemVO certificado1 = new CertificadosPostagemVO("DEUS TEM FALADO", 2L);
 
 		certificado1.getAlunos()
-				.addAll(Arrays.asList(new AlunosCertificadosPostagemVO("ADALBERTO DE SOUZA FERREIRA"),
-						new AlunosCertificadosPostagemVO("ADALTO DOS SANTOS"),
-						new AlunosCertificadosPostagemVO("GUSTAVO EDUARDO MARTINS FRANÇA"),
-						new AlunosCertificadosPostagemVO("ISABELA CRISTINA GONÇALVES DE OLIVEIRA")));
+				.addAll(Arrays.asList(new AlunoVO("ADALBERTO DE SOUZA FERREIRA"),
+						new AlunoVO("ADALTO DOS SANTOS"),
+						new AlunoVO("GUSTAVO EDUARDO MARTINS FRANÇA"),
+						new AlunoVO("ISABELA CRISTINA GONÇALVES DE OLIVEIRA")));
 
 		CertificadosPostagemVO certificado2 = new CertificadosPostagemVO("NASCIDOS DA ÁGUA E DO ESPÍRITO", 12L);
 
 		certificado2.getAlunos()
-				.addAll(Arrays.asList(new AlunosCertificadosPostagemVO("ADRIANA CRISTINA ROSA ZACHARIAS"),
-						new AlunosCertificadosPostagemVO("ADRIANA HENRIQUE MIRANDA")));
+				.addAll(Arrays.asList(new AlunoVO("ADRIANA CRISTINA ROSA ZACHARIAS"),
+						new AlunoVO("ADRIANA HENRIQUE MIRANDA")));
 
 		CertificadosPostagemVO certificado3 = new CertificadosPostagemVO("O QUE A BÍBLIA DIZ", 5L);
 
-		certificado3.getAlunos().addAll(Arrays.asList(new AlunosCertificadosPostagemVO("CÉLIO FERREIRA DE MATOS"),
-				new AlunosCertificadosPostagemVO("CÍCERO DE ASSIS VIEIRA DA SILVA")));
+		certificado3.getAlunos().addAll(Arrays.asList(new AlunoVO("CÉLIO FERREIRA DE MATOS"),
+				new AlunoVO("CÍCERO DE ASSIS VIEIRA DA SILVA")));
 
 		CertificadosPostagemVO certificado4 = new CertificadosPostagemVO("CRISTIANISMO EM AÇÃO", 25L);
 
 		certificado4.getAlunos()
-				.addAll(Arrays.asList(new AlunosCertificadosPostagemVO("EWERTON FELIX DA PAIXÃO MARYAMA"),
-						new AlunosCertificadosPostagemVO("FERNANDO CONCEIÇÃO FERNANDES")));
+				.addAll(Arrays.asList(new AlunoVO("EWERTON FELIX DA PAIXÃO MARYAMA"),
+						new AlunoVO("FERNANDO CONCEIÇÃO FERNANDES")));
 
 		return Arrays.asList(certificado1, certificado2, certificado3, certificado4);
 	}

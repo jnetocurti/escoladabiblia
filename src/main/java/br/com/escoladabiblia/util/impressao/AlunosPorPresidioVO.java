@@ -2,7 +2,7 @@ package br.com.escoladabiblia.util.impressao;
 
 import java.io.Serializable;
 
-public class QuantidadeAlunosPresidioVO implements Serializable {
+public class AlunosPorPresidioVO implements Serializable {
 
 	/**
 	 * 
@@ -13,7 +13,7 @@ public class QuantidadeAlunosPresidioVO implements Serializable {
 
 	private final Long quantidadeAlunos;
 
-	public QuantidadeAlunosPresidioVO(String nomePresidio, Long quantidadeAlunos) {
+	public AlunosPorPresidioVO(String nomePresidio, Long quantidadeAlunos) {
 		this.nomePresidio = nomePresidio;
 		this.quantidadeAlunos = quantidadeAlunos;
 	}

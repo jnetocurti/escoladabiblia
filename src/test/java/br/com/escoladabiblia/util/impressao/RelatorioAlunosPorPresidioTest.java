@@ -20,11 +20,11 @@ public class RelatorioAlunosPorPresidioTest {
 				.getResourceAsStream("jasper/relatorio-alunos-por-presidio.jasper");
 
 		JasperPrint jasperPrintPDF = JasperFillManager.fillReport(jasper, null,
-				new JRBeanCollectionDataSource(Arrays.asList(new QuantidadeAlunosPresidioVO("PRESÍDIO 1", 10L),
-						new QuantidadeAlunosPresidioVO("PRESÍDIO 2", 10L),
-						new QuantidadeAlunosPresidioVO("PRESÍDIO 3", 10L),
-						new QuantidadeAlunosPresidioVO("PRESÍDIO 4", 10L),
-						new QuantidadeAlunosPresidioVO("PRESÍDIO 5", 10L))));
+				new JRBeanCollectionDataSource(Arrays.asList(new AlunosPorPresidioVO("PRESÍDIO 1", 10L),
+						new AlunosPorPresidioVO("PRESÍDIO 2", 10L),
+						new AlunosPorPresidioVO("PRESÍDIO 3", 10L),
+						new AlunosPorPresidioVO("PRESÍDIO 4", 10L),
+						new AlunosPorPresidioVO("PRESÍDIO 5", 10L))));
 		
 		JasperExportManager.exportReportToPdfFile(jasperPrintPDF, "target/relatorio-alunos-por-presidio.pdf");
 	}

@@ -26,4 +26,8 @@ public interface AlunoService {
 
 	byte[] relatorioAlunosPorPresidio() throws JRException;
 
+	byte[] relatorioAlunosAtivosPorPeriodo() throws JRException;
+
+	byte[] relatorioAlunosInativosPorPeriodo() throws JRException;
+
 }

@@ -1,5 +1,6 @@
 package br.com.escoladabiblia.repository;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Repository;
 import br.com.escoladabiblia.model.Aluno;
 import br.com.escoladabiblia.util.dto.AlunoComumDTO;
 import br.com.escoladabiblia.util.dto.AlunoPresidioDTO;
-import br.com.escoladabiblia.util.impressao.QuantidadeAlunosPresidioVO;
+import br.com.escoladabiblia.util.impressao.AlunoVO;
+import br.com.escoladabiblia.util.impressao.AlunosPorPresidioVO;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
@@ -57,13 +59,26 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 	@Query("update Aluno aluno set aluno.possuiBiblia = :possuiBiblia where aluno.id = :id")
 	void updateBibliaStatus(@Param("id") Long id, @Param("possuiBiblia") boolean possuiBiblia);
 
-	@Query(" select new br.com.escoladabiblia.util.impressao.QuantidadeAlunosPresidioVO(p.nome, count(a.id)) "
+	@Query(" select new br.com.escoladabiblia.util.impressao.AlunosPorPresidioVO(p.nome, count(a.id)) "
 		 + "   from Aluno a "
 		 + "   join a.caracterizacoes c "
 		 + "   join c.presidio p "
 		 + "  where c.ativa = true "
 		 + "  group by p.nome "
 		 + "  order by p.nome asc ")
-	List<QuantidadeAlunosPresidioVO> obterQuantidadeAlunosPorPresidio();
+	List<AlunosPorPresidioVO> obterAlunosPorPresidio();
+
+	@Query(" select new br.com.escoladabiblia.util.impressao.AlunoVO(a.nome) "
+		 + "   from Aluno a "
+		 + "  where a.ultimaAtividade between :periodoInicio and :periodoFinal "
+		 + "  order by a.nome ")
+	List<AlunoVO> obterAlunosAtivosPeriodo(@Param("periodoInicio") Calendar periodoInicio,
+			@Param("periodoFinal") Calendar periodoFinal);
+
+	@Query(" select new br.com.escoladabiblia.util.impressao.AlunoVO(a.nome) "
+		 + "   from Aluno a "
+		 + "  where a.ultimaAtividade is null or a.ultimaAtividade < :periodoInicio "
+		 + "  order by a.nome ")
+	List<AlunoVO> obterAlunosInativosPeriodo(@Param("periodoInicio") Calendar periodoInicio);
 
 }

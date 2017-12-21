@@ -2,7 +2,7 @@ package br.com.escoladabiblia.util.impressao;
 
 import java.io.Serializable;
 
-public class AlunosCertificadosPostagemVO implements Serializable {
+public class AlunoVO implements Serializable {
 
 	/**
 	 * 
@@ -11,7 +11,7 @@ public class AlunosCertificadosPostagemVO implements Serializable {
 
 	private String nome;
 
-	public AlunosCertificadosPostagemVO(String nome) {
+	public AlunoVO(String nome) {
 		this.nome = nome;
 	}
 

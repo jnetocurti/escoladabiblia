@@ -68,6 +68,10 @@ public class Aluno implements Serializable {
 
 	@Column(name = "observacao")
 	private String observacao;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "ultima_atividade")
+	private Calendar ultimaAtividade;
 
 	@JsonInclude(value = Include.NON_NULL)
 	@OneToOne(cascade = { CascadeType.ALL })
@@ -96,6 +100,7 @@ public class Aluno implements Serializable {
 		this.frequentouIgreja = builder.frequentouIgreja;
 		this.sexo = builder.sexo;
 		this.observacao = builder.observacao;
+		this.ultimaAtividade = builder.ultimaAtividade;
 		this.endereco = builder.endereco;
 		this.caracterizacoes = builder.caracterizacoes;
 		this.atividadesEstudo = builder.atividadesEstudo;
@@ -164,6 +169,14 @@ public class Aluno implements Serializable {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+	
+	public Calendar getUltimaAtividade() {
+		return ultimaAtividade;
+	}
+
+	public void setUltimaAtividade(Calendar ultimaAtividade) {
+		this.ultimaAtividade = ultimaAtividade;
 	}
 
 	public Endereco getEndereco() {
@@ -271,6 +284,7 @@ public class Aluno implements Serializable {
 		private Boolean frequentouIgreja;
 		private Sexo sexo;
 		private String observacao;
+		private Calendar ultimaAtividade;
 		private Endereco endereco;
 		private List<Caracterizacao> caracterizacoes = new ArrayList<>();
 		private List<AtividadeEstudo> atividadesEstudo = new ArrayList<>();
@@ -315,6 +329,11 @@ public class Aluno implements Serializable {
 
 		public Builder withObservacao(String observacao) {
 			this.observacao = observacao;
+			return this;
+		}
+		
+		public Builder withUltimaAtividade(Calendar ultimaAtividade) {
+			this.ultimaAtividade = ultimaAtividade;
 			return this;
 		}
 
